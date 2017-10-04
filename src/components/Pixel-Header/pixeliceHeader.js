@@ -21,7 +21,7 @@ class PixeliceHeader extends React.Component {
       );
     } else {
       content = (
-        <div className={style['nav-wrap']}>
+        <div className={style['nav-wrap-home']}>
           <a href=""><span>登录</span></a>
           <a href=""><span>注册</span></a>
         </div>
