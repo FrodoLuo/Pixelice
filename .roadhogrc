@@ -1,11 +1,23 @@
 {
+  "theme": {
+    "primary-color": "rgba(62,200,173,1)",
+    "border-radius-base": "0",
+    "border-radius-sm": "0"
+  },
   "entry": "src/index.js",
+  "proxy": {
+    "/api": {
+      "target": "http://localhost:3000/",
+      "changeOrigin": true,
+      "pathRewrite": { "^/api" : "" }
+    }
+  },
   "env": {
     "development": {
       "extraBabelPlugins": [
         "dva-hmr",
         "transform-runtime",
-        ["import", { "libraryName": "antd", "style": "css" }]
+        ["import", { "libraryName": "antd", "style": true }]
       ]
     },
     "production": {

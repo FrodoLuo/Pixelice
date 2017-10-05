@@ -1,33 +1,19 @@
 import React from 'react';
-import { connect } from 'dva';
-import { Avatar } from 'antd';
 import style from './pixeliceHeader.less';
+import Logo from './logo/logo';
+import Nav from './nav/nav';
+import Sign from './sign/sign';
 
-class PixeliceHeader extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      logged: false,
-    };
-  }
-  render() {
-    let content;
-    if (this.state.logged) {
-      content = (
-        <div className={style['nav-wrap']}>
-          <a href=""><span>注销</span></a>
-          <Avatar icon="user" src="" />
-        </div>
-      );
-    } else {
-      content = (
-        <div className={style['nav-wrap-home']}>
-          <a href=""><span>登录</span></a>
-          <a href=""><span>注册</span></a>
-        </div>
-      );
-    }
-    return (content);
-  }
+function PixeliceHeader(props) {
+  const c = props.home ? 'header-wrap-home' : 'header-wrap';
+  return (
+    <div className={style[c]}>
+      <div className={style['left-wrap']}>
+        <Logo />
+        <Nav />
+      </div>
+      <Sign />
+    </div>
+  );
 }
-export default connect()(PixeliceHeader);
+export default PixeliceHeader;

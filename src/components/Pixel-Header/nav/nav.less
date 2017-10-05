@@ -1,0 +1,27 @@
+.nav-wrap{
+  display: inline-flex;
+  justify-content: flex-end;
+  align-items: center;
+  position: relative;
+  height: 100%;
+  float: left;
+  right: 0;
+  font-size: 15px;
+}
+.nav-wrap > a {
+  margin: 0 10px;
+  color: white;
+  height: 48px;
+  line-height: 48px;
+  padding: 0 10px;
+  transition: all ease 0.5s;
+}
+@media screen and (max-width: 320px) {
+  .nav-wrap > a {
+    padding: 0 10px;
+    margin: 0;
+  }
+}
+.nav-wrap > a:hover{
+  background-color: rgba(32,170,143,1);
+}

@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'dva';
 import { Layout } from 'antd';
 import PixeliceHeader from '../components/Pixel-Header/pixeliceHeader';
+import PixeliceFooter from '../components/Pixel-Footer/pixelFooter';
 import Cover from '../components/Cover/cover';
 
 const { Content, Footer } = Layout;
@@ -9,11 +10,11 @@ const { Content, Footer } = Layout;
 function IndexPage() {
   return (
     <Layout>
-      <PixeliceHeader />
+      <PixeliceHeader home />
       <Content className="main-content">
-        <Cover />
+        <Cover home author="No one" />
       </Content>
-      <Footer />
+      <PixeliceFooter />
     </Layout>
   );
 }
