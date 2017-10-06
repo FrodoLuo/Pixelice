@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'dva';
 import { Avatar, Modal, Form, Input, Button, message } from 'antd';
 import style from './sign.less';
+import { logout } from '../../../utils/Tool';
 
 class Sign extends React.Component {
   constructor(props) {
@@ -11,12 +12,30 @@ class Sign extends React.Component {
       loginVisible: false,
       username: '',
       password: '',
+      nickName: '',
     };
   }
   componentWillMount() {
     this.props.dispatch({
       type: 'auth/userInfo',
     });
+  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.userInfo.message === 20) {
+      this.setState({
+        logged: true,
+        nickName: nextProps.userInfo.data.nickName,
+      });
+    }
+    if (nextProps.signIn.message === 20) {
+      message.success('登录成功.');
+      setTimeout(() => {
+        window.location.reload();
+      }, 2500);
+    }
+    if (nextProps.signIn.message === 21) {
+      message.error('用户名或密码不正确');
+    }
   }
   showModal = () => {
     this.setState({
@@ -25,9 +44,6 @@ class Sign extends React.Component {
   };
   handleOk = (e) => {
     console.log(this.state);
-    this.setState({
-      loginVisible: false,
-    });
     this.props.dispatch({
       type: 'auth/signIn',
       payload: {
@@ -56,8 +72,9 @@ class Sign extends React.Component {
     if (this.state.logged) {
       content = (
         <div className={style['sign-wrap']}>
-          <a href=""><span>注销</span></a>
           <Avatar icon="user" src="" />
+          <span>{this.state.nickName}</span>
+          <a onClick={logout}><span>注销</span></a>
         </div>
       );
     } else {
@@ -97,4 +114,9 @@ class Sign extends React.Component {
     return (content);
   }
 }
-export default connect()(Sign);
+export default connect((models) => {
+  return {
+    signIn: models.auth.signIn,
+    userInfo: models.auth.userInfo,
+  };
+})(Sign);

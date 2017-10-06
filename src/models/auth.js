@@ -36,7 +36,6 @@ export default {
     },
     *test({ payload }, { call, put }) {
       const result = yield call(authService.test);
-      console.log(result);
     },
     *signUp({ payload: data }, { call, put }) {
       yield put({
@@ -44,7 +43,6 @@ export default {
         payload: { message: 0, token: '' },
       });
       const result = yield call(authService.signUp, data);
-      console.log(result);
       yield put({
         type: 'saveSignUpState',
         payload: result.data,
@@ -80,7 +78,6 @@ export default {
       return { ...state, signUp: data };
     },
     saveSignInState(state, { payload: data }) {
-      console.log(data);
       tool.saveToken(data.token);
       return { ...state, signIn: data };
     },
