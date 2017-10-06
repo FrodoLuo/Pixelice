@@ -1,5 +1,5 @@
 import React from 'react';
-import { Steps, Layout } from 'antd';
+import { Steps, Layout, message } from 'antd';
 import { connect } from 'dva';
 import SignUpForm from '../../components/SignUp/Form/signUpForm';
 import PixeliceHeader from '../../components/Pixel-Header/pixeliceHeader';
@@ -18,10 +18,14 @@ class SignUpPage extends React.Component {
     };
   }
   componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
     if (nextProps.message === 20) {
       this.setState({
         current: 1,
       });
+      message.success('注册成功');
+    } else if (nextProps.message === 21) {
+      message.error('用户名或电子邮箱已被使用');
     }
   }
   render() {

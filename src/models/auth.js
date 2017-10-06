@@ -8,6 +8,10 @@ export default {
       message: 0,
       token: '',
     },
+    signIn: {
+      message: 0,
+      token: '',
+    },
     userInfo: {
       message: 0,
       data: {
@@ -35,10 +39,25 @@ export default {
       console.log(result);
     },
     *signUp({ payload: data }, { call, put }) {
+      yield put({
+        type: 'saveSignUpState',
+        payload: { message: 0, token: '' },
+      });
       const result = yield call(authService.signUp, data);
       console.log(result);
       yield put({
         type: 'saveSignUpState',
+        payload: result.data,
+      });
+    },
+    *signIn({ payload: { username, password } }, { call, put }) {
+      yield put({
+        type: 'saveSignInState',
+        payload: { message: 0, token: '' },
+      });
+      const result = yield call(authService.signIn, { username, password });
+      yield put({
+        type: 'saveSignInState',
         payload: result.data,
       });
     },
@@ -59,6 +78,11 @@ export default {
     saveSignUpState(state, { payload: data }) {
       tool.saveToken(data.token);
       return { ...state, signUp: data };
+    },
+    saveSignInState(state, { payload: data }) {
+      console.log(data);
+      tool.saveToken(data.token);
+      return { ...state, signIn: data };
     },
     saveUserInfo(state, { payload: data }) {
       return { ...state, userInfo: data };

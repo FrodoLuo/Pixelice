@@ -9,7 +9,15 @@ export function test() {
     test: 'hello',
   });
 }
-
+export function signIn(data) {
+  return request.post(
+    'api/auth/signIn',
+    {
+      username: data.username,
+      password: tool.md5Cipher(data.password),
+    },
+  );
+}
 export function signUp(data) {
   console.log(data);
   const temp = {
