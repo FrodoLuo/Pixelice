@@ -10,6 +10,11 @@ class Sign extends React.Component {
       logged: false,
     };
   }
+  componentWillMount() {
+    this.props.dispatch({
+      type: 'auth/userInfo',
+    });
+  }
   handleTest = () => {
     console.log('ready to test');
     this.props.dispatch({

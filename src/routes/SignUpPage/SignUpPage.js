@@ -17,6 +17,13 @@ class SignUpPage extends React.Component {
       current: 0,
     };
   }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.message === 20) {
+      this.setState({
+        current: 1,
+      });
+    }
+  }
   render() {
     const steps = [
       {
@@ -56,4 +63,6 @@ class SignUpPage extends React.Component {
     );
   }
 }
-export default connect()(SignUpPage);
+export default connect((models) => {
+  return models.auth.signUp;
+})(SignUpPage);

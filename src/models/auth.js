@@ -1,4 +1,5 @@
 import * as authService from '../services/authService';
+import * as tool from '../utils/Tool';
 
 export default {
   namespace: 'auth',
@@ -6,6 +7,18 @@ export default {
     signUp: {
       message: 0,
       token: '',
+    },
+    userInfo: {
+      message: 0,
+      data: {
+        userId: '',
+        nickName: '',
+        email: '',
+        avatarUrl: '',
+        phone: '',
+        gender: '',
+        verified: '',
+      },
     },
   },
   subscriptions: {
@@ -23,8 +36,17 @@ export default {
     },
     *signUp({ payload: data }, { call, put }) {
       const result = yield call(authService.signUp, data);
+      console.log(result);
       yield put({
         type: 'saveSignUpState',
+        payload: result.data,
+      });
+    },
+    *userInfo({ payload }, { call, put }) {
+      const result = yield call(authService.userInfo);
+      console.log(result);
+      yield put({
+        type: 'saveUserInfo',
         payload: result.data,
       });
     },
@@ -35,7 +57,11 @@ export default {
       return { ...state, ...action.payload };
     },
     saveSignUpState(state, { payload: data }) {
+      tool.saveToken(data.token);
       return { ...state, signUp: data };
+    },
+    saveUserInfo(state, { payload: data }) {
+      return { ...state, userInfo: data };
     },
   },
 };

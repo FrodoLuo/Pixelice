@@ -13,6 +13,7 @@ export function test() {
 export function signUp(data) {
   console.log(data);
   const temp = {
+    username: data.username,
     nickName: data.username,
     password: tool.md5Cipher(data.password),
     email: data.email,
@@ -30,4 +31,8 @@ export function signUp(data) {
     }, {
       ContentType: 'application/json',
     });
+}
+
+export function userInfo() {
+  return request.post('api/auth/userInfo');
 }

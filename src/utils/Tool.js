@@ -11,6 +11,12 @@ export function checkLog() {
   }
 }
 
+export function saveToken(token, expire) {
+  return Cookies.set('token', token, { expires: expire });
+}
+export function removeToken() {
+  return Cookies.remove('token');
+}
 export function jumpToLogin() {
   Modal.error({
     title: '登录失效或未登录',
