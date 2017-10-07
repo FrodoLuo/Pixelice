@@ -12,18 +12,6 @@ export default {
       message: 0,
       token: '',
     },
-    userInfo: {
-      message: 0,
-      data: {
-        userId: '',
-        nickName: '',
-        email: '',
-        avatarUrl: '',
-        phone: '',
-        gender: '',
-        verified: '',
-      },
-    },
   },
   subscriptions: {
     setup({ dispatch, history }) {  // eslint-disable-line
@@ -59,14 +47,6 @@ export default {
         payload: result.data,
       });
     },
-    *userInfo({ payload }, { call, put }) {
-      const result = yield call(authService.userInfo);
-      console.log(result);
-      yield put({
-        type: 'saveUserInfo',
-        payload: result.data,
-      });
-    },
   },
 
   reducers: {
@@ -80,9 +60,6 @@ export default {
     saveSignInState(state, { payload: data }) {
       tool.saveToken(data.token);
       return { ...state, signIn: data };
-    },
-    saveUserInfo(state, { payload: data }) {
-      return { ...state, userInfo: data };
     },
   },
 };

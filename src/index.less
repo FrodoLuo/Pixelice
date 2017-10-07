@@ -9,16 +9,20 @@ html, body, :global(#root) {
 }
 :global(.main-content) {
   min-height: 100%;
-  height: 100%;
   background-color: white;
+  height: 0;
 }
 :global(.content-wrap) {
-  max-width: 1024px;
-  margin: 30px auto;
-  padding: 5px 10px;
+  max-width: 1440px;
+  padding: 30px 10px;
+  position: relative;
+  margin: auto;
 }
 :global(.ant-modal-wrap) {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+:global(.no-cover){
+  margin-top: 48px;
 }

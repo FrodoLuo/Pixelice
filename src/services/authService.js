@@ -41,6 +41,3 @@ export function signUp(data) {
     });
 }
 
-export function userInfo() {
-  return request.post('api/auth/userInfo');
-}

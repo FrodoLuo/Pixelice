@@ -3,6 +3,7 @@ import { connect } from 'dva';
 import { Avatar, Modal, Form, Input, Button, message } from 'antd';
 import style from './sign.less';
 import { logout } from '../../../utils/Tool';
+import defaultAvatar from '../../../assets/images/defaultAvatar.jpeg';
 
 class Sign extends React.Component {
   constructor(props) {
@@ -13,11 +14,12 @@ class Sign extends React.Component {
       username: '',
       password: '',
       nickName: '',
+      avatarUrl: '',
     };
   }
   componentWillMount() {
     this.props.dispatch({
-      type: 'auth/userInfo',
+      type: 'user/userInfo',
     });
   }
   componentWillReceiveProps(nextProps) {
@@ -25,6 +27,7 @@ class Sign extends React.Component {
       this.setState({
         logged: true,
         nickName: nextProps.userInfo.data.nickName,
+        avatarUrl: nextProps.userInfo.data.avatarUrl,
       });
     }
     if (nextProps.signIn.message === 20) {
@@ -70,10 +73,12 @@ class Sign extends React.Component {
   render() {
     let content;
     if (this.state.logged) {
+      const imgSrc = this.state.avatarUrl === '' ?
+        defaultAvatar : this.state.avatarUrl;
       content = (
         <div className={style['sign-wrap']}>
-          <Avatar icon="user" src="" />
-          <span>{this.state.nickName}</span>
+          <Avatar src={imgSrc} />
+          <a href="#infoCenter"><span>{this.state.nickName}</span></a>
           <a onClick={logout}><span>注销</span></a>
         </div>
       );
@@ -117,6 +122,6 @@ class Sign extends React.Component {
 export default connect((models) => {
   return {
     signIn: models.auth.signIn,
-    userInfo: models.auth.userInfo,
+    userInfo: models.user.userInfo,
   };
 })(Sign);

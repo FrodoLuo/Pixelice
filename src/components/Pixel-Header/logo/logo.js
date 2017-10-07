@@ -1,13 +1,9 @@
 import React from 'react';
+import style from './logo.less';
 
 function Logo() {
-  const style = {
-    color: 'white',
-    fontSize: '20px',
-    padding: '0 10px',
-  };
   return (
-    <div style={style}>
+    <div className={style['logo-wrap']}>
       Pixelice
     </div>
   );
