@@ -12,8 +12,10 @@ function Cover(props) {
       {props.home ?
         (
           <div className={style['cover-search-wrap']}>
-            <p>Pixelice</p>
-            <p>Search, coming soon.</p>
+            <div className="cover-content">
+              <p>Pixelice</p>
+              <p>Search, coming soon.</p>
+            </div>
           </div>
         )
         :

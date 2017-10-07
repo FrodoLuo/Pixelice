@@ -5,12 +5,14 @@ html, body, :global(#root) {
 }
 
 :global(.ant-layout) {
-  height: 100% !important;
+  min-height: 100%;
+  display: flex;
 }
 :global(.main-content) {
-  min-height: 100%;
   background-color: white;
-  height: 0;
+  flex: auto;
+  -moz-box-flex: 1;
+  -webkit-box-flex: 1;
 }
 :global(.content-wrap) {
   max-width: 1440px;

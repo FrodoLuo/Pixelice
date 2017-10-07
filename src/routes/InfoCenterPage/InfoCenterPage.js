@@ -4,6 +4,7 @@ import { connect } from 'dva';
 import PixeliceHeader from '../../components/Pixel-Header/pixeliceHeader';
 import PixeliceFooter from '../../components/Pixel-Footer/pixelFooter';
 import InfoCover from '../../components/InfoCenter/infoCover/info-cover';
+import ProfileCard from '../../components/InfoCenter/profile/profileCard';
 
 const TabPane = Tabs.TabPane;
 
@@ -56,7 +57,9 @@ class InfoCenterPage extends React.Component {
               <TabPane tab="相册" key="2">Content of Tab Pane 3</TabPane>
               <TabPane tab="收藏" key="3">Content of Tab Pane 2</TabPane>
               <TabPane tab="订阅" key="4">Content of Tab Pane 3</TabPane>
-              <TabPane tab="资料" key="5">Content of Tab Pane 3</TabPane>
+              <TabPane tab="资料" key="5">
+                <ProfileCard userInfo={this.state.userInfo} />
+              </TabPane>
             </Tabs>
           </div>
         </Layout.Content>
