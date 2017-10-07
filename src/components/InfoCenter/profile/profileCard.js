@@ -10,7 +10,6 @@ class ProfileCard extends React.Component {
     editMode: false,
   };
   render() {
-    console.log(this.props.userInfo);
     return (
       <div>
         <div className={style['profile-form-wrap']}>
