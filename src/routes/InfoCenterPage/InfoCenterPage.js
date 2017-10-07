@@ -33,7 +33,6 @@ class InfoCenterPage extends React.Component {
     });
   }
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
     if (nextProps.userInfo.message === 21) {
       Modal.error('未登录或登录已失效, 即将跳转至首页');
       setTimeout(() => {
@@ -69,7 +68,6 @@ class InfoCenterPage extends React.Component {
   }
 }
 export default connect((models) => {
-  console.log(models);
   return {
     userInfo: models.user.userInfo,
   };
