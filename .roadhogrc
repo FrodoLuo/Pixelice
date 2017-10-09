@@ -1,7 +1,7 @@
 {
   "theme": {
     "primary-color": "rgba(62,200,173,1)",
-    "border-radius-base": "0",
+    "border-radius-base": "3px",
     "border-radius-sm": "0"
   },
   "entry": "src/index.js",

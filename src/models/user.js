@@ -13,6 +13,7 @@ export default {
         phone: '',
         gender: '',
         verified: '',
+        intro: '',
         followers: 0,
       },
     },

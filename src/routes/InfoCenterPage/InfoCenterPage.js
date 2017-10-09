@@ -26,9 +26,7 @@ class InfoCenterPage extends React.Component {
         },
       },
     };
-  }
-  componentWillMount() {
-    this.props.dispatch({
+    props.dispatch({
       type: 'user/userInfo',
     });
   }

@@ -1,46 +1,26 @@
 import React from 'react';
-import { Input, Form, Upload, Button, Select } from 'antd';
+import { Input, Form, Upload, Button, Select, Tabs } from 'antd';
 import { connect } from 'dva';
 import style from './profileCard.less';
+import Info from './info/info';
+import Account from './account/account';
 
 const Option = Select.Option;
 
 class ProfileCard extends React.Component {
-  state = {
-    editMode: false,
-  };
+  state = {};
   render() {
+    console.log(this.props.userInfo);
     return (
       <div>
-        <div className={style['profile-form-wrap']}>
-          <Form layout={'vertical'}>
-            <Form.Item label="个人介绍">
-              <Input.TextArea
-                defaultValue={this.props.userInfo.intro}
-                disabled={!this.state.editMode}
-              />
-            </Form.Item>
-            <Form.Item label="昵称">
-              <Input defaultValue={this.props.userInfo.nickName} disabled={!this.state.editMode} />
-            </Form.Item>
-            <Form.Item label="ID">
-              <Input defaultValue={this.props.userInfo.userId} disabled={!this.state.editMode} />
-            </Form.Item>
-            <Form.Item label="电子邮箱">
-              <Input defaultValue={this.props.userInfo.email} disabled={!this.state.editMode} />
-            </Form.Item>
-            <Form.Item label="电话号码">
-              <Input defaultValue={this.props.userInfo.phone} disabled={!this.state.editMode} />
-            </Form.Item>
-            <Form.Item label="性别">
-              <Select defaultValue={this.props.userInfo.gender} disabled={!this.state.editMode}>
-                <Option value="m">男</Option>
-                <Option value="f">女</Option>
-                <Option value="s">保密</Option>
-              </Select>
-            </Form.Item>
-          </Form>
-        </div>
+        <Tabs size="small" tabPosition="left" defaultActiveKey="1">
+          <Tabs.TabPane tab="个人信息" key="1">
+            <Info userInfo={this.props.userInfo} />
+          </Tabs.TabPane>
+          <Tabs.TabPane tab="账户" key="2">
+            <Account userInfo={this.props.userInfo} />
+          </Tabs.TabPane>
+        </Tabs>
       </div>
     );
   }

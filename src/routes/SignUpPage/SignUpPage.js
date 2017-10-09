@@ -24,6 +24,9 @@ class SignUpPage extends React.Component {
         current: 1,
       });
       message.success('注册成功');
+      setTimeout(() => {
+        window.location.href = '/';
+      }, 1500);
     } else if (nextProps.message === 21) {
       message.error('用户名或电子邮箱已被使用');
     }
