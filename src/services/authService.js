@@ -40,4 +40,6 @@ export function signUp(data) {
       ContentType: 'application/json',
     });
 }
-
+export function sendVerify() {
+  return request.post('api/auth/sendVerify');
+}

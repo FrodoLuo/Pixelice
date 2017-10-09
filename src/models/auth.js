@@ -12,6 +12,9 @@ export default {
       message: 0,
       token: '',
     },
+    verify: {
+      message: 0,
+    },
   },
   subscriptions: {
     setup({ dispatch, history }) {  // eslint-disable-line
@@ -47,6 +50,17 @@ export default {
         payload: result.data,
       });
     },
+    *sendVerify({ payload }, { call, put }) {
+      yield put({
+        type: 'saveSendVerify',
+        payload: { message: 0 },
+      });
+      const result = yield call(authService.sendVerify);
+      yield put({
+        type: 'saveSendVerify',
+        payload: result.data,
+      });
+    },
   },
 
   reducers: {
@@ -60,6 +74,9 @@ export default {
     saveSignInState(state, { payload: data }) {
       tool.saveToken(data.token);
       return { ...state, signIn: data };
+    },
+    saveSendVerify(state, { payload: data }) {
+      return { ...state, sendVerify: data };
     },
   },
 };
