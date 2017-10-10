@@ -1,7 +1,7 @@
 import React from 'react';
 import { Input, Form, Upload, Button, Select, Tabs } from 'antd';
 import { connect } from 'dva';
-import style from './profileCard.less';
+import style from './profilePane.less';
 import Info from './info/info';
 import Account from './account/account';
 
