@@ -28,13 +28,29 @@ html, body, :global(#root) {
 :global(.no-cover){
   margin-top: 48px;
 }
-
-  input[type=text], input[type=password]{
-    max-width: 240px;
+.main-content{
+  position: absolute;
+  height: 100%;
+}
+.ant-layout{
+  height: 100% !important;
+}
+.ant-select-lg{
+  max-width: 240px !important;
+}
+.ant-tabs-vertical > .ant-tabs-bar .ant-tabs-tab{
+  padding: 8px 12px;
+}
+input[type=text], input[type=password]{
+  max-width: 240px;
+}
+input[type=text]:disabled{
+  border: none;
+  background: transparent;
+  color: black;
+}
+@media screen and (max-width: 450px) {
+  .ant-tabs-tab{
+    padding: 8px;
   }
-  input[type=text]:disabled{
-    border: none;
-    background: transparent;
-    color: black;
-  }
-
+}
