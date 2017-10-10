@@ -28,7 +28,7 @@ html, body, :global(#root) {
 :global(.no-cover){
   margin-top: 48px;
 }
-:global{
+
   input[type=text], input[type=password]{
     max-width: 240px;
   }
@@ -37,4 +37,4 @@ html, body, :global(#root) {
     background: transparent;
     color: black;
   }
-}
+
