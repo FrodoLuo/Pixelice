@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Input } from 'antd';
+import { Button, Input, message } from 'antd';
 import { connect } from 'dva';
 import style from './account.less';
 
@@ -16,18 +16,37 @@ class Account extends React.Component {
     },
   };
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
+    // console.log(nextProps);
+    if (nextProps.sendVerify.message === 20) {
+      message.info('邮件已发送');
+      this.setState({
+        mailSent: true,
+        count: 60,
+      });
+      this.resendCount();
+    }
   }
+  resendCount = () => {
+    this.timer = setInterval(() => {
+      let count = this.state.count;
+      count -= 1;
+      if (count < 1) {
+        this.setState({
+          mailSent: false,
+        });
+        clearInterval(this.timer);
+      }
+      this.setState({
+        count,
+      });
+    }, 1000);
+  };
   handleSendVerify = () => {
     this.props.dispatch({
       type: 'auth/sendVerify',
     });
-    this.setState({
-      // mailSent: tru,
-    });
   };
   render() {
-    console.log(this.props.userInfo.verified);
     const verified = this.props.userInfo.verified === '1' ?
       (
         <div className={style['verified-label']}>
