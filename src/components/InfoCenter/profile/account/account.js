@@ -17,7 +17,12 @@ class Account extends React.Component {
   };
   componentWillReceiveProps(nextProps) {
     // console.log(nextProps);
-    if (nextProps.sendVerify.message === 20) {
+    if (nextProps.sendVerify.message === 23) {
+      message.info('账号已完成邮箱验证, 即将跳转');
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    } else if (nextProps.sendVerify.message === 20) {
       message.info('邮件已发送');
       this.setState({
         mailSent: true,
