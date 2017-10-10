@@ -54,6 +54,7 @@ class InfoCenterPage extends React.Component {
             <Tabs defaultActiveKey="1">
               <TabPane tab="作品" key="1">
                 <PhotoPane />
+                {this.props.children}
               </TabPane>
               <TabPane tab="相册" key="2">Content of Tab Pane 3</TabPane>
               <TabPane tab="收藏" key="3">Content of Tab Pane 2</TabPane>
