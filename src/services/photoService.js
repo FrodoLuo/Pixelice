@@ -7,7 +7,7 @@ export function upload(files) {
     files,
     {
       headers: {
-        'Content-Type': 'multipart/form-data',
+        'Content-Type': 'multipart/form-data;boundary',
       },
     },
   );

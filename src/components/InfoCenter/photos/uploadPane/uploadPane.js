@@ -1,5 +1,5 @@
 import React from 'react';
-import { Upload, Icon, Modal } from 'antd';
+import { Upload, Icon, Modal, Button } from 'antd';
 import { connect } from 'dva';
 
 class UploadPane extends React.Component {
@@ -8,14 +8,17 @@ class UploadPane extends React.Component {
     previewImage: '',
     fileList: [],
   };
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
+  }
   handleUpload = () => {
     console.log(this.state.fileList);
     this.props.dispatch({
       type: 'photo/upload',
       payload: this.state.fileList,
     });
+    return true;
   };
-
   handleCancel = () => this.setState({ previewVisible: false });
 
   handlePreview = (file) => {
@@ -28,7 +31,6 @@ class UploadPane extends React.Component {
   handleChange = ({ fileList }) => {
     this.setState({ fileList });
   };
-
   beforeUpload = () => false;
   render() {
     const uploadButton = (
@@ -40,14 +42,13 @@ class UploadPane extends React.Component {
     return (
       <div>
         <Upload
-          beforeUpload={this.beforeUpload}
-          action="/api/photo/upload"
+          action="api/photo/preUpload"
           listType="picture-card"
           fileList={this.state.fileList}
           onPreview={this.handlePreview}
           onChange={this.handleChange}
         >
-          {this.state.fileList.length >= 3 ? null : uploadButton}
+          {uploadButton}
         </Upload>
         <Modal visible={this.state.previewVisible} footer={null} onCancel={this.handleCancel}>
           <img alt="example" style={{ width: '100%' }} src={this.state.previewImage} />
@@ -56,4 +57,7 @@ class UploadPane extends React.Component {
     );
   }
 }
-export default connect()(UploadPane);
+export default connect((models) => {
+  console.log(models);
+  return models.photo.upload;
+})(UploadPane);
