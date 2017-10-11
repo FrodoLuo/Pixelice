@@ -123,5 +123,5 @@ class UploadPane extends React.Component {
 }
 export default connect((models) => {
   console.log(models);
-  return models.photo.upload;
+  return models;
 })(UploadPane);
