@@ -6,24 +6,30 @@ class UploadPane extends React.Component {
   state = {
     previewVisible: false,
     previewImage: '',
-    fileList: [{
-      uid: -1,
-      name: 'xxx.png',
-      status: 'done',
-      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-    }],
+    fileList: [],
   };
+  handleUpload = () => {
+    console.log(this.state.fileList);
+    this.props.dispatch({
+      type: 'photo/upload',
+      payload: this.state.fileList,
+    });
+  };
+
   handleCancel = () => this.setState({ previewVisible: false });
 
   handlePreview = (file) => {
     this.setState({
-      previewImage: file.url || file.thumbUrl,
+      previewImage: file.thumbUrl,
       previewVisible: true,
     });
   };
 
-  handleChange = ({ fileList }) => this.setState({ fileList });
+  handleChange = ({ fileList }) => {
+    this.setState({ fileList });
+  };
 
+  beforeUpload = () => false;
   render() {
     const uploadButton = (
       <div>
@@ -34,7 +40,8 @@ class UploadPane extends React.Component {
     return (
       <div>
         <Upload
-          action="//jsonplaceholder.typicode.com/posts/"
+          beforeUpload={this.beforeUpload}
+          action="/api/photo/upload"
           listType="picture-card"
           fileList={this.state.fileList}
           onPreview={this.handlePreview}

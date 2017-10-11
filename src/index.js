@@ -12,6 +12,8 @@ app.model(require('./models/auth'));
 
 app.model(require('./models/user'));
 
+app.model(require('./models/photo'));
+
 // 4. Router
 app.router(require('./router'));
 

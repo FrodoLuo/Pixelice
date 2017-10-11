@@ -8,16 +8,30 @@ import UploadPane from './uploadPane/uploadPane';
 class PhotoPane extends React.Component {
   state = {
     photos: [],
+    uploadVisible: false,
+    upload: {
+      message: 0,
+    },
   };
-  render() {
-    return (
-      <div>
-        <div className={style['photo-control-wrap']}>
-          <Button size={'large'} type="primary">上传照片</Button>
-        </div>
+  openUpload = () => {
+    this.setState({
+      uploadVisible: true,
+    });
+  };
+  hideUpload = () => {
+    this.setState({
+      uploadVisible: false,
+    });
+  };
+  paneCompute = () => {
+    if (this.state.uploadVisible) {
+      return (
         <div className={style['upload-pane-wrap']}>
           <UploadPane />
         </div>
+      );
+    } else {
+      return (
         <Row type="flex" justify="space-between" className={style['photo-cards-wrap']}>
           <PhotoCard title="test" liked="14" star="3" />
           <PhotoCard title="test" liked="14" star="3" />
@@ -36,6 +50,16 @@ class PhotoPane extends React.Component {
           <PhotoCard title="test" liked="14" star="3" />
           <PhotoCard title="test" liked="14" star="3" />
         </Row>
+      );
+    }
+  };
+  render() {
+    return (
+      <div>
+        <div className={style['photo-control-wrap']}>
+          <Button onClick={this.openUpload} size={'large'} type="primary">上传照片</Button>
+        </div>
+        {this.paneCompute()}
       </div>
     );
   }
