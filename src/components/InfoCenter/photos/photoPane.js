@@ -54,10 +54,20 @@ class PhotoPane extends React.Component {
     }
   };
   render() {
+    const buttonhandler = this.state.uploadVisible ?
+      this.hideUpload
+      :
+      this.openUpload;
     return (
       <div>
         <div className={style['photo-control-wrap']}>
-          <Button onClick={this.openUpload} size={'large'} type="primary">上传照片</Button>
+          <Button
+            onClick={buttonhandler}
+            size={'large'}
+            type={this.state.uploadVisible ? '' : 'primary'}
+          >
+            {this.state.uploadVisible ? '取消' : '上传图片'}
+          </Button>
         </div>
         {this.paneCompute()}
       </div>

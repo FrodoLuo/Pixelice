@@ -23,7 +23,7 @@ class PhotoCard extends React.Component {
       <Col xs={24} sm={11} md={6}>
         <Card
           bodyStyle={{ padding: 0 }}
-          style={{ margin: '10px', border: '#eee 1px solid' }}
+          style={{ margin: '10px 2px', border: '#eee 1px solid' }}
         >
           <a onClick={this.showDetail}>
             <div className={style['photo-card-wrap']}>

@@ -9,12 +9,12 @@ export default {
   },
   subscriptions: {},
   effects: {
-    *upload({ payload: files }, { call, put }) {
+    *upload({ payload: { files, info } }, { call, put }) {
       yield put({
         type: 'saveUpload',
         payload: { message: 0 },
       });
-      const result = yield call(photoService.upload, files);
+      const result = yield call(photoService.upload, { files, info });
       yield put({
         type: 'saveUpload',
         payload: result.data,

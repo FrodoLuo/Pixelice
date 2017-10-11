@@ -1,14 +1,16 @@
 import { get, post } from '../utils/request';
 
-export function upload(files) {
-  console.log(files);
+export function upload(data) {
+  console.log(data);
+  const list = [];
+  for (let i = 0; i < data.files.length; i += 1) {
+    list.push(data.files[i].name);
+  }
   return post(
     '/api/photo/upload',
-    files,
     {
-      headers: {
-        'Content-Type': 'multipart/form-data;boundary',
-      },
+      list,
+      info: data.info,
     },
   );
 }
