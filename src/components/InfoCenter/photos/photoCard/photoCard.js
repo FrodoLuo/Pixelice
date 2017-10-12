@@ -20,10 +20,10 @@ class PhotoCard extends React.Component {
   };
   render() {
     return (
-      <Col xs={24} sm={11} md={6}>
+      <div>
         <Card
           bodyStyle={{ padding: 0 }}
-          style={{ margin: '10px 2px', border: '#eee 1px solid' }}
+          style={{ margin: '12px 2px', border: '#eee 1px solid' }}
         >
           <a onClick={this.showDetail}>
             <div className={style['photo-card-wrap']}>
@@ -53,7 +53,7 @@ class PhotoCard extends React.Component {
         >
           <PhotoDetail info={this.props.info} />
         </Modal>
-      </Col>
+      </div>
     );
   }
 }

@@ -1,6 +1,7 @@
 import React from 'react';
-import { Row, Button } from 'antd';
+import { Row, Button, Col } from 'antd';
 import { connect } from 'dva';
+import MediaQuery from 'react-responsive';
 import PhotoCard from './photoCard/photoCard';
 import style from './photoPane.less';
 import UploadPane from './uploadPane/uploadPane';
@@ -38,7 +39,79 @@ class PhotoPane extends React.Component {
       uploadVisible: false,
     });
   };
-  paneCompute = () => {
+  smPane = () => {
+    const column1 = [];
+    const column2 = [];
+    for (let i = 0; i < this.state.photos.data.length; i += 2) {
+      const item1 = this.state.photos.data[i];
+      const item2 = this.state.photos.data[i + 1];
+      column1.push(
+        <PhotoCard key={i} info={item1} />,
+      );
+      if (item2 !== undefined) {
+        column2.push(
+          <PhotoCard key={i + 1} info={item2} />,
+        );
+      }
+    }
+    return ([
+      <Col span={12}>
+        {column1}
+      </Col>,
+      <Col span={12}>
+        {column2}
+      </Col>,
+    ]);
+  };
+  mdPane = () => {
+    const column1 = [];
+    const column2 = [];
+    const column3 = [];
+    for (let i = 0; i < this.state.photos.data.length; i += 3) {
+      const item1 = this.state.photos.data[i];
+      const item2 = this.state.photos.data[i + 1];
+      const item3 = this.state.photos.data[i + 2];
+      column1.push(
+        <PhotoCard key={i} info={item1} />,
+      );
+      if (item2 !== undefined) {
+        column2.push(
+          <PhotoCard key={i + 1} info={item2} />,
+        );
+      }
+      if (item3 !== undefined) {
+        column3.push(
+          <PhotoCard key={i + 2} info={item3} />,
+        );
+      }
+    }
+    return ([
+      <Col span={8}>
+        {column1}
+      </Col>,
+      <Col span={8}>
+        {column2}
+      </Col>,
+      <Col span={8}>
+        {column3}
+      </Col>,
+    ]);
+  };
+  xsPane = () => {
+    const column = [];
+    for (let i = 0; i < this.state.photos.data.length; i += 1) {
+      const item = this.state.photos.data[i];
+      column.push(
+        <PhotoCard key={i} info={item} />,
+      );
+    }
+    return (
+      <Col span={24}>
+        {column}
+      </Col>
+    );
+  };
+  paneCompute = (size) => {
     if (this.state.uploadVisible) {
       return (
         <div className={style['upload-pane-wrap']}>
@@ -46,15 +119,29 @@ class PhotoPane extends React.Component {
         </div>
       );
     } else {
-      const photos = [];
-      for (let i = 0; i < this.state.photos.data.length; i += 1) {
-        const item = this.state.photos.data[i];
-        photos.push(
-          <PhotoCard key={i} info={item} />,
-        );
+      let photos;
+      switch (size) {
+        case 'xs':
+          photos = this.xsPane();
+          break;
+        case 'sm':
+          photos = this.smPane();
+          break;
+        case 'md':
+          photos = this.mdPane();
+          break;
+        default:
+          photos = '';
+          break;
       }
       return (
-        <Row type="flex" justify="space-between" className={style['photo-cards-wrap']}>
+        <Row
+          type="flex"
+          justify="space-between"
+          align="top"
+          className={style['photo-cards-wrap']}
+          gutter={10}
+        >
           {photos}
         </Row>
       );
@@ -76,7 +163,15 @@ class PhotoPane extends React.Component {
             {this.state.uploadVisible ? '取消' : '上传图片'}
           </Button>
         </div>
-        {this.paneCompute()}
+        <MediaQuery minWidth={992}>
+          {this.paneCompute('md')}
+        </MediaQuery>
+        <MediaQuery minWidth={768} maxWidth={992}>
+          {this.paneCompute('sm')}
+        </MediaQuery>
+        <MediaQuery maxWidth={768}>
+          {this.paneCompute('xs')}
+        </MediaQuery>
       </div>
     );
   }

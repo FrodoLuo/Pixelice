@@ -19,7 +19,8 @@
     "js-cookie": "^2.1.4",
     "js-md5": "^0.6.0",
     "react": "^15.4.0",
-    "react-dom": "^15.4.0"
+    "react-dom": "^15.4.0",
+    "react-responsive": "^2.0.0"
   },
   "devDependencies": {
     "babel-eslint": "^7.1.1",
