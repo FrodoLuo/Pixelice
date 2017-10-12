@@ -19,3 +19,6 @@ export function fetchPhotos() {
     '/api/photo/fetchPhotos',
   );
 }
+export function getNewPhotos() {
+  return post('/api/photo/getNewPhotos');
+}

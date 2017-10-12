@@ -31,6 +31,13 @@ export default {
         payload: result.data,
       });
     },
+    *getNewPhotos({ payload }, { call, put }) {
+      const result = yield call(photoService.getNewPhotos);
+      yield put({
+        type: 'savePhotos',
+        payload: result.data,
+      });
+    },
   },
   reducers: {
     saveUpload(state, { payload: data }) {

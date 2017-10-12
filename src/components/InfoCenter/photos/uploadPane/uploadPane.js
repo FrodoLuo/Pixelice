@@ -36,7 +36,7 @@ class UploadPane extends React.Component {
           type: 'photo/upload',
           payload: {
             files: this.state.fileList,
-            info: this.state.info,
+            info: values,
           },
         });
       }
