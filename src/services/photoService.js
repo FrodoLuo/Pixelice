@@ -14,3 +14,8 @@ export function upload(data) {
     },
   );
 }
+export function fetchPhotos() {
+  return post(
+    '/api/photo/fetchPhotos',
+  );
+}

@@ -6,6 +6,10 @@ export default {
     upload: {
       message: 0,
     },
+    photos: {
+      message: 0,
+      data: [],
+    },
   },
   subscriptions: {},
   effects: {
@@ -20,10 +24,20 @@ export default {
         payload: result.data,
       });
     },
+    *fetchPhotos({ payload }, { call, put }) {
+      const result = yield call(photoService.fetchPhotos);
+      yield put({
+        type: 'savePhotos',
+        payload: result.data,
+      });
+    },
   },
   reducers: {
     saveUpload(state, { payload: data }) {
       return { ...state, upload: data };
+    },
+    savePhotos(state, { payload: data }) {
+      return { ...state, photos: data };
     },
   },
 };

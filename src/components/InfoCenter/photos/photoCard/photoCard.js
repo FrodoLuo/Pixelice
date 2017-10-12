@@ -27,20 +27,20 @@ class PhotoCard extends React.Component {
         >
           <a onClick={this.showDetail}>
             <div className={style['photo-card-wrap']}>
-              <img src={defaultPhoto} role="presentation" />
+              <img src={this.props.info.photoUrl} role="presentation" />
             </div>
             <div className={style['photo-simple-info-wrap']}>
               <div className={style['photo-title']}>
-                {this.props.title}
+                {this.props.info.title}
               </div>
               <div className={style['photo-simple-info']}>
                 <div>
                   <Icon type="heart" />
-                  <span>{this.props.liked}</span>
+                  <span>{this.props.info.liked}</span>
                 </div>
                 <div>
                   <Icon type="star" />
-                  <span>{this.props.star}</span>
+                  <span>{this.props.info.liked}</span>
                 </div>
               </div>
             </div>
@@ -51,7 +51,7 @@ class PhotoCard extends React.Component {
           onCancel={this.hideDetail}
           footer={null}
         >
-          <PhotoDetail />
+          <PhotoDetail info={this.props.info} />
         </Modal>
       </Col>
     );

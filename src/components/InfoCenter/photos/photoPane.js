@@ -7,12 +7,27 @@ import UploadPane from './uploadPane/uploadPane';
 
 class PhotoPane extends React.Component {
   state = {
-    photos: [],
+    photos: {
+      message: 0,
+      data: [],
+    },
     uploadVisible: false,
     upload: {
       message: 0,
     },
   };
+  componentWillMount() {
+    this.props.dispatch({
+      type: 'photo/fetchPhotos',
+    });
+  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.photos.message === 20) {
+      this.setState({
+        photos: nextProps.photos,
+      });
+    }
+  }
   openUpload = () => {
     this.setState({
       uploadVisible: true,
@@ -31,24 +46,16 @@ class PhotoPane extends React.Component {
         </div>
       );
     } else {
+      const photos = [];
+      for (let i = 0; i < this.state.photos.data.length; i += 1) {
+        const item = this.state.photos.data[i];
+        photos.push(
+          <PhotoCard key={i} info={item} />,
+        );
+      }
       return (
         <Row type="flex" justify="space-between" className={style['photo-cards-wrap']}>
-          <PhotoCard title="test" liked="14" star="3" />
-          <PhotoCard title="test" liked="14" star="3" />
-          <PhotoCard title="test" liked="14" star="3" />
-          <PhotoCard title="test" liked="14" star="3" />
-          <PhotoCard title="test" liked="14" star="3" />
-          <PhotoCard title="test" liked="14" star="3" />
-          <PhotoCard title="test" liked="14" star="3" />
-          <PhotoCard title="test" liked="14" star="3" />
-          <PhotoCard title="test" liked="14" star="3" />
-          <PhotoCard title="test" liked="14" star="3" />
-          <PhotoCard title="test" liked="14" star="3" />
-          <PhotoCard title="test" liked="14" star="3" />
-          <PhotoCard title="test" liked="14" star="3" />
-          <PhotoCard title="test" liked="14" star="3" />
-          <PhotoCard title="test" liked="14" star="3" />
-          <PhotoCard title="test" liked="14" star="3" />
+          {photos}
         </Row>
       );
     }
@@ -74,4 +81,6 @@ class PhotoPane extends React.Component {
     );
   }
 }
-export default connect()(PhotoPane);
+export default connect((models) => {
+  return models.photo;
+})(PhotoPane);
