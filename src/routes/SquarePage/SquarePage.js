@@ -31,7 +31,7 @@ class SquarePage extends React.Component {
       const item = this.state.photos.data[i];
       photos.push(
         <div key={i}>
-          <img src={item.photoUrl} role="presentation" />
+          <img src={item.zipUrl} role="presentation" />
         </div>,
       );
     }

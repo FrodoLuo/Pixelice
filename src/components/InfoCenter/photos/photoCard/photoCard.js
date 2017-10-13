@@ -27,7 +27,7 @@ class PhotoCard extends React.Component {
         >
           <a onClick={this.showDetail}>
             <div className={style['photo-card-wrap']}>
-              <img src={this.props.info.photoUrl} role="presentation" />
+              <img src={this.props.info.zipUrl} role="presentation" />
             </div>
             <div className={style['photo-simple-info-wrap']}>
               <div className={style['photo-title']}>

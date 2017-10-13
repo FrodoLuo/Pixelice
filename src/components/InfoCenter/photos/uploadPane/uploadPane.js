@@ -112,7 +112,7 @@ class UploadPane extends React.Component {
                       required: true,
                       message: '请输入标题',
                     }, {
-                      max: 32,
+                      max: 16,
                       message: '标题长度限制在16字内',
                     }],
                   })(
