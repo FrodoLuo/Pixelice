@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Avatar } from 'antd';
+import { Card, Avatar, Modal } from 'antd';
 import style from './newCard.less';
 import defaultAvatar from '../../../assets/images/defaultAvatar.jpeg';
 
@@ -7,7 +7,7 @@ function newCard(props) {
   const avatar = props.info.avatarUrl === '' ?
     defaultAvatar : props.info.avatarUrl;
   return (
-    <Card bordered={false} noHovering className={style['nc-wrap']}>
+    <Card onClick={props.onClick} bordered={false} noHovering className={style['nc-wrap']}>
       <div className={style['nc-userInfo-wrap']}>
         <Avatar src={avatar} />
         <span className={style['nc-userInfo-nickName']}>{props.info.nickName}</span>

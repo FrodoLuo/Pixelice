@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Row, Col, Card, Affix, Tabs } from 'antd';
+import { Layout, Row, Col, Card, Affix, Tabs, Modal } from 'antd';
 import { connect } from 'dva';
 import MediaQuery from 'react-responsive';
 import PixelHeader from '../../components/Pixel-Header/pixeliceHeader';
@@ -7,6 +7,7 @@ import PixelFooter from '../../components/Pixel-Footer/pixelFooter';
 import Cover from '../../components/Cover/cover';
 import style from './SquarePage.less';
 import NewPhotoCard from '../../components/Square/newCard/newCard';
+import PhotoDetail from '../../components/PhotoDetail/photoDetail';
 
 const { Content } = Layout;
 
@@ -16,6 +17,8 @@ class SquarePage extends React.Component {
       message: 0,
       data: [],
     },
+    detailVisible: false,
+    chosenPhoto: undefined,
   };
   componentWillMount() {
     this.props.dispatch({
@@ -28,6 +31,12 @@ class SquarePage extends React.Component {
       photos: nextProps.photos,
     });
   }
+  showDetail = (info) => {
+    this.setState({
+      chosenPhoto: info,
+      detailVisible: true,
+    });
+  };
   smPane = () => {
     const column1 = [];
     const column2 = [];
@@ -35,11 +44,11 @@ class SquarePage extends React.Component {
       const item1 = this.state.photos.data[i];
       const item2 = this.state.photos.data[i + 1];
       column1.push(
-        <NewPhotoCard key={i} info={item1} />,
+        <NewPhotoCard onClick={() => { this.showDetail(item1); }} key={i} info={item1} />,
       );
       if (item2 !== undefined) {
         column2.push(
-          <NewPhotoCard key={i + 1} info={item2} />,
+          <NewPhotoCard onClick={() => { this.showDetail(item2); }} key={i + 1} info={item2} />,
         );
       }
     }
@@ -61,16 +70,16 @@ class SquarePage extends React.Component {
       const item2 = this.state.photos.data[i + 1];
       const item3 = this.state.photos.data[i + 2];
       column1.push(
-        <NewPhotoCard key={i} info={item1} />,
+        <NewPhotoCard onClick={() => { this.showDetail(item1); }} key={i} info={item1} />,
       );
       if (item2 !== undefined) {
         column2.push(
-          <NewPhotoCard key={i + 1} info={item2} />,
+          <NewPhotoCard onClick={() => { this.showDetail(item2); }} key={i + 1} info={item2} />,
         );
       }
       if (item3 !== undefined) {
         column3.push(
-          <NewPhotoCard key={i + 2} info={item3} />,
+          <NewPhotoCard onClick={() => { this.showDetail(item3); }} key={i + 2} info={item3} />,
         );
       }
     }
@@ -91,7 +100,7 @@ class SquarePage extends React.Component {
     for (let i = 0; i < this.state.photos.data.length; i += 1) {
       const item = this.state.photos.data[i];
       column.push(
-        <NewPhotoCard key={i} info={item} />,
+        <NewPhotoCard onClick={() => { this.showDetail(item); }} key={i} info={item} />,
       );
     }
     return (
@@ -124,7 +133,7 @@ class SquarePage extends React.Component {
       const item = this.state.photos.data[i];
       photos.push(
         <Col key={i}>
-          <NewPhotoCard info={item} />
+          <NewPhotoCard onClick={this.showDetail} info={item} />
         </Col>,
       );
     }
@@ -163,6 +172,15 @@ class SquarePage extends React.Component {
               </Tabs.TabPane>
             </Tabs>
           </div>
+          <Modal
+            style={{ position: 'absolute', top: 20 }}
+            width="90%"
+            visible={this.state.detailVisible}
+            onCancel={() => { this.setState({ detailVisible: false }); }}
+            footer={null}
+          >
+            <PhotoDetail photoInfo={this.state.chosenPhoto} />
+          </Modal>
         </Content>
         <PixelFooter />
       </Layout>
