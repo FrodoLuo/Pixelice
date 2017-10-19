@@ -132,7 +132,7 @@ class SquarePage extends React.Component {
     for (let i = 0; i < this.state.photos.data.length; i += 1) {
       const item = this.state.photos.data[i];
       photos.push(
-        <Col key={i}>
+        <Col key={i} span={24}>
           <NewPhotoCard onClick={this.showDetail} info={item} />
         </Col>,
       );
@@ -141,28 +141,34 @@ class SquarePage extends React.Component {
       <Layout>
         <PixelHeader />
         <Content className="main-content">
-          <Cover />
           <div className="content-wrap">
             <Tabs defaultActiveKey="1">
               <Tabs.TabPane tab="最新作品" key="1">
                 <div className={style['newphoto-wrap']}>
                   <Row type="flex" justify="space-between" align="top">
+                    <Col>
+                      <Affix>
+                        <Card span={2} >
+                          bla
+                        </Card>
+                      </Affix>
+                    </Col>
                     <Col xs={24} sm={20}>
                       <Row type="flex" justify="start" align="top">
-                        <MediaQuery minWidth={992}>
+                        <MediaQuery minWidth={992} className={style['newphoto-wrap']}>
                           {this.paneCompute('md')}
                         </MediaQuery>
-                        <MediaQuery minWidth={768} maxWidth={992}>
+                        <MediaQuery minWidth={768} maxWidth={992} className={style['newphoto-wrap']}>
                           {this.paneCompute('sm')}
                         </MediaQuery>
-                        <MediaQuery maxWidth={768}>
+                        <MediaQuery maxWidth={768} className={style['newphoto-wrap']}>
                           {this.paneCompute('xs')}
                         </MediaQuery>
                       </Row>
                     </Col>
                     <Col>
                       <Affix>
-                        <Card span={4} >
+                        <Card span={2} >
                           bla
                         </Card>
                       </Affix>

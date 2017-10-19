@@ -3,22 +3,29 @@
   justify-content: space-between;
   align-items: center;
   //position: relative;
-  background-color: rgba(82,220,193,0.85);
+  background-color: white;
   transition: all ease 0.5s;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
   width: 100%;
   z-index: 1000;
   position: absolute;
 }
 .header-wrap-home{
   .header-wrap;
-
-  background: linear-gradient(top, rgba(0,0,0,0.4), transparent);
+  box-shadow: none;
+  background: linear-gradient(top, rgba(255,255,255,0.5), rgba(255,255,255,0));
 }
 .header-wrap-home:hover{
-  background: none;
-  background-color: rgba(82,220,193,0.85);
+  color: black;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  background-color: white;
 }
 .left-wrap{
   display: inline-flex;
   align-items: center;
+}
+@media screen and (min-width: 768px){
+  .header-wrap, .header-wrap-home{
+    position: fixed;
+  }
 }

@@ -1,8 +1,8 @@
 {
   "theme": {
-    "primary-color": "rgba(62,200,173,1)",
-    "border-radius-base": "3px",
-    "border-radius-sm": "0"
+    "primary-color": "#333333",
+    "border-radius-base": "2px",
+    "border-radius-sm": "1px"
   },
   "entry": "src/index.js",
   "proxy": {

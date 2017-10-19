@@ -7,7 +7,7 @@ function newCard(props) {
   const avatar = props.info.avatarUrl === '' ?
     defaultAvatar : props.info.avatarUrl;
   return (
-    <Card onClick={props.onClick} bordered={false} noHovering className={style['nc-wrap']}>
+    <Card bodyStyle={{ padding: 0 }} onClick={props.onClick} bordered={false} className={style['nc-wrap']}>
       <div className={style['nc-userInfo-wrap']}>
         <Avatar src={avatar} />
         <span className={style['nc-userInfo-nickName']}>{props.info.nickName}</span>

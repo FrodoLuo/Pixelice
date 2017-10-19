@@ -10,9 +10,9 @@ function PixeliceHeader(props) {
     <div className={style[c]}>
       <div className={style['left-wrap']}>
         <Logo />
-        <Nav />
+        <Nav home />
       </div>
-      <Sign />
+      <Sign home />
     </div>
   );
 }
