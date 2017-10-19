@@ -11,16 +11,70 @@
   font-size: 15px;
 }
 .nc-photo-wrap{
-  margin: 10px 0;
   transition: all ease 0.3s;
-  box-shadow: 0 0 1px rgba(0,0,0,0.6);
   display: inline-block;
-}
-.nc-photo-wrap > img{
-  margin-bottom: -4px;
   width: 100%;
 }
+.nc-photo-wrap > img{
+  margin-bottom: -5px;
+  width: 100%;
+}
+.nc-like-wrap{
+  font-size: 24px;
+  height: 36px;
+  left: 0;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+.nc-like-wrap:before{
+  position: absolute;
+  display: block;
+  height: 1px;
+  bottom: 36px;
+  background-color: white;
+  content: '';
+  width: 100%;
+}
+.nc-like-button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+.nc-like-button:hover{
+  background-color: rgba(255,255,255,0.2);
+}
+.nc-like-button:active{
+  background-color: rgba(255,255,255,0.1);
+}
 .nc-wrap{
-  margin: 10px 5px;
-  box-shadow: 0 0 2px rgba(0,0,0,0.2)
+  margin: 20px 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  overflow: hidden;
+}
+.nc-wrap:hover{
+  box-shadow: 0 0 20px rgba(0,0,0,0.8);
+}
+.nc-hover-wrap{
+  position: absolute;
+  background-color: transparent;
+  height: 100%;
+  top: -100%;
+  left: 0;
+  transition: all ease 0.4s;
+  width: 100%;
+  color: white;
+  padding: 5px;
+}
+.nc-wrap:hover .nc-hover-wrap{
+  top: 0;
+  background-color: rgba(0,0,0,0.5);
+}
+.nc-footer{
+  position: absolute;
+  bottom: 36px;
 }

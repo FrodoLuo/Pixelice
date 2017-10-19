@@ -3,12 +3,17 @@ html, body, :global(#root) {
   height: 100%;
   margin: 0;
 }
-
+:global{
+  .ant-modal-content{
+    height: 100%;
+  }
+}
 :global(.ant-layout) {
   min-height: 100%;
   display: flex;
 }
 :global(.main-content) {
+  padding-top: 48px;
   background-color: white;
   flex: auto;
   -moz-box-flex: 1;

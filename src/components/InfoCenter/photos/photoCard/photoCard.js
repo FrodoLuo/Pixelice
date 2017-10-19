@@ -1,22 +1,11 @@
 import React from 'react';
 import { Card, Icon, Col, Modal } from 'antd';
-import PhotoDetail from './photoDetail';
 import defaultPhoto from '../../../../assets/images/default_photo_cover.jpeg';
 import style from './photoCard.less';
 
 class PhotoCard extends React.Component {
   state = {
     detailVisible: false,
-  };
-  showDetail = () => {
-    this.setState({
-      detailVisible: true,
-    });
-  };
-  hideDetail = () => {
-    this.setState({
-      detailVisible: false,
-    });
   };
   render() {
     return (
@@ -25,7 +14,7 @@ class PhotoCard extends React.Component {
           bodyStyle={{ padding: 0 }}
           style={{ margin: '12px 2px', border: '#eee 1px solid' }}
         >
-          <a onClick={this.showDetail}>
+          <a onClick={this.props.onClick}>
             <div className={style['photo-card-wrap']}>
               <img src={this.props.info.zipUrl} role="presentation" />
             </div>
@@ -46,13 +35,6 @@ class PhotoCard extends React.Component {
             </div>
           </a>
         </Card>
-        <Modal
-          visible={this.state.detailVisible}
-          onCancel={this.hideDetail}
-          footer={null}
-        >
-          <PhotoDetail info={this.props.info} />
-        </Modal>
       </div>
     );
   }

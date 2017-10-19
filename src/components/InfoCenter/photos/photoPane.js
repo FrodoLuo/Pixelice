@@ -1,10 +1,11 @@
 import React from 'react';
-import { Row, Button, Col } from 'antd';
+import { Row, Button, Col, Modal } from 'antd';
 import { connect } from 'dva';
 import MediaQuery from 'react-responsive';
 import PhotoCard from './photoCard/photoCard';
 import style from './photoPane.less';
 import UploadPane from './uploadPane/uploadPane';
+import PhotoDetail from '../../PhotoDetail/photoDetail';
 
 class PhotoPane extends React.Component {
   state = {
@@ -16,6 +17,8 @@ class PhotoPane extends React.Component {
     upload: {
       message: 0,
     },
+    chosenPhoto: undefined,
+    detailVisible: false,
   };
   componentWillMount() {
     this.props.dispatch({
@@ -29,6 +32,12 @@ class PhotoPane extends React.Component {
       });
     }
   }
+  showDetail = (info) => {
+    this.setState({
+      chosenPhoto: info,
+      detailVisible: true,
+    });
+  };
   openUpload = () => {
     this.setState({
       uploadVisible: true,
@@ -46,11 +55,11 @@ class PhotoPane extends React.Component {
       const item1 = this.state.photos.data[i];
       const item2 = this.state.photos.data[i + 1];
       column1.push(
-        <PhotoCard key={i} info={item1} />,
+        <PhotoCard onClick={() => { this.showDetail(item1); }} key={i} info={item1} />,
       );
       if (item2 !== undefined) {
         column2.push(
-          <PhotoCard key={i + 1} info={item2} />,
+          <PhotoCard onClick={() => { this.showDetail(item2); }} key={i + 1} info={item2} />,
         );
       }
     }
@@ -72,16 +81,16 @@ class PhotoPane extends React.Component {
       const item2 = this.state.photos.data[i + 1];
       const item3 = this.state.photos.data[i + 2];
       column1.push(
-        <PhotoCard key={i} info={item1} />,
+        <PhotoCard onClick={() => { this.showDetail(item1); }} key={i} info={item1} />,
       );
       if (item2 !== undefined) {
         column2.push(
-          <PhotoCard key={i + 1} info={item2} />,
+          <PhotoCard onClick={() => { this.showDetail(item2); }} key={i + 1} info={item2} />,
         );
       }
       if (item3 !== undefined) {
         column3.push(
-          <PhotoCard key={i + 2} info={item3} />,
+          <PhotoCard onClick={() => { this.showDetail(item3); }} key={i + 2} info={item3} />,
         );
       }
     }
@@ -98,16 +107,16 @@ class PhotoPane extends React.Component {
     ]);
   };
   xsPane = () => {
-    const column = [];
+    const column1 = [];
     for (let i = 0; i < this.state.photos.data.length; i += 1) {
-      const item = this.state.photos.data[i];
-      column.push(
-        <PhotoCard key={i} info={item} />,
+      const item1 = this.state.photos.data[i];
+      column1.push(
+        <PhotoCard onClick={() => { this.showDetail(item1); }} key={i} info={item1} />,
       );
     }
     return (
       <Col span={24}>
-        {column}
+        {column1}
       </Col>
     );
   };
@@ -172,6 +181,16 @@ class PhotoPane extends React.Component {
         <MediaQuery maxWidth={768}>
           {this.paneCompute('xs')}
         </MediaQuery>
+        <Modal
+          style={{ top: 10, height: '90%', paddingBottom: '0' }}
+          bodyStyle={{ height: '100%' }}
+          width="90%"
+          visible={this.state.detailVisible}
+          onCancel={() => { this.setState({ detailVisible: false }); }}
+          footer={null}
+        >
+          <PhotoDetail photoInfo={this.state.chosenPhoto} />
+        </Modal>
       </div>
     );
   }

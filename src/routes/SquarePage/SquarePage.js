@@ -146,14 +146,7 @@ class SquarePage extends React.Component {
               <Tabs.TabPane tab="最新作品" key="1">
                 <div className={style['newphoto-wrap']}>
                   <Row type="flex" justify="space-between" align="top">
-                    <Col>
-                      <Affix>
-                        <Card span={2} >
-                          bla
-                        </Card>
-                      </Affix>
-                    </Col>
-                    <Col xs={24} sm={20}>
+                    <Col span={24}>
                       <Row type="flex" justify="start" align="top">
                         <MediaQuery minWidth={992} className={style['newphoto-wrap']}>
                           {this.paneCompute('md')}
@@ -166,20 +159,14 @@ class SquarePage extends React.Component {
                         </MediaQuery>
                       </Row>
                     </Col>
-                    <Col>
-                      <Affix>
-                        <Card span={2} >
-                          bla
-                        </Card>
-                      </Affix>
-                    </Col>
                   </Row>
                 </div>
               </Tabs.TabPane>
             </Tabs>
           </div>
           <Modal
-            style={{ position: 'absolute', top: 20 }}
+            style={{ top: 10, height: '90%', paddingBottom: '0' }}
+            bodyStyle={{ height: '100%' }}
             width="90%"
             visible={this.state.detailVisible}
             onCancel={() => { this.setState({ detailVisible: false }); }}

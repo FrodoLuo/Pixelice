@@ -13,8 +13,8 @@ class PhotoDetail extends React.Component {
   }
   render() {
     return (
-      <div>
-        <Row>
+      <div style={{ height: '100%' }}>
+        <Row type="flex" style={{ height: '100%' }}>
           <Col xs={24} sm={20}>
             <div className={style['photo-wrap']}>
               <img src={this.props.photoInfo.photoUrl} role="presentation" />
