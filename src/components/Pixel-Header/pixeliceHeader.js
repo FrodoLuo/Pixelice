@@ -7,7 +7,7 @@ import Sign from './sign/sign';
 function PixeliceHeader(props) {
   const c = props.home ? 'header-wrap-home' : 'header-wrap';
   return (
-    <div className={style[c]}>
+    <div className={style[c]} id="header">
       <div className={style['left-wrap']}>
         <Logo />
         <Nav home />
