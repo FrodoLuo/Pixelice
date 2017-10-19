@@ -10,6 +10,13 @@ export default {
       message: 0,
       data: [],
     },
+    cover: {
+      message: 0,
+      result: {
+        author: '',
+        photoUrl: '',
+      },
+    },
   },
   subscriptions: {},
   effects: {
@@ -38,6 +45,13 @@ export default {
         payload: result.data,
       });
     },
+    *randomPhoto({ payload }, { call, put }) {
+      const result = yield call(photoService.randomPhoto);
+      yield put({
+        type: 'saveCover',
+        payload: result.data,
+      });
+    },
   },
   reducers: {
     saveUpload(state, { payload: data }) {
@@ -45,6 +59,9 @@ export default {
     },
     savePhotos(state, { payload: data }) {
       return { ...state, photos: data };
+    },
+    saveCover(state, { payload: data }) {
+      return { ...state, cover: data };
     },
   },
 };

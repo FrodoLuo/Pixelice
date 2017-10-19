@@ -9,6 +9,10 @@
   height: 144px;
   position: relative;
 }
+.background-mask{
+  width: 100%;
+  background-color: rgba(0,0,0,0.3);
+}
 .cover-background-home{
   .cover-background;
   height: 100%;
@@ -18,6 +22,9 @@
 }
 .cover-content{
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .cover-author{
   color: white;
@@ -30,5 +37,10 @@
 .cover-search-wrap{
   text-align: center;
   color: white;
-  font-size: 48px;
+  width: 240px;
+  margin: 10px 0;
+}
+.cover-title-wrap > p {
+  margin: auto;
+  text-align: center;
 }

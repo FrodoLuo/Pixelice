@@ -22,3 +22,6 @@ export function fetchPhotos() {
 export function getNewPhotos() {
   return post('/api/photo/getNewPhotos');
 }
+export function randomPhoto() {
+  return get('/api/photo/randomPhoto');
+}
