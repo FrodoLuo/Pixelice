@@ -14,7 +14,8 @@ const menu = (
   </Menu>
 );
 
-function Nav() {
+function Nav(props) {
+  console.log(window.location);
   return (
     <div>
       <MediaQuery minWidth={768}>

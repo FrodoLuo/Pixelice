@@ -8,6 +8,7 @@
   z-index: 0;
   height: 144px;
   position: relative;
+  transition: all ease 0.5s
 }
 .background-mask{
   width: 100%;
@@ -17,8 +18,28 @@
   .cover-background;
   height: 100%;
   height: fill-available;
-
   position: relative;
+}
+.process-bar{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  padding: 1px 0;
+}
+.process-bar > span{
+  left: 0;
+  display: block;
+  background-color: white;
+  height: 2px;
+  -webkit-animation: progress 6s infinite;
+  -o-animation: progress 6s infinite;
+  animation: progress 6s infinite;
+}
+@keyframes progress {
+  0%    {width: 0}
+  100%  {width: 100%}
 }
 .cover-content{
   height: 100%;

@@ -12,6 +12,16 @@ class Cover extends React.Component {
     props.dispatch({
       type: 'photo/randomPhoto',
     });
+    this.state = ({
+      changeProcess: 0.5,
+      currentImgIndex: 0,
+      coverImageList: [defaultCover],
+    });
+  }
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      coverImageList: nextProps.result,
+    });
   }
   render() {
     console.log(this.props);
@@ -19,7 +29,9 @@ class Cover extends React.Component {
     return (
       <div
         className={style[c]}
-        style={{ backgroundImage: `url(${this.props.result.photoUrl})` }}
+        style={{
+          backgroundImage: `url(${this.state.coverImageList[this.state.currentImgIndex].photoUrl})`,
+        }}
       >
         {this.props.home ?
           (
@@ -43,7 +55,14 @@ class Cover extends React.Component {
           ''
         }
         <div className={style['cover-author']}>
-          <div>Author: {this.props.result.author}</div>
+          <div>Author: {this.state.coverImageList[this.state.currentImgIndex].author}</div>
+        </div>
+        <div className={style['process-bar']}>
+          <span
+            style={{
+              width: `${100 * this.state.changeProcess}%`,
+            }}
+          />
         </div>
       </div>
     );

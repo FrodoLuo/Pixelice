@@ -47,6 +47,7 @@ export default {
     },
     *randomPhoto({ payload }, { call, put }) {
       const result = yield call(photoService.randomPhoto);
+      console.log(result);
       yield put({
         type: 'saveCover',
         payload: result.data,
