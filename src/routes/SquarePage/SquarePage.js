@@ -21,12 +21,12 @@ class SquarePage extends React.Component {
     chosenPhoto: undefined,
   };
   componentWillMount() {
+    console.log(this.props.location.search);
     this.props.dispatch({
       type: 'photo/getNewPhotos',
     });
   }
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
     this.setState({
       photos: nextProps.photos,
     });
