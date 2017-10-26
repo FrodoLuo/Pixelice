@@ -78,7 +78,7 @@ class Sign extends React.Component {
       content = (
         <div className={style['sign-wrap']}>
           <Avatar src={imgSrc} />
-          <a href="#infoCenter"><span>{this.state.nickName}</span></a>
+          <a href="infoCenter"><span>{this.state.nickName}</span></a>
           <a onClick={logout}><span>注销</span></a>
         </div>
       );
@@ -112,7 +112,7 @@ class Sign extends React.Component {
               </Form>
             </div>
           </Modal>
-          <a href="#signUp">注册</a>
+          <a href="signUp">注册</a>
         </div>
       );
     }

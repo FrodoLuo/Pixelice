@@ -6,10 +6,10 @@ import style from './nav.less';
 const menu = (
   <Menu className={style['drop-menu']}>
     <Menu.Item>
-      <a href="">首页</a>
+      <a href="/">首页</a>
     </Menu.Item>
     <Menu.Item>
-      <a href="#square">广场</a>
+      <a href="square">广场</a>
     </Menu.Item>
   </Menu>
 );
@@ -20,8 +20,8 @@ function Nav(props) {
     <div>
       <MediaQuery minWidth={768}>
         <div className={style['nav-wrap']}>
-          <a href="">首页</a>
-          <a href="#square">广场</a>
+          <a href="/">首页</a>
+          <a href="square">广场</a>
         </div>
       </MediaQuery>
       <MediaQuery maxWidth={768}>

@@ -18,13 +18,22 @@ class Cover extends React.Component {
       coverImageList: [defaultCover],
     });
   }
+  componentDidMount() {
+    if (this.props.home) {
+      setInterval(() => {
+        const t = this.state.currentImgIndex;
+        this.setState({
+          currentImgIndex: t === 4 ? 0 : t + 1,
+        });
+      }, 8000);
+    }
+  }
   componentWillReceiveProps(nextProps) {
     this.setState({
       coverImageList: nextProps.result,
     });
   }
   render() {
-    console.log(this.props);
     const c = this.props.home ? 'cover-background-home' : 'cover-background';
     return (
       <div

@@ -8,7 +8,7 @@
   z-index: 0;
   height: 144px;
   position: relative;
-  transition: all ease 0.5s
+  transition: all ease 1s
 }
 .background-mask{
   width: 100%;
@@ -26,6 +26,7 @@
   width: 100%;
   display: flex;
   justify-content: flex-start;
+  background-color: rgba(0,0,0,0.4);
   padding: 1px 0;
 }
 .process-bar > span{
@@ -33,9 +34,9 @@
   display: block;
   background-color: white;
   height: 2px;
-  -webkit-animation: progress 6s infinite;
-  -o-animation: progress 6s infinite;
-  animation: progress 6s infinite;
+  -webkit-animation: progress 8s infinite ease-out;
+  -o-animation: progress 8s infinite ease-out;
+  animation: progress 8s infinite ease-out;
 }
 @keyframes progress {
   0%    {width: 0}
