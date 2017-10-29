@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Button, Select, Row, Col, Input, Icon } from 'antd';
+import { Form, Button, Select, Row, Col, Input, Icon, message } from 'antd';
 import { connect } from 'dva';
 import style from './info.less';
 
@@ -18,12 +18,85 @@ class Info extends React.Component {
       verified: '',
       followers: 0,
     },
+    editForm: {
+      intro: '',
+      nickName: '',
+      phone: '',
+      gender: this.props.userInfo.data.gender,
+    },
+    modify: {
+      state: 'ready',
+    },
   };
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
+    switch (nextProps.modify.state) {
+      case 'success':
+        message.success('修改成功');
+        this.setState({
+          editMode: false,
+        });
+        this.props.dispatch({
+          type: 'user/userInfo',
+        });
+        break;
+      case 'occupied':
+        message.error('昵称已被占用');
+        break;
+      case 'error':
+        message.error('遇到服务器错误, 修改失败');
+    }
+    this.setState({
+      modify: nextProps.modify,
+    });
+  }
+  changeIntro = (e) => {
+    this.setState({
+      editForm: {
+        ...this.state.editForm,
+        intro: e.target.value,
+      },
+    });
+  };
+  changePhone = (e) => {
+    this.setState({
+      editForm: {
+        ...this.state.editForm,
+        phone: e.target.value,
+      },
+    });
+  };
+  changeNickName = (e) => {
+    this.setState({
+      editForm: {
+        ...this.state.editForm,
+        nickName: e.target.value,
+      },
+    });
+  };
+  changeGender = (value) => {
+    this.setState({
+      editForm: {
+        ...this.state.editForm,
+        gender: value,
+      },
+    });
+  };
+  handleModify = () => {
+    this.props.dispatch({
+      type: 'user/modifyUserInfo',
+      payload: this.state.editForm,
+    });
+  }
   render() {
     const wrap = this.state.editMode ?
       (
         <div>
-          <Button type="primary">
+          <Button
+            type="primary"
+            onClick={this.handleModify}
+            loading={this.state.modify.state === 'loading'}
+          >
             <Icon type="check" />
             确定
           </Button>
@@ -56,7 +129,6 @@ class Info extends React.Component {
           </Button>
         </div>
       );
-    console.log(this.props.userInfo);
     return (
       <Row type="flex" align="top">
         <Col xs={24} sm={16}>
@@ -64,38 +136,42 @@ class Info extends React.Component {
             <Form layout={'vertical'}>
               <Form.Item label="个人介绍">
                 <Input.TextArea
-                  defaultValue={this.props.userInfo.intro}
+                  defaultValue={this.props.userInfo.data.intro}
                   disabled={!this.state.editMode}
+                  onChange={this.changeIntro}
                 />
               </Form.Item>
               <Form.Item label="昵称">
                 <Input
-                  defaultValue={this.props.userInfo.nickName}
+                  defaultValue={this.props.userInfo.data.nickName}
                   disabled={!this.state.editMode}
+                  onChange={this.changeNickName}
                 />
               </Form.Item>
               <Form.Item label="ID">
                 <Input
-                  defaultValue={this.props.userInfo.userId}
-                  disabled={!this.state.editMode}
+                  defaultValue={this.props.userInfo.data.userId}
+                  disabled
                 />
               </Form.Item>
               <Form.Item label="电子邮箱">
                 <Input
-                  defaultValue={this.props.userInfo.email}
-                  disabled={!this.state.editMode}
+                  defaultValue={this.props.userInfo.data.email}
+                  disabled
                 />
               </Form.Item>
               <Form.Item label="电话号码">
                 <Input
-                  defaultValue={this.props.userInfo.phone}
+                  defaultValue={this.props.userInfo.data.phone}
                   disabled={!this.state.editMode}
+                  onChange={this.changePhone}
                 />
               </Form.Item>
               <Form.Item label="性别">
                 <Select
-                  defaultValue={this.props.userInfo.gender}
+                  defaultValue={this.props.userInfo.data.gender}
                   disabled={!this.state.editMode}
+                  onSelect={this.changeGender}
                 >
                   <Option value="m">男</Option>
                   <Option value="f">女</Option>
@@ -112,4 +188,7 @@ class Info extends React.Component {
     );
   }
 }
-export default connect()(Info);
+export default connect((models) => {
+  console.log(models);
+  return models.user;
+})(Info);
