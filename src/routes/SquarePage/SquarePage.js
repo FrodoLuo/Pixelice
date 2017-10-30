@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Row, Col, Card, Affix, Tabs, Modal } from 'antd';
+import { Layout, Row, Col, Card, Affix, Tabs, Modal, Input } from 'antd';
 import { connect } from 'dva';
 import MediaQuery from 'react-responsive';
 import PixelHeader from '../../components/Pixel-Header/pixeliceHeader';
@@ -16,8 +16,11 @@ class SquarePage extends React.Component {
       message: 0,
       data: [],
     },
-    detailVisible: false,
-    chosenPhoto: undefined,
+    search: {
+      message: 0,
+      tried: false,
+      data: [],
+    },
   };
   componentWillMount() {
     console.log(this.props.location.search);
@@ -36,15 +39,31 @@ class SquarePage extends React.Component {
       detailVisible: true,
     });
   };
+  handleSearch = (value) => {
+    console.log(value);
+  }
   render() {
     return (
       <Layout>
         <PixelHeader />
         <Content className="main-content">
           <div className="content-wrap">
-            <Tabs defaultActiveKey="1">
+            <Tabs defaultActiveKey="2">
               <Tabs.TabPane tab="最新作品" key="1">
                 <PhotoWall photos={this.state.photos.data} />
+              </Tabs.TabPane>
+              <Tabs.TabPane tab="搜索" key="2">
+                <div>
+                  <div className={style['square-search-wrap']}>
+                    <div className={style['square-search']}>
+                      <Input.Search
+                        placeholder="搜索图片关键词"
+                        onSearch={this.handleSearch}
+                      />
+                    </div>
+                  </div>
+                  <PhotoWall photos={this.state.search.data} />
+                </div>
               </Tabs.TabPane>
             </Tabs>
           </div>
