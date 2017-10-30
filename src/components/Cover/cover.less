@@ -8,7 +8,6 @@
   z-index: 0;
   height: 144px;
   position: relative;
-  transition: all ease 1s
 }
 .background-mask{
   width: 100%;
@@ -17,8 +16,11 @@
 .cover-background-home{
   .cover-background;
   height: 100%;
-  height: fill-available;
+  height: -webkit-fill-available;
   position: relative;
+  transition: ease 1s;
+  -moz-transition: ease 1s;
+  -webkit-transition: ease 1s;
 }
 .process-bar{
   position: absolute;

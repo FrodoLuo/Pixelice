@@ -73,8 +73,16 @@
 .nc-wrap:hover .nc-hover-wrap{
   opacity: 1;
   background-color: rgba(0,0,0,0.3);
+  top: 0;
 }
 .nc-footer{
   position: absolute;
   bottom: 36px;
+}
+@media screen and (max-width: 768px) {
+  .nc-hover-wrap{
+    background-color: rgba(0,0,0,0.3);
+    top: -100%;
+    opacity: 1;
+  }
 }

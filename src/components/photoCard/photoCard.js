@@ -1,9 +1,9 @@
 import React from 'react';
 import { Card, Avatar, Icon } from 'antd';
-import style from './newCard.less';
-import defaultAvatar from '../../../assets/images/defaultAvatar.jpeg';
+import style from './photoCard.less';
+import defaultAvatar from '../../assets/images/defaultAvatar.jpeg';
 
-function newCard(props) {
+function photoCard(props) {
   const avatar = props.info.avatarUrl === '' ?
     defaultAvatar : props.info.avatarUrl;
   const k = (e) => {
@@ -37,4 +37,4 @@ function newCard(props) {
     </Card>
   );
 }
-export default newCard;
+export default photoCard;
