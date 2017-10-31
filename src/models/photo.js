@@ -24,7 +24,7 @@ export default {
   },
   subscriptions: {},
   effects: {
-    *search({ payload: keystring }, { call, put }){
+    *search({ payload: keystring }, { call, put }) {
       yield put({
         type: 'saveSearch',
         payload: {
