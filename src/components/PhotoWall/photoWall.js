@@ -7,15 +7,9 @@ import PhotoDetail from '../PhotoDetail/photoDetail';
 
 class PhotoWall extends React.Component {
   state = {
-    photos: [],
     detailVisible: false,
     chosenPhoto: undefined,
   };
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      photos: nextProps.photos,
-    });
-  }
   showDetail = (info) => {
     this.setState({
       chosenPhoto: info,
@@ -25,9 +19,9 @@ class PhotoWall extends React.Component {
   smPane = () => {
     const column1 = [];
     const column2 = [];
-    for (let i = 0; i < this.state.photos.length; i += 2) {
-      const item1 = this.state.photos[i];
-      const item2 = this.state.photos[i + 1];
+    for (let i = 0; i < this.props.photos.length; i += 2) {
+      const item1 = this.props.photos[i];
+      const item2 = this.props.photos[i + 1];
       column1.push(
         <PhotoCard onClick={() => { this.showDetail(item1); }} key={i} info={item1} />,
       );
@@ -50,10 +44,10 @@ class PhotoWall extends React.Component {
     const column1 = [];
     const column2 = [];
     const column3 = [];
-    for (let i = 0; i < this.state.photos.length; i += 3) {
-      const item1 = this.state.photos[i];
-      const item2 = this.state.photos[i + 1];
-      const item3 = this.state.photos[i + 2];
+    for (let i = 0; i < this.props.photos.length; i += 3) {
+      const item1 = this.props.photos[i];
+      const item2 = this.props.photos[i + 1];
+      const item3 = this.props.photos[i + 2];
       column1.push(
         <PhotoCard onClick={() => { this.showDetail(item1); }} key={i} info={item1} />,
       );
@@ -82,8 +76,8 @@ class PhotoWall extends React.Component {
   };
   xsPane = () => {
     const column = [];
-    for (let i = 0; i < this.state.photos.length; i += 1) {
-      const item = this.state.photos[i];
+    for (let i = 0; i < this.props.photos.length; i += 1) {
+      const item = this.props.photos[i];
       column.push(
         <PhotoCard onClick={() => { this.showDetail(item); }} key={i} info={item} />,
       );
