@@ -29,8 +29,15 @@ class SquarePage extends React.Component {
     });
   }
   componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
     this.setState({
       photos: nextProps.photos,
+    });
+  }
+  cpmponentDidMount() {
+    console.log('mounted');
+    this.setState({
+      photos: this.proprs.photos,
     });
   }
   showDetail = (info) => {
@@ -43,6 +50,7 @@ class SquarePage extends React.Component {
     console.log(value);
   }
   render() {
+    console.log(this.state);
     return (
       <Layout>
         <PixelHeader />
