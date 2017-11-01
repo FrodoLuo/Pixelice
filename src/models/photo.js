@@ -17,9 +17,40 @@ export default {
         photoUrl: '',
       },
     },
+    search: {
+      state: 'ready',
+      data: [],
+    },
   },
   subscriptions: {},
   effects: {
+    *search({ payload: keystring }, { call, put }) {
+      yield put({
+        type: 'saveSearch',
+        payload: {
+          state: 'loading',
+          data: [],
+        },
+      });
+      const result = yield call(photoService.searchPhoto, keystring);
+      console.log(result);
+      let state = '';
+      switch (result.data.message) {
+        case 20:
+          state = 'success';
+          break;
+        case 21:
+          state = 'error';
+          break;
+      }
+      yield put({
+        type: 'saveSearch',
+        payload: {
+          state,
+          data: result.data.data,
+        },
+      });
+    },
     *upload({ payload: { files, info } }, { call, put }) {
       yield put({
         type: 'saveUpload',
@@ -63,6 +94,9 @@ export default {
     },
     saveCover(state, { payload: data }) {
       return { ...state, cover: data };
+    },
+    saveSearch(state, { payload: data }) {
+      return { ...state, search: data };
     },
   },
 };

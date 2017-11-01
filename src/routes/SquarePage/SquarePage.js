@@ -32,6 +32,7 @@ class SquarePage extends React.Component {
     console.log(nextProps);
     this.setState({
       photos: nextProps.photos,
+      search: nextProps.search,
     });
   }
   cpmponentDidMount() {
@@ -48,6 +49,10 @@ class SquarePage extends React.Component {
   };
   handleSearch = (value) => {
     console.log(value);
+    this.props.dispatch({
+      type: 'photo/search',
+      payload: value,
+    });
   }
   render() {
     console.log(this.state);

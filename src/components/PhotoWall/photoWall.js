@@ -11,18 +11,6 @@ class PhotoWall extends React.Component {
     detailVisible: false,
     chosenPhoto: undefined,
   };
-  componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
-    this.setState({
-      photos: nextProps.photos.data,
-    });
-  }
-  conmponentDidMount() {
-    console.log(this.props);
-    this.setState({
-      photos: this.props.photos.data,
-    });
-  }
   showDetail = (info) => {
     this.setState({
       chosenPhoto: info,
