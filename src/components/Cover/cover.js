@@ -3,6 +3,7 @@ import { connect } from 'dva';
 import { Input, Row, Col } from 'antd';
 import style from './cover.less';
 import defaultCover from '../../assets/images/default_cover.jpeg';
+import SearchBar from './SearchBar/searchBar';
 
 const Search = Input.Search;
 
@@ -17,16 +18,6 @@ class Cover extends React.Component {
       currentImgIndex: 0,
       coverImageList: [defaultCover],
     });
-  }
-  componentDidMount() {
-    if (this.props.home) {
-      setInterval(() => {
-        const t = this.state.currentImgIndex;
-        this.setState({
-          currentImgIndex: t === 4 ? 0 : t + 1,
-        });
-      }, 8000);
-    }
   }
   componentWillReceiveProps(nextProps) {
     this.setState({
@@ -45,7 +36,8 @@ class Cover extends React.Component {
         {this.props.home ?
           (
             <div className={style['background-mask']}>
-              <div>
+              <SearchBar />
+              {/* <div>
                 <Row type="flex" justify="center">
                   <div className={style['cover-title-wrap']}>
                     <p style={{ color: 'white', fontSize: '48px' }}>Pixelice</p>
@@ -57,7 +49,7 @@ class Cover extends React.Component {
                     <Search placeholder="Coming Soon." />
                   </div>
                 </Row>
-              </div>
+              </div> */}
             </div>
           )
           :
@@ -65,13 +57,6 @@ class Cover extends React.Component {
         }
         <div className={style['cover-author']}>
           <div>Author: {this.state.coverImageList[this.state.currentImgIndex].author}</div>
-        </div>
-        <div className={style['process-bar']}>
-          <span
-            style={{
-              width: `${100 * this.state.changeProcess}%`,
-            }}
-          />
         </div>
       </div>
     );

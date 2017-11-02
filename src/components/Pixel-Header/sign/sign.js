@@ -91,6 +91,7 @@ class Sign extends React.Component {
             style={{
               top: '-100px',
             }}
+            width={300}
             visible={this.state.loginVisible}
             onCancel={this.handleCancel}
             footer={[

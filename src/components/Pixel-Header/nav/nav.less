@@ -13,16 +13,14 @@
 }
 .nav-wrap > a {
   margin: 0 10px;
-  color: black;
   height: 48px;
   line-height: 48px;
   padding: 0 10px;
   transition: all ease 0.1s;
 }
-@media screen and (max-width: 320px) {
-  .nav-wrap > a {
-    padding: 0 10px;
-    margin: 0;
+@media screen and (max-width: 768px) {
+  .nav-wrap{
+    flex-direction: column;
   }
 }
 .nav-wrap > a:hover{

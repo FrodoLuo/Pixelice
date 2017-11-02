@@ -11,7 +11,6 @@
 }
 .sign-wrap > a {
   margin: 0 10px;
-  color: black;
   height: 48px;
   line-height: 48px;
   padding: 0 10px;
@@ -21,17 +20,10 @@
   border-bottom: black 3px inset;
 }
 .sign-wrap > span {
-  color: black;
   margin: 0 10px;
-}
-@media screen and (max-width: 320px) {
-  .sign-wrap > a {
-    padding: 0 10px;
-    margin: 0;
-  }
 }
 @media screen and (max-width: 768px) {
   .sign-wrap{
-    justify-content: space-around;
+    flex-direction: column;
   }
 }

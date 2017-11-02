@@ -4,7 +4,7 @@ import style from './logo.less';
 function Logo() {
   return (
     <div className={style['logo-wrap']}>
-      Pixelice
+      <a href="/">Pixelice</a>
     </div>
   );
 }
