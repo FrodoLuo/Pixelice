@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'dva';
 import style from './carousel.less';
+import Preview from './preview';
 
 class Carousel extends React.Component {
   state = {
@@ -10,10 +11,15 @@ class Carousel extends React.Component {
   render() {
     return (
       <div className={style['carousel-wrap']}>
-        <div>
-          k
-        </div>
-        carousel
+        <Preview />
+        <Preview />
+        <Preview />
+        <Preview />
+        <Preview />
+        <Preview />
+        <Preview />
+        <Preview />
+        <Preview />
       </div>
     );
   }
