@@ -30,7 +30,9 @@ function PixeliceHeader(props) {
               <Logo />
               <Nav home />
               <div>
-                <Input.Search />
+                {
+                  props.home ? '' : (<Input.Search />)
+                }
               </div>
             </div>
           </Col>

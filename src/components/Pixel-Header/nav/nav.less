@@ -12,17 +12,18 @@
   font-size: 15px;
 }
 .nav-wrap > a {
+  opacity: 0.7;
   margin: 0 10px;
   height: 48px;
   line-height: 48px;
   padding: 0 10px;
   transition: all ease 0.1s;
 }
+.nav-wrap > a:hover {
+  opacity: 1;
+}
 @media screen and (max-width: 768px) {
   .nav-wrap{
     flex-direction: column;
   }
-}
-.nav-wrap > a:hover{
-  border-bottom: black 3px inset;
 }

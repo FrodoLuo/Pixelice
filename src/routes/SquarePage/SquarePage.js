@@ -60,6 +60,7 @@ class SquarePage extends React.Component {
       <Layout>
         <PixelHeader />
         <Content className="main-content">
+          <Cover />
           <div className="content-wrap">
             <Tabs defaultActiveKey="2">
               <Tabs.TabPane tab="最新作品" key="1">
