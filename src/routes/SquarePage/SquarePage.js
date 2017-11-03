@@ -62,7 +62,7 @@ class SquarePage extends React.Component {
         <Content className="main-content">
           <Cover />
           <div className="content-wrap">
-            <Tabs defaultActiveKey="2">
+            <Tabs defaultActiveKey="1">
               <Tabs.TabPane tab="最新作品" key="1">
                 <PhotoWall photos={this.state.photos.data} />
               </Tabs.TabPane>

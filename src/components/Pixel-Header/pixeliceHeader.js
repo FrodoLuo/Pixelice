@@ -7,6 +7,7 @@ import Nav from './nav/nav';
 import Sign from './sign/sign';
 
 function PixeliceHeader(props) {
+  console.log(props);
   const menu = (
     <div
       style={{
@@ -28,7 +29,7 @@ function PixeliceHeader(props) {
           <Col xs={24} sm={12}>
             <div className={style['left-wrap']}>
               <Logo />
-              <Nav home />
+              <Nav />
               <div>
                 {
                   props.home ? '' : (<Input.Search />)
