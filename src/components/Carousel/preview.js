@@ -1,14 +1,15 @@
 import React from 'react';
 import style from './preview.less';
 
-function Preview() {
+function Preview(props) {
+  console.log(props);
   return (
     <div className={style['preview-wrap']}>
-      <div>
+      <div className={style['preview-title-wrap']}>
         title here.
       </div>
-      <div>
-        <img src="" role="presentation" />
+      <div className={style['preview-img-wrap']}>
+        <img src={props.photo.zipUrl} role="presentation" />
       </div>
     </div>
   );
