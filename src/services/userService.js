@@ -12,3 +12,7 @@ export function modifyInfo(vo) {
     userInfo: vo,
   });
 }
+
+export function hostInfo(hostId) {
+  return request.get(`api/user/hostInfo?hostId=${hostId}`);
+}

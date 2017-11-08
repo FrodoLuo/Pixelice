@@ -4,26 +4,19 @@ import style from './carousel.less';
 import Preview from './preview';
 
 class Carousel extends React.Component {
-  constructor(props) {
-    super(props);
-    props.dispatch({
-      type: 'photo/randomPhotos',
-    });
-  }
   state = {
-    photos: [],
-    currentIndex: 0,
+    photos: this.props.data,
   };
   componentWillReceiveProps(nextProps) {
     this.setState({
-      photos: nextProps.result,
+      photos: nextProps.data,
     });
   }
   render() {
     const previews = [];
     for (const i of this.state.photos) {
       previews.push(
-        <Preview photo={i} key={previews.length} />,
+        <Preview photo={i} key={previews.length} index={previews.length} />,
       );
     }
     return (
@@ -34,6 +27,5 @@ class Carousel extends React.Component {
   }
 }
 export default connect((models) => {
-  console.log(models);
   return models.photo.cover;
 })(Carousel);

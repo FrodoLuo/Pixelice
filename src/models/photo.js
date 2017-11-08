@@ -5,19 +5,20 @@ export default {
   namespace: 'photo',
   state: {
     upload: {
-      message: 0,
+      stata: 'ready',
     },
     photos: {
       state: 'ready',
       data: [],
     },
     cover: {
-      message: 0,
-      result: {
+      state: 'ready',
+      data: [{
         author: '',
         photoUrl: '',
-      },
+      }],
     },
+    coverCurrentIndex: 0,
     search: {
       state: 'ready',
       data: [],
@@ -25,6 +26,12 @@ export default {
   },
   subscriptions: {},
   effects: {
+    *setCoverIndex({ payload: index }, { put }) {
+      yield put({
+        type: 'saveCoverIndex',
+        payload: index,
+      });
+    },
     *search({ payload: keystring }, { call, put }) {
       yield put({
         type: 'saveSearch',
@@ -34,20 +41,10 @@ export default {
         },
       });
       const result = yield call(photoService.searchPhoto, keystring);
-      console.log(result);
-      let state = '';
-      switch (result.data.message) {
-        case 20:
-          state = 'success';
-          break;
-        case 21:
-          state = 'error';
-          break;
-      }
       yield put({
         type: 'saveSearch',
         payload: {
-          state,
+          state: stateCode[result.data.message],
           data: result.data.data,
         },
       });
@@ -60,7 +57,9 @@ export default {
       const result = yield call(photoService.upload, { files, info });
       yield put({
         type: 'saveUpload',
-        payload: result.data,
+        payload: {
+          state: stateCode[result.data.message],
+        },
       });
     },
     *fetchPhotos({ payload }, { call, put }) {
@@ -85,14 +84,19 @@ export default {
     },
     *randomPhoto({ payload }, { call, put }) {
       const result = yield call(photoService.randomPhoto);
-      console.log(result);
       yield put({
         type: 'saveCover',
-        payload: result.data,
+        payload: {
+          state: stateCode[result.data.message],
+          data: result.data.result,
+        },
       });
     },
   },
   reducers: {
+    saveCoverIndex(state, { payload: data }) {
+      return { ...state, coverCurrentIndex: data };
+    },
     saveUpload(state, { payload: data }) {
       return { ...state, upload: data };
     },

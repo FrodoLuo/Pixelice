@@ -4,6 +4,7 @@ import IndexPage from './routes/HomePage/HomePage';
 import SignUpPage from './routes/SignUpPage/SignUpPage';
 import InfoCenterPage from './routes/InfoCenterPage/InfoCenterPage';
 import SquarePage from './routes/SquarePage/SquarePage';
+import HostPage from './routes/HostPage/HostPage.js';
 import Error404 from './routes/404';
 
 function RouterConfig({ history }) {
@@ -14,6 +15,7 @@ function RouterConfig({ history }) {
         <Route path="/signUp" exact component={SignUpPage} />
         <Route path="/infoCenter" exact component={InfoCenterPage} />
         <Route path="/square" exact component={SquarePage} />
+        <Route path="/:hostId" component={HostPage} />
         <Route path="*" component={Error404} />
       </Switch>
     </Router>

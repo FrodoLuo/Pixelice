@@ -19,11 +19,8 @@ class InfoCenterPage extends React.Component {
         data: {
           userId: '',
           nickName: '',
-          email: '',
           avatarUrl: '',
-          phone: '',
           gender: '',
-          verified: '',
           followers: 0,
         },
       },
@@ -33,16 +30,16 @@ class InfoCenterPage extends React.Component {
       },
     };
     props.dispatch({
-      type: 'user/getHostInfo',
+      type: 'user/hostInfo',
       payload: {
-        hostId: this.props.param.hostId,
+        hostId: props.match.params.hostId,
       },
     });
   }
   componentWillReceiveProps(nextProps) {
-    if (nextProps.userInfo.message === 21) {
-      Modal.error('该用户不存在');
-    } else if (nextProps.userInfo.message === 20) {
+    if (nextProps.hostInfo.state === 'error') {
+      Modal.error('发生服务器错误');
+    } else if (nextProps.hostInfo.state === 'success') {
       this.setState({
         userInfo: nextProps.userInfo.data,
       });
@@ -74,6 +71,6 @@ class InfoCenterPage extends React.Component {
 }
 export default connect((models) => {
   return {
-    userInfo: models.user.userInfo,
+    userInfo: models.user.hostInfo,
   };
 })(InfoCenterPage);

@@ -24,6 +24,17 @@ export default {
         followers: 0,
       },
     },
+    hostInfo: {
+      state: 'ready',
+      data: {
+        userId: '',
+        nickName: '',
+        avatarUrl: '',
+        gender: '',
+        intro: '',
+        followers: 0,
+      },
+    },
     modify: {
       state: 'ready',
     },
@@ -38,8 +49,18 @@ export default {
     saveModify(state, { payload: data }) {
       return { ...state, modify: data };
     },
+    saveHostInfo(state, { payload: data }) {
+      return { ...state, hostInfo: data };
+    },
   },
   effects: {
+    *hostInfo({ payload: hostId }, { call, put }) {
+      const result = yield call(userService.hostInfo, hostId);
+      yield put({
+        type: 'saveHostInfo',
+        payload: result.data,
+      });
+    },
     *userInfo({ payload }, { call, put }) {
       yield put({
         type: 'initState',

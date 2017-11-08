@@ -20,11 +20,14 @@ class Cover extends React.Component {
     });
   }
   componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
     this.setState({
-      coverImageList: nextProps.result,
+      coverImageList: nextProps.cover.data,
+      currentImgIndex: nextProps.coverCurrentIndex,
     });
   }
   render() {
+    console.log(this.state);
     const c = this.props.home ? 'cover-background-home' : 'cover-background';
     return (
       <div
@@ -63,5 +66,5 @@ class Cover extends React.Component {
   }
 }
 export default connect((models) => {
-  return models.photo.cover;
+  return models.photo;
 })(Cover);
