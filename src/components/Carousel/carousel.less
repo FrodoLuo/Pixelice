@@ -1,6 +1,6 @@
 .carousel-wrap{
   // background-color: rgba(0,0,0,0.5);
-  height: 115px;
+  height: 125px;
   width: 90%;
   left: 0;
   right: 0;
@@ -10,4 +10,24 @@
   display: inline-flex;
   justify-content: flex-start;
   align-items: center;
+  overflow-x: auto; 
+  overflow-y: visible; 
+  border-right: groove rgba(0,0,0,0.3);
+}
+.carousel-wrap::-webkit-scrollbar-track{
+  background-color: rgba(0,0,0,0.2);
+  border-radius: 2px;
+}
+.carousel-wrap::-webkit-scrollbar-thumb{
+  background-color: rgba(0,0,0,0.6);
+  border-radius: 2px;
+}
+.carousel-wrap::-webkit-scrollbar{
+  position: absolute;
+  bottom: 0;
+  width: 4px;
+  height: 4px;
+}
+.carousel-wrap::-webkit-scrollbar-corner{
+  visibility: hidden;
 }
