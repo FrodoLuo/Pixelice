@@ -13,7 +13,7 @@ const { Content } = Layout;
 class SquarePage extends React.Component {
   state = {
     photos: {
-      message: 0,
+      state: 'ready',
       data: [],
     },
     search: {
@@ -64,7 +64,7 @@ class SquarePage extends React.Component {
           <div className="content-wrap">
             <Tabs defaultActiveKey="1">
               <Tabs.TabPane tab="最新作品" key="1">
-                <PhotoWall photos={this.state.photos.data} />
+                <PhotoWall photos={this.state.photos} />
               </Tabs.TabPane>
               <Tabs.TabPane tab="搜索" key="2">
                 <div>

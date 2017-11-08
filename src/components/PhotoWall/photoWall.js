@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, Modal } from 'antd';
+import { Row, Col, Modal, Icon } from 'antd';
 import { connect } from 'dva';
 import MediaQuery from 'react-responsive';
 import style from './photoWall.less';
@@ -10,6 +10,7 @@ class PhotoWall extends React.Component {
   state = {
     detailVisible: false,
     chosenPhoto: undefined,
+    state: 'loading',
   };
   showDetail = (info) => {
     this.setState({
@@ -20,9 +21,9 @@ class PhotoWall extends React.Component {
   smPane = () => {
     const column1 = [];
     const column2 = [];
-    for (let i = 0; i < this.props.photos.length; i += 2) {
-      const item1 = this.props.photos[i];
-      const item2 = this.props.photos[i + 1];
+    for (let i = 0; i < this.props.photos.data.length; i += 2) {
+      const item1 = this.props.photos.data[i];
+      const item2 = this.props.photos.data[i + 1];
       column1.push(
         <PhotoCard onClick={() => { this.showDetail(item1); }} key={i} info={item1} />,
       );
@@ -45,10 +46,10 @@ class PhotoWall extends React.Component {
     const column1 = [];
     const column2 = [];
     const column3 = [];
-    for (let i = 0; i < this.props.photos.length; i += 3) {
-      const item1 = this.props.photos[i];
-      const item2 = this.props.photos[i + 1];
-      const item3 = this.props.photos[i + 2];
+    for (let i = 0; i < this.props.photos.data.length; i += 3) {
+      const item1 = this.props.photos.data[i];
+      const item2 = this.props.photos.data[i + 1];
+      const item3 = this.props.photos.data[i + 2];
       column1.push(
         <PhotoCard onClick={() => { this.showDetail(item1); }} key={i} info={item1} />,
       );
@@ -77,8 +78,8 @@ class PhotoWall extends React.Component {
   };
   xsPane = () => {
     const column = [];
-    for (let i = 0; i < this.props.photos.length; i += 1) {
-      const item = this.props.photos[i];
+    for (let i = 0; i < this.props.photos.data.length; i += 1) {
+      const item = this.props.photos.data[i];
       column.push(
         <PhotoCard onClick={() => { this.showDetail(item); }} key={i} info={item} />,
       );
@@ -108,24 +109,34 @@ class PhotoWall extends React.Component {
     return photos;
   };
   render() {
+    const pad = this.props.photos.state === 'success' ?
+      (
+        <Row type="flex" justify="space-between" align="top">
+          <Col span={24}>
+            <Row type="flex" justify="start" align="top">
+              <MediaQuery minWidth={992} className={style['photo-wall-wrap']}>
+                {this.paneCompute('md')}
+              </MediaQuery>
+              <MediaQuery minWidth={768} maxWidth={992} className={style['photo-wall-wrap']}>
+                {this.paneCompute('sm')}
+              </MediaQuery>
+              <MediaQuery maxWidth={768} className={style['photo-wall-wrap']}>
+                {this.paneCompute('xs')}
+              </MediaQuery>
+            </Row>
+          </Col>
+        </Row>
+      )
+      :
+      (
+        <div className={style['photo-wall-loading-wrap']}>
+          <Icon type="loading" />
+        </div>
+      );
     return (
       <div>
         <div className={style['photo-wall-wrap']}>
-          <Row type="flex" justify="space-between" align="top">
-            <Col span={24}>
-              <Row type="flex" justify="start" align="top">
-                <MediaQuery minWidth={992} className={style['photo-wall-wrap']}>
-                  {this.paneCompute('md')}
-                </MediaQuery>
-                <MediaQuery minWidth={768} maxWidth={992} className={style['photo-wall-wrap']}>
-                  {this.paneCompute('sm')}
-                </MediaQuery>
-                <MediaQuery maxWidth={768} className={style['photo-wall-wrap']}>
-                  {this.paneCompute('xs')}
-                </MediaQuery>
-              </Row>
-            </Col>
-          </Row>
+          {pad}
         </div>
         <Modal
           style={{ top: 10, height: '90%', paddingBottom: '0' }}

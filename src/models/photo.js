@@ -1,4 +1,5 @@
 import * as photoService from '../services/photoService';
+import stateCode from '../utils/statuCode';
 
 export default {
   namespace: 'photo',
@@ -7,7 +8,7 @@ export default {
       message: 0,
     },
     photos: {
-      message: 0,
+      state: 'ready',
       data: [],
     },
     cover: {
@@ -66,14 +67,20 @@ export default {
       const result = yield call(photoService.fetchPhotos);
       yield put({
         type: 'savePhotos',
-        payload: result.data,
+        payload: {
+          state: stateCode[result.data.message],
+          data: result.data.data,
+        },
       });
     },
     *getNewPhotos({ payload }, { call, put }) {
       const result = yield call(photoService.getNewPhotos);
       yield put({
         type: 'savePhotos',
-        payload: result.data,
+        payload: {
+          state: stateCode[result.data.message],
+          data: result.data.data,
+        },
       });
     },
     *randomPhoto({ payload }, { call, put }) {
