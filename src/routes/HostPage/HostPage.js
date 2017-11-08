@@ -31,12 +31,11 @@ class InfoCenterPage extends React.Component {
     };
     props.dispatch({
       type: 'user/hostInfo',
-      payload: {
-        hostId: props.match.params.hostId,
-      },
+      payload: props.match.params.hostId,
     });
   }
   componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
     if (nextProps.hostInfo.state === 'error') {
       Modal.error('发生服务器错误');
     } else if (nextProps.hostInfo.state === 'success') {
