@@ -4,7 +4,7 @@ import { connect } from 'dva';
 import PixeliceHeader from '../../components/Pixel-Header/pixeliceHeader';
 import PixeliceFooter from '../../components/Pixel-Footer/pixelFooter';
 
-import InfoCover from '../../components/InfoCenter/infoCover/info-cover';
+import HostCover from '../../components/Host/hostCover/host-cover';
 import ProfileCard from '../../components/InfoCenter/profile/profilePane';
 import PhotoPane from '../../components/InfoCenter/photos/photoPane';
 
@@ -49,7 +49,7 @@ class InfoCenterPage extends React.Component {
       <Layout>
         <PixeliceHeader />
         <Layout.Content className="main-content no-cover">
-          <InfoCover userInfo={this.state.userInfo} />
+          <HostCover hostInfo={this.state.userInfo} />
           <div className="content-wrap">
             <Tabs defaultActiveKey="1">
               <TabPane tab="作品" key="1">
