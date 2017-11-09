@@ -46,7 +46,6 @@ class Cover extends React.Component {
               <SearchBar />
               {/* <div>
                 <Row type="flex" justify="center">
-                  
                 </Row>
                 <Row type="flex" justify="center">
                   <div className={style['cover-search-wrap']}>
