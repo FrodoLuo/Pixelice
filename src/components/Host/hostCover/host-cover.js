@@ -8,7 +8,7 @@ class HostCover extends React.Component {
     console.log(this.props);
     return (
       <div className={style['host-cover-wrap']} style={{ backgroundImage: `url(${defaultHostCover})` }}>
-        <Row type="flex" justify="center" align="center" style={{ height: '100%' }}>
+        <Row type="flex" justify="center" align="center" style={{ width: '100%' }}>
           <Col xs={24} sm={3}>
             <div className={style['host-cover-avatar-wrap']}>
               <img src={this.props.hostInfo.data.avatarUrl} role="presentation" />
@@ -16,9 +16,9 @@ class HostCover extends React.Component {
           </Col>
           <Col>
             <div className={style['host-cover-info-wrap']}>
-              <h3>{this.props.hostInfo.data.nickName}</h3>
-              <h4>{this.props.hostInfo.data.userId}</h4>
-              <div>关注者: {this.props.hostInfo.data.followers}</div>
+              <div className={style['host-cover-info']}>{this.props.hostInfo.data.nickName}</div>
+              <div className={style['host-cover-info']}>{this.props.hostInfo.data.userId}</div>
+              <div className={style['host-cover-info']}>关注者: {this.props.hostInfo.data.followers}</div>
             </div>
           </Col>
         </Row>

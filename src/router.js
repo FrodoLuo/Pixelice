@@ -15,7 +15,7 @@ function RouterConfig({ history }) {
         <Route path="/signUp" exact component={SignUpPage} />
         <Route path="/infoCenter" exact component={InfoCenterPage} />
         <Route path="/square" exact component={SquarePage} />
-        <Route path="/:hostId" component={HostPage} />
+        <Route path="/user/:hostId" component={HostPage} />
         <Route path="*" component={Error404} />
       </Switch>
     </Router>

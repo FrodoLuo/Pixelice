@@ -46,7 +46,9 @@ function PixeliceHeader(props) {
         <div className={style['header-wrap-mobile']}>
           <Logo />
           <div>
-            <Input.Search />
+            {
+              props.home ? '' : (<Input.Search />)
+            }
           </div>
           <Dropdown overlay={menu} style={{ backgroundColor: 'white' }}>
             <Icon type="bars" style={{ fontSize: '24px', margin: '0 10px 0 0' }} />
