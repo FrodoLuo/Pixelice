@@ -8,7 +8,7 @@ function Nav(props) {
     <div>
       <div className={style['nav-wrap']}>
         <a href="/">首页</a>
-        <a href="square">广场</a>
+        <a href="/square/news">广场</a>
       </div>
     </div>
   );

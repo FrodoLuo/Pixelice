@@ -77,8 +77,8 @@ class Sign extends React.Component {
         defaultAvatar : this.state.avatarUrl;
       content = (
         <div className={style['sign-wrap']}>
-          <a href="infoCenter"><Avatar src={imgSrc} /></a>
-          <a href="infoCenter"><span>{this.state.nickName}</span></a>
+          <a href="/infoCenter/work"><Avatar src={imgSrc} /></a>
+          <a href="/infoCenter/work"><span>{this.state.nickName}</span></a>
           <a onClick={logout}><span>注销</span></a>
         </div>
       );

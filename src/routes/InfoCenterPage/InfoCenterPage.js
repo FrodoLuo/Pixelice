@@ -51,15 +51,15 @@ class InfoCenterPage extends React.Component {
         <Layout.Content className="main-content no-cover">
           <InfoCover userInfo={this.state.userInfo} />
           <div className="content-wrap">
-            <Tabs defaultActiveKey="1">
-              <TabPane tab="作品" key="1">
+            <Tabs defaultActiveKey={this.props.match.params.target}>
+              <TabPane tab="作品" key="work">
                 <PhotoPane />
                 {this.props.children}
               </TabPane>
-              <TabPane tab="相册" key="2">Content of Tab Pane 3</TabPane>
-              <TabPane tab="收藏" key="3">Content of Tab Pane 2</TabPane>
-              <TabPane tab="订阅" key="4">Content of Tab Pane 3</TabPane>
-              <TabPane tab="资料" key="5">
+              <TabPane tab="相册" key="album">Content of Tab Pane 3</TabPane>
+              <TabPane tab="收藏" key="favorite">Content of Tab Pane 2</TabPane>
+              <TabPane tab="订阅" key="subs">Content of Tab Pane 3</TabPane>
+              <TabPane tab="资料" key="profile">
                 <ProfileCard userInfo={this.state.userInfo} />
               </TabPane>
             </Tabs>
