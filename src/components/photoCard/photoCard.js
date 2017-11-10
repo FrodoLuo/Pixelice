@@ -10,26 +10,15 @@ function photoCard(props) {
     e.stopPropagation();
   };
   return (
-    <Card bodyStyle={{ padding: 0 }} noHovering bordered={false} className={style['nc-wrap']}>
-      <div className={style['nc-hover-wrap']} onClick={props.onClick}>
+    <Card bodyStyle={{ padding: 0 }} noHovering bordered={false} className={style['nc-wrap']} onClick={props.onClick}>
+      <div className={style['nc-hover-wrap']}>
         <div className={style['nc-userInfo-wrap']}>
           <Avatar src={avatar} />
           <span className={style['nc-userInfo-nickName']}>{props.info.nickName}</span>
         </div>
-        <div className={style['nc-like-wrap']}>
-          <div onClick={k} className={style['nc-like-button']}>
-            <Icon type="like-o" />
-          </div>
-          <div onClick={k} className={style['nc-like-button']}>
-            <Icon type="star-o" />
-          </div>
-        </div>
-        <p className={style['nc-intro-wrap']}>
-          {props.info.intro}
-        </p>
-        <div className={style['nc-footer']}>
-          <span>发表于{props.info.date}</span>
-        </div>
+      </div>
+      <div className={style['nc-like-wrap']}>
+        <Icon type="heart-o" />
       </div>
       <div className={style['nc-photo-wrap']}>
         <img src={props.info.zipUrl} role="presentation" />

@@ -69,7 +69,5 @@ class InfoCenterPage extends React.Component {
   }
 }
 export default connect((models) => {
-  return {
-    userInfo: models.user.hostInfo,
-  };
+  return models.user;
 })(InfoCenterPage);
