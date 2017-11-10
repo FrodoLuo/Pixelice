@@ -13,8 +13,8 @@ function RouterConfig({ history }) {
       <Switch>
         <Route path="/" exact component={IndexPage} />
         <Route path="/signUp" exact component={SignUpPage} />
-        <Route path="/infoCenter" exact component={InfoCenterPage} />
-        <Route path="/square" exact component={SquarePage} />
+        <Route path="/infoCenter/:target" exact component={InfoCenterPage} />
+        <Route path="/square/:target" exact component={SquarePage} />
         <Route path="/user/:hostId" component={HostPage} />
         <Route path="*" component={Error404} />
       </Switch>

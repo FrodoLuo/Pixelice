@@ -62,11 +62,11 @@ class SquarePage extends React.Component {
         <Content className="main-content">
           <Cover />
           <div className="content-wrap">
-            <Tabs defaultActiveKey="1">
-              <Tabs.TabPane tab="最新作品" key="1">
+            <Tabs defaultActiveKey={this.props.match.params.target}>
+              <Tabs.TabPane tab="最新作品" key="news">
                 <PhotoWall photos={this.state.photos} />
               </Tabs.TabPane>
-              <Tabs.TabPane tab="搜索" key="2">
+              <Tabs.TabPane tab="搜索" key="search">
                 <div>
                   <div className={style['square-search-wrap']}>
                     <div className={style['square-search']}>
