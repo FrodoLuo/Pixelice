@@ -1,6 +1,6 @@
 .nc-userInfo-wrap{
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   font-size: 16px;
 }
@@ -19,50 +19,28 @@
   margin-bottom: -5px;
   width: 100%;
 }
-.nc-like-wrap{
-  font-size: 24px;
-  height: 36px;
-  left: 0;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
-}
-.nc-like-wrap:before{
-  position: absolute;
-  display: block;
-  height: 1px;
-  bottom: 36px;
-  background-color: white;
-  content: '';
-  width: 100%;
-}
-.nc-like-button{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-}
-.nc-like-button:hover{
-  background-color: rgba(255,255,255,0.2);
-}
-.nc-like-button:active{
-  background-color: rgba(255,255,255,0.1);
-}
 .nc-wrap{
   margin: 20px 10px;
   box-shadow: 0 0 10px rgba(0,0,0,0.4);
   overflow: hidden;
 }
 .nc-wrap:hover{
-  box-shadow: 0 0 20px rgba(0,0,0,0.8);
+  // box-shadow: 0 0 20px rgba(0,0,0,0.8);
+}
+.nc-like-wrap{
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  font-size: 20px;
+  color: white;
+  transition: all ease 0.3s;
+}
+.nc-like-wrap:hover{
+  text-shadow: 0 0 10px rgba(0,0,0,1);
 }
 .nc-hover-wrap{
   position: absolute;
   background-color: transparent;
-  height: 100%;
   left: 0;
   opacity: 0;
   transition: all ease 0.4s;
@@ -72,17 +50,6 @@
 }
 .nc-wrap:hover .nc-hover-wrap{
   opacity: 1;
-  background-color: rgba(0,0,0,0.3);
+  background: linear-gradient(rgba(0,0,0,0.3), transparent);
   top: 0;
-}
-.nc-footer{
-  position: absolute;
-  bottom: 36px;
-}
-@media screen and (max-width: 768px) {
-  .nc-hover-wrap{
-    background-color: rgba(0,0,0,0.3);
-    top: -100%;
-    opacity: 1;
-  }
 }

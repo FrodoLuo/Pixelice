@@ -76,7 +76,7 @@ class SquarePage extends React.Component {
                       />
                     </div>
                   </div>
-                  <PhotoWall photos={this.state.search.data} />
+                  <PhotoWall photos={this.state.search} />
                 </div>
               </Tabs.TabPane>
             </Tabs>

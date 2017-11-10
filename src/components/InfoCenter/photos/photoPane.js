@@ -10,7 +10,7 @@ import PhotoDetail from '../../PhotoDetail/photoDetail';
 class PhotoPane extends React.Component {
   state = {
     photos: {
-      message: 0,
+      state: 'loading',
       data: [],
     },
     uploadVisible: false,
@@ -26,7 +26,7 @@ class PhotoPane extends React.Component {
     });
   }
   componentWillReceiveProps(nextProps) {
-    if (nextProps.photos.message === 20) {
+    if (nextProps.photos.state === 'success') {
       this.setState({
         photos: nextProps.photos,
       });
@@ -157,6 +157,7 @@ class PhotoPane extends React.Component {
     }
   };
   render() {
+    console.log(this.state);
     const buttonhandler = this.state.uploadVisible ?
       this.hideUpload
       :
