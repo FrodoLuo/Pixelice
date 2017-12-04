@@ -10,8 +10,14 @@ class PhotoWall extends React.Component {
   state = {
     detailVisible: false,
     chosenPhoto: undefined,
-    state: 'loading',
+    state: 'ready',
+    searched: false,
   };
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      searched: true,
+    });
+  }
   showDetail = (info) => {
     this.setState({
       chosenPhoto: info,
@@ -109,7 +115,8 @@ class PhotoWall extends React.Component {
     return photos;
   };
   render() {
-    const pad = this.props.photos.state === 'success' ?
+    console.log(this.props.photos.state);
+    const pad = this.props.photos.state !== 'loading' ?
       (
         <Row type="flex" justify="space-between" align="top">
           <Col span={24}>
@@ -136,6 +143,13 @@ class PhotoWall extends React.Component {
     return (
       <div>
         <div className={style['photo-wall-wrap']}>
+          <div>
+            {this.state.searched ? (
+              <div>
+                找到了{this.props.photos.data.length}个结果
+              </div>
+            ) : ''}
+          </div>
           {pad}
         </div>
         <Modal

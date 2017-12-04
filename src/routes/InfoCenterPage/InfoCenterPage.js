@@ -7,6 +7,7 @@ import PixeliceFooter from '../../components/Pixel-Footer/pixelFooter';
 import InfoCover from '../../components/InfoCenter/infoCover/info-cover';
 import ProfileCard from '../../components/InfoCenter/profile/profilePane';
 import PhotoPane from '../../components/InfoCenter/photos/photoPane';
+import AlbumPane from '../../components/AlbumPane/albumPane';
 
 const TabPane = Tabs.TabPane;
 
@@ -56,7 +57,9 @@ class InfoCenterPage extends React.Component {
                 <PhotoPane />
                 {this.props.children}
               </TabPane>
-              <TabPane tab="相册" key="album">Content of Tab Pane 3</TabPane>
+              <TabPane tab="相册" key="album">
+                <AlbumPane id={this.state.userInfo.userId} />
+              </TabPane>
               <TabPane tab="收藏" key="favorite">Content of Tab Pane 2</TabPane>
               <TabPane tab="订阅" key="subs">Content of Tab Pane 3</TabPane>
               <TabPane tab="资料" key="profile">

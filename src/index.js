@@ -13,6 +13,8 @@ const app = dva({
 // 3. Model
 app.model(require('./models/auth'));
 
+app.model(require('./models/album'));
+
 app.model(require('./models/user'));
 
 app.model(require('./models/photo'));

@@ -113,7 +113,7 @@ class Sign extends React.Component {
               </Form>
             </div>
           </Modal>
-          <a href="signUp">注册</a>
+          <a href="/signUp">注册</a>
         </div>
       );
     }

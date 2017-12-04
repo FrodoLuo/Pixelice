@@ -10,7 +10,7 @@ import PhotoDetail from '../../PhotoDetail/photoDetail';
 class PhotoPane extends React.Component {
   state = {
     photos: {
-      state: 'loading',
+      state: 'ready',
       data: [],
     },
     uploadVisible: false,

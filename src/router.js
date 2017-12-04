@@ -5,6 +5,7 @@ import SignUpPage from './routes/SignUpPage/SignUpPage';
 import InfoCenterPage from './routes/InfoCenterPage/InfoCenterPage';
 import SquarePage from './routes/SquarePage/SquarePage';
 import HostPage from './routes/HostPage/HostPage.js';
+import AlbumPage from './routes/AlbumPage/AlbumPage';
 import Error404 from './routes/404';
 
 function RouterConfig({ history }) {
@@ -16,6 +17,7 @@ function RouterConfig({ history }) {
         <Route path="/infoCenter/:target" exact component={InfoCenterPage} />
         <Route path="/square/:target" exact component={SquarePage} />
         <Route path="/user/:hostId" component={HostPage} />
+        <Route path="/album/:albumId" component={AlbumPage} />
         <Route path="*" component={Error404} />
       </Switch>
     </Router>

@@ -3,10 +3,8 @@ import { Layout, Input, Form, Tabs, Modal } from 'antd';
 import { connect } from 'dva';
 import PixeliceHeader from '../../components/Pixel-Header/pixeliceHeader';
 import PixeliceFooter from '../../components/Pixel-Footer/pixelFooter';
-
+import AlbumPane from '../../components/AlbumPane/albumPane';
 import HostCover from '../../components/Host/hostCover/host-cover';
-import ProfileCard from '../../components/InfoCenter/profile/profilePane';
-import PhotoPane from '../../components/InfoCenter/photos/photoPane';
 
 const TabPane = Tabs.TabPane;
 
@@ -53,12 +51,11 @@ class InfoCenterPage extends React.Component {
           <div className="content-wrap">
             <Tabs defaultActiveKey="1">
               <TabPane tab="作品" key="1">
-                <PhotoPane />
-                {this.props.children}
+                <AlbumPane />
               </TabPane>
               <TabPane tab="相册" key="2">Content of Tab Pane 3</TabPane>
               <TabPane tab="资料" key="3">
-                <ProfileCard userInfo={this.state.userInfo} />
+                rua!
               </TabPane>
             </Tabs>
           </div>
