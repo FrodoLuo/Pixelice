@@ -1,0 +1,89 @@
+
+.lg-size{
+  width: 20%
+}
+.md-size{
+  width: 25%
+}
+.sm-size{
+  width: 33%;
+}
+.xs-size{
+  width: 48%;
+}
+.xs-size-b{
+  width: 90%;
+}
+@media screen and (min-width: 1440px) {
+  .album-wrap{
+    .lg-size;
+  }
+}
+@media screen and (max-width: 1440px) {
+  .album-wrap{
+    .md-size;
+  }
+}
+@media screen and (max-width: 768px) {
+  .album-wrap{
+    .sm-size;
+  }
+}
+@media screen and (max-width: 568px) {
+  .album-wrap{
+    .xs-size;
+  }
+}
+@media screen and (max-width: 468px) {
+  .album-wrap{
+    .xs-size-b;
+  }
+}
+.album-wrap{
+  height: 180px;
+
+  box-shadow: 0 0 2px rgba(0,0,0,0.4);
+  margin: 10px;
+  transition: all ease 0.3s;
+}
+.album-wrap:hover {
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  cursor: pointer;
+}
+.album-card{
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.album-title{
+  display: flex;
+  flex-direction: row;
+  background-color: rgba(0,0,0,0.6);
+  color: white;
+  font-size: 16px;
+  padding: 6px;
+  justify-content: space-between;
+  align-items: center; 
+}
+.album-title > a{
+  font-size: 14px;
+}
+.fake-border{
+  position: relative;
+  background-color: white;
+  box-shadow: 0 0 2px rgba(0,0,0,0.4);
+  right: 4px;
+  bottom: 4px;
+  top: -4px;
+  left: -4px;
+  height: 100%;
+  width: 100%
+}
+.more-button{
+  transition: all ease 0.3s;
+  padding: 5px;
+}
+.more-button:hover{
+  background-color: rgba(0,0,0,0.6);
+}

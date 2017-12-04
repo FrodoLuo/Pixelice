@@ -11,7 +11,7 @@ export function test() {
 }
 export function signIn(data) {
   return request.post(
-    'api/auth/signIn',
+    '/api/auth/signIn',
     {
       username: data.username,
       password: tool.md5Cipher(data.password),
@@ -33,7 +33,7 @@ export function signUp(data) {
   };
   console.log(temp);
   return request.post(
-    'api/auth/signUp',
+    '/api/auth/signUp',
     {
       vo: JSON.stringify(temp),
     }, {
@@ -41,5 +41,5 @@ export function signUp(data) {
     });
 }
 export function sendVerify() {
-  return request.post('api/auth/sendVerify');
+  return request.post('/api/auth/sendVerify');
 }
