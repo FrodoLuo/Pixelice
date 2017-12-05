@@ -1,5 +1,5 @@
 import * as photoService from '../services/photoService';
-import stateCode from '../utils/statuCode';
+import { mapStatu } from '../utils/statuCode';
 
 export default {
   namespace: 'photo',
@@ -44,7 +44,7 @@ export default {
       yield put({
         type: 'saveSearch',
         payload: {
-          state: stateCode[result.data.message],
+          state: mapStatu(result.data.message),
           data: result.data.data,
         },
       });
@@ -58,7 +58,7 @@ export default {
       yield put({
         type: 'saveUpload',
         payload: {
-          state: stateCode[result.data.message],
+          state: mapStatu(result.data.message),
         },
       });
     },
@@ -67,7 +67,7 @@ export default {
       yield put({
         type: 'savePhotos',
         payload: {
-          state: stateCode[result.data.message],
+          state: mapStatu(result.data.message),
           data: result.data.data,
         },
       });
@@ -77,7 +77,7 @@ export default {
       yield put({
         type: 'savePhotos',
         payload: {
-          state: stateCode[result.data.message],
+          state: mapStatu(result.data.message),
           data: result.data.data,
         },
       });
@@ -87,7 +87,7 @@ export default {
       yield put({
         type: 'saveCover',
         payload: {
-          state: stateCode[result.data.message],
+          state: mapStatu(result.data.message),
           data: result.data.result,
         },
       });

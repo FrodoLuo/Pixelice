@@ -1,6 +1,6 @@
 import { message } from 'antd';
 import * as userService from '../services/userService';
-import stateCode from '../utils/statuCode';
+import { mapStatu } from '../utils/statuCode';
 
 const initState = {
   modify: {
@@ -60,7 +60,7 @@ export default {
       yield put({
         type: 'saveHostInfo',
         payload: {
-          state: stateCode[result.data.message],
+          state: mapStatu(result.data.message),
           data: result.data.data,
         },
       });

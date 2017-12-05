@@ -22,3 +22,45 @@ export function getAlbumPhotosByAlbumId(albumId) {
     `/api/album/getAlbumPhotos?albumId=${albumId}`,
   );
 }
+
+export function modifyAlbum(album) {
+  return request.post(
+    '/api/album/modifyAlbum',
+    {
+      album,
+    },
+  );
+}
+
+export function removeAlbum(albumId) {
+  return request.post(
+    '/api/album/removeAlbum',
+  );
+}
+
+export function addToAlbum({ photoId, albumId }) {
+  return request.post(
+    '/api/album/addToAlbum',
+    {
+      photoId,
+      albumId,
+    },
+  );
+}
+export function removeFromAlbum({ photoId, albumId }) {
+  return request.post(
+    '/api/album/removeFromAlbum',
+    {
+      photoId,
+      albumId,
+    },
+  );
+}
+export function findInAlbum(photoId) {
+  return request.post(
+    '/api/album/findInAlbum',
+    {
+      photoId,
+    },
+  );
+}

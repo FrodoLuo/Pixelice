@@ -6,9 +6,9 @@ function AlbumCover(props) {
   const scrollHandler = () => {
     // console.log('scrolled');
     if (window.document.documentElement.scrollTop === 0) {
-      window.document.getElementById('cover').style.height = '600px';
+      window.document.getElementById('cover').style.height = '340px';
     } else {
-      window.document.getElementById('cover').style.height = '256px';
+      window.document.getElementById('cover').style.height = '200px';
     }
   };
   window.onscroll = scrollHandler;
@@ -16,7 +16,8 @@ function AlbumCover(props) {
     <div
       id="cover"
       style={{
-        background: `url(${props.album.photoUrl})`,
+        backgroundImage: `url(${props.album.photoUrl})`,
+        backgroundSize: 'cover',
       }}
       className={style['album-cover-wrap']}
     >

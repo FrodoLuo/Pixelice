@@ -1,5 +1,5 @@
 import * as albumService from '../services/albumService';
-import stateCode from '../utils/statuCode';
+import { mapStatu } from '../utils/statuCode';
 
 export default {
   namespace: 'album',
@@ -19,6 +19,21 @@ export default {
         createDate: '',
       },
     },
+    inAlbumList: {
+      state: 'ready',
+      data: [],
+    },
+    modifyAlbum: {
+      state: 'ready',
+      data: [],
+    },
+    removeAlbum: {
+      state: 'ready',
+      data: [],
+    },
+    pickPhoto: {
+      state: 'ready',
+    },
   },
   reducers: {
     saveAlbumsList(state, { payload: data }) {
@@ -29,6 +44,12 @@ export default {
     },
     saveAlbumInfo(state, { payload: data }) {
       return { ...state, albumInfo: data };
+    },
+    saveModifyAlbum(state, { payload: data }) {
+      return { ...state, modifyAlbum: data };
+    },
+    saveInList(state, { payload: data }) {
+      return { ...state, inAlbumList: data };
     },
   },
   effects: {
@@ -44,7 +65,7 @@ export default {
       yield put({
         type: 'saveAlbumsList',
         payload: {
-          state: stateCode[result.data.message],
+          state: mapStatu(result.data.message),
           data: result.data.data,
         },
       });
@@ -72,15 +93,79 @@ export default {
       yield put({
         type: 'saveAlbumInfo',
         payload: {
-          state: stateCode[resultInfo.data.message],
+          state: mapStatu(resultInfo.data.message),
           data: resultInfo.data.data,
         },
       });
       yield put({
         type: 'saveAlbumPhotos',
         payload: {
-          state: stateCode[resultPhoto.data.message],
+          state: mapStatu(resultPhoto.data.message),
           data: resultPhoto.data.data,
+        },
+      });
+    },
+    *modifyAlbum({ payload: album }, { call, put }) {
+      yield put({
+        type: 'saveModifyAlbum',
+        payload: {
+          state: 'loading',
+          data: null,
+        },
+      });
+      const result = yield call(albumService.modifyAlbum, album);
+      yield put({
+        type: 'saveModifyAlbum',
+        payload: {
+          state: mapStatu(result.data.message),
+          data: result.data.data,
+        },
+      });
+    },
+    *addToAlbum({ payload: { albumId, photoId } }, { call, put }) {
+      yield put({
+        type: 'pickPhoto',
+        payload: {
+          state: 'loading',
+        },
+      });
+      const result = yield call(albumService.addToAlbum, { albumId, photoId });
+      yield put({
+        type: 'pickPhoto',
+        payload: {
+          state: mapStatu(result.data.message),
+        },
+      });
+    },
+    *removeFromAlbum({ payload: { albumId, photoId } }, { call, put }) {
+      yield put({
+        type: 'pickPhoto',
+        payload: {
+          state: 'loading',
+        },
+      });
+      const result = yield call(albumService.removeFromAlbum, { albumId, photoId });
+      yield put({
+        type: 'pickPhoto',
+        payload: {
+          state: mapStatu(result.data.message),
+        },
+      });
+    },
+    *findInAlbum({ payload: photoId }, { call, put }) {
+      yield put({
+        type: 'saveInList',
+        payload: {
+          state: 'loading',
+          data: [],
+        },
+      });
+      const result = yield call(albumService.findInAlbum, photoId);
+      yield put({
+        type: 'saveInList',
+        payload: {
+          state: mapStatu(result.data.message),
+          data: result.data.data,
         },
       });
     },
