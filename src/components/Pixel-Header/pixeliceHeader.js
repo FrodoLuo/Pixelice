@@ -51,7 +51,10 @@ function PixeliceHeader(props) {
             }
           </div>
           <Dropdown trigger={['hover', 'click']} overlay={menu} style={{ backgroundColor: 'white' }}>
-            <Icon type="bars" style={{ fontSize: '24px', margin: '0 10px 0 0' }} />
+            <Icon
+              type="ellipsis"
+              style={{ color: 'white', fontSize: '24px', margin: '0 10px 0 0' }}
+            />
           </Dropdown>
         </div>
       </MediaQuery>

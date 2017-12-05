@@ -1,4 +1,5 @@
 import React from 'react';
+import { Icon } from 'antd';
 import style from './albumCover.less';
 
 function AlbumCover(props) {
@@ -19,6 +20,9 @@ function AlbumCover(props) {
       }}
       className={style['album-cover-wrap']}
     >
+      <div className={style['album-description']}>
+        <Icon type="edit" />&nbsp;{props.album.description}
+      </div>
       <div className={style['album-cover-name']}>
         {props.album.albumName}
       </div>
