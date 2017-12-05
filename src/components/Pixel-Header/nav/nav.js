@@ -4,11 +4,15 @@ import MediaQuery from 'react-responsive';
 import style from './nav.less';
 
 function Nav(props) {
+  console.log(props)
   return (
     <div>
       <div className={style['nav-wrap']}>
         <a href="/">首页</a>
         <a href="/square/news">广场</a>
+        <div>
+          <a className={style['upload-entry']} href="/infocenter/work">上传照片</a>
+        </div>
       </div>
     </div>
   );

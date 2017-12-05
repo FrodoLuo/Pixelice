@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Input, Form, Tabs, Modal } from 'antd';
+import { Layout, Input, Form, Tabs, message } from 'antd';
 import { connect } from 'dva';
 import PixeliceHeader from '../../components/Pixel-Header/pixeliceHeader';
 import PixeliceFooter from '../../components/Pixel-Footer/pixelFooter';
@@ -35,7 +35,7 @@ class InfoCenterPage extends React.Component {
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.userInfo.message === 21) {
-      Modal.error('未登录或登录已失效, 即将跳转至首页');
+      message.error('请先登录以查看该页面, 正在跳转至首页...');
       setTimeout(() => {
         window.location.href = '/';
       }, 1000);

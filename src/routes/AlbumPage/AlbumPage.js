@@ -38,7 +38,9 @@ class AlbumPage extends React.Component {
         <PixeliceHeader />
         <Layout.Content className="main-content">
           <AlbumCover album={this.state.albumInfo.data} />
-          <PhotoWall photos={this.state.photos} />
+          <div className="content-wrap">
+            <PhotoWall photos={this.state.photos} />
+          </div>
         </Layout.Content>
         <PixeliceFooter />
       </Layout>
