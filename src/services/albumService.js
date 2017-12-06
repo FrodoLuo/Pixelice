@@ -24,6 +24,7 @@ export function getAlbumPhotosByAlbumId(albumId) {
 }
 
 export function modifyAlbum(album) {
+  console.log(album);
   return request.post(
     '/api/album/modifyAlbum',
     {
@@ -35,6 +36,18 @@ export function modifyAlbum(album) {
 export function removeAlbum(albumId) {
   return request.post(
     '/api/album/removeAlbum',
+    {
+      albumId,
+    },
+  );
+}
+
+export function createAlbum(album) {
+  return request.post(
+    '/api/album/createAlbum',
+    {
+      album,
+    },
   );
 }
 
@@ -61,6 +74,15 @@ export function findInAlbum(photoId) {
     '/api/album/findInAlbum',
     {
       photoId,
+    },
+  );
+}
+
+export function quickFetch(albumId) {
+  return request.post(
+    '/api/album/quickFetch',
+    {
+      albumId,
     },
   );
 }

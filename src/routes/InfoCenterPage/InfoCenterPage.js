@@ -58,7 +58,7 @@ class InfoCenterPage extends React.Component {
                 {this.props.children}
               </TabPane>
               <TabPane tab="相册" key="album">
-                <AlbumPane id={this.state.userInfo.userId} />
+                <AlbumPane id={this.state.userInfo.userId} author />
               </TabPane>
               <TabPane tab="收藏" key="favorite">Content of Tab Pane 2</TabPane>
               <TabPane tab="订阅" key="subs">Content of Tab Pane 3</TabPane>

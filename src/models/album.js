@@ -4,6 +4,7 @@ import { mapStatu } from '../utils/statuCode';
 export default {
   namespace: 'album',
   state: {
+    runningOp: '',
     albumsList: {
       state: 'ready',
       data: [],
@@ -19,6 +20,10 @@ export default {
         createDate: '',
       },
     },
+    photosForCover: {
+      state: 'ready',
+      data: [],
+    },
     inAlbumList: {
       state: 'ready',
       data: [],
@@ -31,28 +36,58 @@ export default {
       state: 'ready',
       data: [],
     },
+    createAlbum: {
+      state: 'ready',
+      data: [],
+    },
     pickPhoto: {
       state: 'ready',
     },
   },
   reducers: {
+    savePhotosForCover(state, { payload: data }) {
+      return { ...state, photosForCover: data, runningOp: 'quickFetch' };
+    },
     saveAlbumsList(state, { payload: data }) {
-      return { ...state, albumsList: data };
+      return { ...state, albumsList: data, runningOp: 'getAlbum' };
     },
     saveAlbumPhotos(state, { payload: data }) {
-      return { ...state, albumPhotos: data };
+      return { ...state, albumPhotos: data, runningOp: 'getPhoto' };
     },
     saveAlbumInfo(state, { payload: data }) {
-      return { ...state, albumInfo: data };
+      return { ...state, albumInfo: data, runningOp: 'getAlbumInfo' };
     },
     saveModifyAlbum(state, { payload: data }) {
-      return { ...state, modifyAlbum: data };
+      return { ...state, modifyAlbum: data, runningOp: 'modify' };
+    },
+    saveRemoveAlbum(state, { payload: data }) {
+      return { ...state, removeAlbum: data, runningOp: 'remove' };
+    },
+    saveCreateAlbum(state, { payload: data }) {
+      return { ...state, createAlbum: data, runningOp: 'create' };
     },
     saveInList(state, { payload: data }) {
-      return { ...state, inAlbumList: data };
+      return { ...state, inAlbumList: data, runningOp: 'checkInAlbum' };
     },
   },
   effects: {
+    *quickFetch({ payload: albumId }, { call, put }) {
+      yield put({
+        type: 'savePhotosForCover',
+        payload: {
+          state: 'loading',
+          data: [],
+        },
+      });
+      const result = yield call(albumService.quickFetch, albumId);
+      yield put({
+        type: 'savePhotosForCover',
+        payload: {
+          state: mapStatu(result.data.message),
+          data: result.data.data,
+        },
+      });
+    },
     *getAlbumsByToken({ payload }, { call, put }) {
       yield put({
         type: 'saveAlbumslist',
@@ -116,6 +151,40 @@ export default {
       const result = yield call(albumService.modifyAlbum, album);
       yield put({
         type: 'saveModifyAlbum',
+        payload: {
+          state: mapStatu(result.data.message),
+          data: result.data.data,
+        },
+      });
+    },
+    *removeAlbum({ payload: albumId }, { call, put }) {
+      yield put({
+        type: 'saveRemoveAlbum',
+        payload: {
+          state: 'loading',
+          data: null,
+        },
+      });
+      const result = yield call(albumService.removeAlbum, albumId);
+      yield put({
+        type: 'saveRemoveAlbum',
+        payload: {
+          state: mapStatu(result.data.message),
+          data: result.data.data,
+        },
+      });
+    },
+    *createAlbum({ payload: album }, { call, put }) {
+      yield put({
+        type: 'saveCreateAlbum',
+        payload: {
+          state: 'loading',
+          data: null,
+        },
+      });
+      const result = yield call(albumService.createAlbum, album);
+      yield put({
+        type: 'saveCreateAlbum',
         payload: {
           state: mapStatu(result.data.message),
           data: result.data.data,

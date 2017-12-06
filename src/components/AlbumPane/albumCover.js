@@ -3,6 +3,7 @@ import { Icon } from 'antd';
 import style from './albumCover.less';
 
 function AlbumCover(props) {
+  console.log(window.document.referrer);
   const scrollHandler = () => {
     // console.log('scrolled');
     if (window.document.documentElement.scrollTop === 0) {
@@ -27,11 +28,13 @@ function AlbumCover(props) {
       <div className={style['album-cover-name']}>
         {props.album.albumName}
       </div>
-      <div className={style['back-button']}>
-        <a href="/infocenter/album">
-          <Icon type="caret-left" />
-        </a>
-      </div>
+      {props.fromInfo ? (
+        <div className={style['back-button']}>
+          <a href="/infocenter/album">
+            <Icon type="caret-left" />
+          </a>
+        </div>
+      ) : ''}
     </div>
   );
 }

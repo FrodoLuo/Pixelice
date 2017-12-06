@@ -5,7 +5,6 @@ import style from './album.less';
 const MenuItem = Menu.Item;
 
 export default function Album(props) {
-  console.log(props);
   const menu = (
     <Menu>
       <MenuItem>
@@ -14,7 +13,7 @@ export default function Album(props) {
         </a>
       </MenuItem>
       <MenuItem>
-        <Popconfirm title="确认删除该相册?" okText="确认" cancelText="取消">
+        <Popconfirm title="确认删除该相册?" okText="确认" cancelText="取消" onConfirm={() => { props.delete(props.album.albumId); }}>
           <a>
             <Icon type="delete" />&nbsp;删除
           </a>
@@ -30,15 +29,24 @@ export default function Album(props) {
             <div className={style['fake-border']}>
               <div
                 className={style['album-card']}
-                style={{ background: `url(${props.album.zipUrl}) no-repeat`, backgroundSize: 'cover' }}
+                style={{ backgroundImage: `url(${props.album.zipUrl})`, backgroundSize: 'cover' }}
               >
                 <div className={style['album-title']}>
                   <div>
                     {props.album.albumName}
+                    {props.album.private === 'f' ? '' : (<Icon type="lock" />)}
                   </div>
-                  <Dropdown overlay={menu} trigger={['click']}>
-                    <Icon className={style['more-button']} type="ellipsis" />
-                  </Dropdown>
+                  {props.author ?
+                    (
+                      <Dropdown overlay={menu} trigger={['click']}>
+                        <Icon className={style['more-button']} type="ellipsis" />
+                      </Dropdown>
+                    ) : (
+                      <a>
+                        <Icon className={style['more-button']} type="like-o" />
+                      </a>
+                    )
+                  }
                 </div>
               </div>
             </div>
