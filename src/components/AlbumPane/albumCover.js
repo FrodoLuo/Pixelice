@@ -27,6 +27,11 @@ function AlbumCover(props) {
       <div className={style['album-cover-name']}>
         {props.album.albumName}
       </div>
+      <div className={style['back-button']}>
+        <a href="/infocenter/album">
+          <Icon type="caret-left" />
+        </a>
+      </div>
     </div>
   );
 }

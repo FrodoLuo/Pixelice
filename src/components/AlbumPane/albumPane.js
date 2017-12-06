@@ -1,6 +1,15 @@
 import React from 'react';
 import { connect } from 'dva';
-import { Row, Col, Modal, Input, Switch, Select, message } from 'antd';
+import {
+  Row,
+  Col,
+  Modal,
+  Input,
+  Switch,
+  Select,
+  message,
+  Button
+} from 'antd';
 import Album from './album';
 import PhotoWall from '../PhotoWall/photoWall';
 import style from './albumPane.less';
@@ -18,6 +27,8 @@ class AlbumPane extends React.Component {
       description: '',
       private: '',
     },
+    createVisible: false,
+
   }
   componentWillMount() {
     this.props.dispatch({
@@ -105,7 +116,7 @@ class AlbumPane extends React.Component {
           }
           onCancel={() => { this.setEditVisible(false); }}
           title={this.state.editingAlbum.albumName}
-          style={{ top: '-150px' }}
+          style={{ top: '-100px' }}
         >
           <div style={{ flexDirection: 'column' }}>
             <h4>相册名称</h4>
@@ -130,8 +141,13 @@ class AlbumPane extends React.Component {
             />
           </div>
         </Modal>
-        <div className={style['album-pane-wrap']}>
-          {albums}
+        <div>
+          <div>
+            <Button>创建相册</Button>
+          </div>
+          <div className={style['album-pane-wrap']}>
+            {albums}
+          </div>
         </div>
       </div>
     );
