@@ -88,7 +88,7 @@ class UploadPane extends React.Component {
         <Col xs={24} sm={20}>
           <div>
             <Upload
-              action="api/photo/preUpload"
+              action="/api/photo/preUpload"
               listType="picture-card"
               fileList={this.state.fileList}
               onPreview={this.handlePreview}
