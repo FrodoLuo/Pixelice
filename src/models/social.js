@@ -11,6 +11,10 @@ export default {
     dislike: {
       state: 'ready',
     },
+    likedList: {
+      state: 'ready',
+      data: [],
+    },
   },
   reducers: {
     saveLike(state, { payload: data }) {
@@ -18,6 +22,9 @@ export default {
     },
     saveDislike(state, { payload: data }) {
       return { ...state, dislike: data, runningOp: 'dislike' };
+    },
+    saveLikedList(state, { payload: data }) {
+      return { ...state, likedList: data, runningOp: 'checkLike' };
     },
   },
   effects: {
@@ -29,10 +36,18 @@ export default {
         },
       });
       const result = yield call(socialService.like, photoId);
+      const likedList = yield call(socialService.checkLike);
       yield put({
         type: 'saveLike',
         payload: {
           state: mapStatu(result.data.message),
+        },
+      });
+      yield put({
+        type: 'saveLikedList',
+        payload: {
+          state: mapStatu(likedList.data.message),
+          data: likedList.data.data,
         },
       });
     },
@@ -44,10 +59,35 @@ export default {
         },
       });
       const result = yield call(socialService.dislike, photoId);
+      const likedList = yield call(socialService.checkLike);
       yield put({
         type: 'saveDislike',
         payload: {
           state: mapStatu(result.data.message),
+        },
+      });
+      yield put({
+        type: 'saveLikedList',
+        payload: {
+          state: mapStatu(likedList.data.message),
+          data: likedList.data.data,
+        },
+      });
+    },
+    *checkLike({ payload }, { call, put }) {
+      yield put({
+        type: 'saveLikedList',
+        payload: {
+          state: 'loading',
+          data: [],
+        },
+      });
+      const result = yield call(socialService.checkLike);
+      yield put({
+        type: 'saveLikedList',
+        payload: {
+          state: mapStatu(result.data.message),
+          data: result.data.data,
         },
       });
     },

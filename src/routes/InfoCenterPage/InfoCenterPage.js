@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Input, Form, Tabs, message } from 'antd';
+import { Layout, Input, Form, Tabs, message, Icon } from 'antd';
 import { connect } from 'dva';
 import PixeliceHeader from '../../components/Pixel-Header/pixeliceHeader';
 import PixeliceFooter from '../../components/Pixel-Footer/pixelFooter';
@@ -53,16 +53,16 @@ class InfoCenterPage extends React.Component {
           <InfoCover userInfo={this.state.userInfo} />
           <div className="content-wrap">
             <Tabs defaultActiveKey={this.props.match.params.target}>
-              <TabPane tab="作品" key="work">
+              <TabPane tab={<span><Icon type="picture" />作品</span>} key="work">
                 <PhotoPane />
                 {this.props.children}
               </TabPane>
-              <TabPane tab="相册" key="album">
+              <TabPane tab={<span><Icon type="appstore" />相册</span>} key="album">
                 <AlbumPane id={this.state.userInfo.userId} author />
               </TabPane>
-              <TabPane tab="收藏" key="favorite">Content of Tab Pane 2</TabPane>
-              <TabPane tab="订阅" key="subs">Content of Tab Pane 3</TabPane>
-              <TabPane tab="资料" key="profile">
+              <TabPane tab={<span><Icon type="like" />赞!</span>} key="favorite">Content of Tab Pane 2</TabPane>
+              <TabPane tab={<span><Icon type="eye" />订阅</span>} key="subs">Content of Tab Pane 3</TabPane>
+              <TabPane tab={<span><Icon type="user" />资料</span>} key="profile">
                 <ProfileCard userInfo={this.state.userInfo} />
               </TabPane>
             </Tabs>

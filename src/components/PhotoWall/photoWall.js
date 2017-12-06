@@ -12,11 +12,44 @@ class PhotoWall extends React.Component {
     chosenPhoto: undefined,
     state: 'ready',
     searched: false,
+    likedList: [],
   };
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      searched: true,
+  componentWillMount() {
+    this.props.dispatch({
+      type: 'social/checkLike',
     });
+  }
+  componentWillReceiveProps(nextProps) {
+    switch (nextProps.runningOp) {
+      case 'checkLike':
+        if (nextProps.likedList.state === 'success') {
+          this.setState({
+            likedList: nextProps.likedList.data,
+          });
+        }
+        break;
+      default:
+        this.setState({
+          searched: true,
+        });
+    }
+  }
+  createPhotoCard = (item) => {
+    return (
+      <PhotoCard
+        liked={this.isLiked(item.photoId)}
+        onClick={() => { this.showDetail(item); }}
+        key={item.photoId} info={item}
+      />
+    );
+  }
+  isLiked = (photoId) => {
+    for (const i of this.state.likedList) {
+      if (i.photoId === photoId) {
+        return true;
+      }
+    }
+    return false;
   }
   showDetail = (info) => {
     this.setState({
@@ -30,13 +63,9 @@ class PhotoWall extends React.Component {
     for (let i = 0; i < this.props.photos.data.length; i += 2) {
       const item1 = this.props.photos.data[i];
       const item2 = this.props.photos.data[i + 1];
-      column1.push(
-        <PhotoCard onClick={() => { this.showDetail(item1); }} key={i} info={item1} />,
-      );
+      column1.push(this.createPhotoCard(item1));
       if (item2 !== undefined) {
-        column2.push(
-          <PhotoCard onClick={() => { this.showDetail(item2); }} key={i + 1} info={item2} />,
-        );
+        column2.push(this.createPhotoCard(item2));
       }
     }
     return ([
@@ -56,18 +85,12 @@ class PhotoWall extends React.Component {
       const item1 = this.props.photos.data[i];
       const item2 = this.props.photos.data[i + 1];
       const item3 = this.props.photos.data[i + 2];
-      column1.push(
-        <PhotoCard onClick={() => { this.showDetail(item1); }} key={i} info={item1} />,
-      );
+      column1.push(this.createPhotoCard(item1));
       if (item2 !== undefined) {
-        column2.push(
-          <PhotoCard onClick={() => { this.showDetail(item2); }} key={i + 1} info={item2} />,
-        );
+        column2.push(this.createPhotoCard(item2));
       }
       if (item3 !== undefined) {
-        column3.push(
-          <PhotoCard onClick={() => { this.showDetail(item3); }} key={i + 2} info={item3} />,
-        );
+        column3.push(this.createPhotoCard(item3));
       }
     }
     return ([
@@ -86,9 +109,7 @@ class PhotoWall extends React.Component {
     const column = [];
     for (let i = 0; i < this.props.photos.data.length; i += 1) {
       const item = this.props.photos.data[i];
-      column.push(
-        <PhotoCard onClick={() => { this.showDetail(item); }} key={i} info={item} />,
-      );
+      column.push(this.createPhotoCard(item));
     }
     return (
       <Col span={24}>
@@ -115,7 +136,6 @@ class PhotoWall extends React.Component {
     return photos;
   };
   render() {
-    console.log(this.props.photos.state);
     const pad = this.props.photos.state !== 'loading' ?
       (
         <Row type="flex" justify="space-between" align="top">
@@ -166,4 +186,6 @@ class PhotoWall extends React.Component {
     );
   }
 }
-export default connect()(PhotoWall);
+export default connect((models) => {
+  return models.social;
+})(PhotoWall);
