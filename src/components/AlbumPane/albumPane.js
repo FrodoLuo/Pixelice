@@ -8,7 +8,7 @@ import {
   Switch,
   Select,
   message,
-  Button
+  Button,
 } from 'antd';
 import Album from './album';
 import PhotoWall from '../PhotoWall/photoWall';
