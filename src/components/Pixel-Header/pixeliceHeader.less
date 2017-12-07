@@ -3,7 +3,7 @@
   justify-content: space-between;
   align-items: center;
   position: absolute;
-  background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.55), rgba(0,0,0,0.4), rgba(0,0,0,0));
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.4), rgba(0,0,0,0.3), rgba(0,0,0,0));
   transition: all ease 0.5s;
   width: 100%;
   z-index: 1000;
@@ -16,7 +16,6 @@
 .header-wrap-home{
   .header-wrap;
   color: white;
-  position: absolute;
   // background: transparent;
   box-shadow: none;
   //box-shadow: none;
@@ -51,5 +50,8 @@
 @media screen and (max-width: 768px){
   .left-wrap{
     justify-content: space-around;
+  }
+  .header-wrap{
+    position: fixed;
   }
 }

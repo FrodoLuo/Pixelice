@@ -173,9 +173,9 @@ class PhotoWall extends React.Component {
           {pad}
         </div>
         <Modal
-          style={{ top: 10, height: '90%', paddingBottom: '0' }}
-          bodyStyle={{ height: '100%' }}
-          width="90%"
+          style={{ top: 20, height: '100%', paddingBottom: '0', margin: 0, overflow: 'none' }}
+          bodyStyle={{ height: '100%', padding: 0, width: '100%' }}
+          width="100%"
           visible={this.state.detailVisible}
           onCancel={() => { this.setState({ detailVisible: false }); }}
           footer={null}
