@@ -7,6 +7,7 @@ import PixelFooter from '../../components/Pixel-Footer/pixelFooter';
 import Cover from '../../components/Cover/cover';
 import style from './SquarePage.less';
 import PhotoWall from '../../components/PhotoWall/photoWall';
+import { queryParse } from '../../utils/queryParser';
 
 const { Content } = Layout;
 
@@ -23,7 +24,10 @@ class SquarePage extends React.Component {
     },
   };
   componentWillMount() {
-    console.log(this.props.location.search);
+    const querys = queryParse(this.props.location.search);
+    if (querys && querys.searchkey) {
+      this.handleSearch(querys.searchkey);
+    }
     this.props.dispatch({
       type: 'photo/getNewPhotos',
     });

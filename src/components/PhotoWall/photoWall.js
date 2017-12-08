@@ -164,11 +164,9 @@ class PhotoWall extends React.Component {
       <div>
         <div className={style['photo-wall-wrap']}>
           <div>
-            {this.state.searched ? (
-              <div>
-                找到了{this.props.photos.data.length}个结果
-              </div>
-            ) : ''}
+            <div>
+              找到了{this.props.photos.data.length}个结果
+            </div>
           </div>
           {pad}
         </div>

@@ -95,7 +95,7 @@ class Sign extends React.Component {
             visible={this.state.loginVisible}
             onCancel={this.handleCancel}
             footer={[
-              <Button type={'primary'} key="submit" onClick={this.handleOk}>登陆</Button>,
+              <Button type={'primary'} key="submit" onClick={this.handleOk}>登录</Button>,
             ]}
           >
             <div>
@@ -111,6 +111,7 @@ class Sign extends React.Component {
                   <Input type={'password'} onChange={this.handlePWChange} />
                 </Form.Item>
               </Form>
+              <span>没有账号?<a href="/signUp">马上注册</a></span>
             </div>
           </Modal>
           <a href="/signUp">注册</a>

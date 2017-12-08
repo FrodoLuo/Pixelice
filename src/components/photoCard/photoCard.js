@@ -30,7 +30,7 @@ function photoCard(props) {
         </div>
       </div>
       <div className={style['nc-like-wrap']} onClick={handleLike}>
-        <Icon type={props.liked ? 'heart' : 'heart-o'} />
+        {props.info.liked}&nbsp;<Icon type={props.liked ? 'heart' : 'heart-o'} />
       </div>
       <div className={style['nc-photo-wrap']}>
         <img src={props.info.zipUrl} role="presentation" />

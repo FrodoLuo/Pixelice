@@ -3,7 +3,7 @@ import { connect } from 'dva';
 import { Input, Row, Col } from 'antd';
 import style from './cover.less';
 import defaultCover from '../../assets/images/default_cover.jpeg';
-import SearchBar from './SearchBar/searchBar';
+import SearchBar from '../SearchBar/searchBar';
 
 const Search = Input.Search;
 
@@ -43,7 +43,7 @@ class Cover extends React.Component {
                 <p style={{ color: 'white', fontSize: '48px' }}>Pixelice</p>
                 <p style={{ color: 'white', fontSize: '24px' }}>面向所有人的摄影社区</p>
               </div>
-              <SearchBar />
+              <SearchBar home />
               {/* <div>
                 <Row type="flex" justify="center">
                 </Row>

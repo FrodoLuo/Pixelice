@@ -5,6 +5,7 @@ import style from './pixeliceHeader.less';
 import Logo from './logo/logo';
 import Nav from './nav/nav';
 import Sign from './sign/sign';
+import SearchBar from '../SearchBar/searchBar';
 
 function PixeliceHeader(props) {
   console.log(props);
@@ -30,11 +31,9 @@ function PixeliceHeader(props) {
             <div className={style['left-wrap']}>
               <Logo />
               <Nav />
-              <div>
-                {
-                  props.home ? '' : (<Input.Search />)
-                }
-              </div>
+              {
+                props.home ? '' : (<SearchBar />)
+              }
             </div>
           </Col>
           <Col xs={24} sm={12}>
