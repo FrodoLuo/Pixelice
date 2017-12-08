@@ -14,12 +14,14 @@ class PhotoDetail extends React.Component {
   shareToSina = () => {
     // eslint-disable-next-line
     const sharesinastring = `http://v.t.sina.com.cn/share/share.php?title=${'分享来自Pixelice的照片'}&url=${window.location.href}&content=utf-8&sourceUrl=${window.location.href}&pic=${this.props.photoInfo.photoUrl}`;
-    window.open(sharesinastring, 'newwindow', 'height=400,width=400,top=100,left=100');
+    // window.open(sharesinastring, 'newwindow', 'height=400,width=400,top=100,left=100');
+    window.location.href = sharesinastring;
   }
   shareToZone = () => {
     // eslint-disable-next-line
-    const shareqqzonestring = `http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?summary=分享来自Pixelice的照片${this.props.photoInfo.title}&url=${window.location.href}&pics=${this.props.photoInfo.photoUrl}`;
-    window.open(shareqqzonestring, 'newwindow', 'height=400,width=400,top=100,left=100');
+    const shareqqzonestring = `http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?title=分享来自Pixelice的照片&summary=分享来自Pixelice的照片${this.props.photoInfo.title}&url=${window.location.href}&pics=${this.props.photoInfo.photoUrl}`;
+    // window.open(shareqqzonestring, 'newwindow', 'height=400,width=400,top=100,left=100');
+    window.location.href = shareqqzonestring;
   }
   render() {
     console.log(this.props.photoInfo);
