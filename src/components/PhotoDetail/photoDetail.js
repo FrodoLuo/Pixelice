@@ -17,8 +17,24 @@ class PhotoDetail extends React.Component {
     window.open(sharesinastring, 'newwindow', 'height=400,width=400,top=100,left=100');
   }
   shareToZone = () => {
-    // eslint-disable-next-line
-    const shareqqzonestring = `http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?title=分享来自Pixelice的照片&summary=分享来自Pixelice的照片${this.props.photoInfo.title}&url=${window.location.href}&pics=${this.props.photoInfo.photoUrl}`;
+    const p = {
+      url: window.location.href,
+      showcount: '0',
+      desc: '',
+      summary: '分享一张来自Pixelice的照片',
+      title: '分享来自pixelice的照片',
+      site: 'Pixelice',
+      pics: this.props.photoInfo.photoUrl,
+      style: '203',
+      width: 22,
+      height: 22,
+    };
+    const s = [];
+    for (const i in p) {
+      if (i) {
+        s.push(i.concat('=').concat(encodeURIComponent(p[i] || '')));
+      }
+    } const shareqqzonestring = `http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?'${s.join('&')}`;
     window.open(shareqqzonestring, 'newwindow', 'height=400,width=400,top=100,left=100');
   }
   render() {

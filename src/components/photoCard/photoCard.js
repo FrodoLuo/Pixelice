@@ -14,11 +14,15 @@ function photoCard(props) {
         type: 'social/dislike',
         payload: props.info.photoId,
       });
+      const k = parseInt(window.document.getElementById(`${props.info.photoId}_liked`).innerHTML, 10);
+      if (k >= props.info.liked && k <= props.info.liked + 1) { window.document.getElementById(`${props.info.photoId}_liked`).innerHTML = k - 1; }
     } else {
       props.dispatch({
         type: 'social/like',
         payload: props.info.photoId,
       });
+      const k = parseInt(window.document.getElementById(`${props.info.photoId}_liked`).innerHTML, 10);
+      if (k <= props.info.liked && k >= props.info.liked - 1) { window.document.getElementById(`${props.info.photoId}_liked`).innerHTML = k + 1; }
     }
   };
   return (
@@ -30,7 +34,7 @@ function photoCard(props) {
         </div>
       </div>
       <div className={style['nc-like-wrap']} onClick={handleLike}>
-        {props.info.liked}&nbsp;<Icon type={props.liked ? 'heart' : 'heart-o'} />
+        <span id={`${props.info.photoId}_liked`} >{props.info.liked}</span>&nbsp;<Icon type={props.liked ? 'heart' : 'heart-o'} />
       </div>
       <div className={style['nc-photo-wrap']}>
         <img src={props.info.zipUrl} role="presentation" />
