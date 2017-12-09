@@ -14,12 +14,12 @@ class UploadPane extends React.Component {
   };
   componentWillReceiveProps(nextProps) {
     if (nextProps.processing === 'upload') {
-      if (nextProps.photo.upload.state === 'success') {
+      if (nextProps.upload.state === 'success') {
         message.success('保存成功, 即将跳转');
         setTimeout(() => {
           window.location.reload();
         }, 1500);
-      } else if (nextProps.photo.upload.state === 'error') {
+      } else if (nextProps.upload.state === 'error') {
         message.error('服务器故障, 请稍后重试');
       }
     }
