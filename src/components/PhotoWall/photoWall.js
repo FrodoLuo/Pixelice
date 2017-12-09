@@ -94,13 +94,13 @@ class PhotoWall extends React.Component {
       }
     }
     return ([
-      <Col span={8}>
+      <Col className={style['single-column']} span={8}>
         {column1}
       </Col>,
-      <Col span={8}>
+      <Col className={style['single-column']} span={8}>
         {column2}
       </Col>,
-      <Col span={8}>
+      <Col className={style['single-column']} span={8}>
         {column3}
       </Col>,
     ]);
@@ -164,9 +164,12 @@ class PhotoWall extends React.Component {
       <div>
         <div className={style['photo-wall-wrap']}>
           <div>
-            <div>
-              找到了{this.props.photos.data.length}个结果
-            </div>
+            {this.props.home ? '' : (
+              <div>
+                找到了{this.props.photos.data.length}个结果
+              </div>
+              )
+            }
           </div>
           {pad}
         </div>

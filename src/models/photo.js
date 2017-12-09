@@ -4,6 +4,7 @@ import { mapStatu } from '../utils/statuCode';
 export default {
   namespace: 'photo',
   state: {
+    processing: '',
     upload: {
       stata: 'ready',
     },
@@ -67,8 +68,11 @@ export default {
       yield put({
         type: 'savePhotos',
         payload: {
-          state: mapStatu(result.data.message),
-          data: result.data.data,
+          data: {
+            state: mapStatu(result.data.message),
+            data: result.data.data,
+          },
+          process: 'fetchPhotos',
         },
       });
     },
@@ -77,8 +81,11 @@ export default {
       yield put({
         type: 'savePhotos',
         payload: {
-          state: mapStatu(result.data.message),
-          data: result.data.data,
+          data: {
+            state: mapStatu(result.data.message),
+            data: result.data.data,
+          },
+          process: 'newPhotos',
         },
       });
     },
@@ -92,22 +99,35 @@ export default {
         },
       });
     },
+    *hotPhoto({ payload }, { call, put }) {
+      const result = yield call(photoService.hotPhoto);
+      yield put({
+        type: 'savePhotos',
+        payload: {
+          data: {
+            state: mapStatu(result.data.message),
+            data: result.data.data,
+          },
+          process: 'hotPhotos',
+        },
+      });
+    },
   },
   reducers: {
     saveCoverIndex(state, { payload: data }) {
-      return { ...state, coverCurrentIndex: data };
+      return { ...state, coverCurrentIndex: data, processing: 'coverIndex' };
     },
     saveUpload(state, { payload: data }) {
-      return { ...state, upload: data };
+      return { ...state, upload: data, processing: 'upload' };
     },
-    savePhotos(state, { payload: data }) {
-      return { ...state, photos: data };
+    savePhotos(state, { payload: { data, process } }) {
+      return { ...state, photos: data, processing: process };
     },
     saveCover(state, { payload: data }) {
-      return { ...state, cover: data };
+      return { ...state, cover: data, processing: 'coverPhoto' };
     },
     saveSearch(state, { payload: data }) {
-      return { ...state, search: data };
+      return { ...state, search: data, processing: 'search' };
     },
   },
 };

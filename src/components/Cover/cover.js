@@ -4,6 +4,7 @@ import { Input, Row, Col } from 'antd';
 import style from './cover.less';
 import defaultCover from '../../assets/images/default_cover.jpeg';
 import SearchBar from '../SearchBar/searchBar';
+import Carousel from '../../components/Carousel/carousel';
 
 const Search = Input.Search;
 
@@ -21,10 +22,13 @@ class Cover extends React.Component {
   }
   componentWillReceiveProps(nextProps) {
     console.log(nextProps);
-    this.setState({
-      coverImageList: nextProps.cover.data,
-      currentImgIndex: nextProps.coverCurrentIndex,
-    });
+    switch (nextProps.processing) {
+      case 'coverPhoto':
+        this.setState({
+          coverImageList: nextProps.cover.data,
+          currentImgIndex: nextProps.coverCurrentIndex,
+        });
+    }
   }
   render() {
     console.log(this.state);
@@ -53,6 +57,7 @@ class Cover extends React.Component {
                   </div>
                 </Row>
               </div> */}
+              <Carousel />
             </div>
           )
           :

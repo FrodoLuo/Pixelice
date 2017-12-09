@@ -25,6 +25,9 @@ export function getNewPhotos() {
 export function randomPhoto() {
   return get('/api/photo/randomPhoto');
 }
+export function hotPhoto() {
+  return get('/api/photo/getHotPhotos');
+}
 export function searchPhoto(keystring) {
   return get(`/api/photo/search?keystring=${keystring}`);
 }
