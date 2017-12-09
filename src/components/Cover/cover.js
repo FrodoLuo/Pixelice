@@ -26,6 +26,11 @@ class Cover extends React.Component {
       case 'coverPhoto':
         this.setState({
           coverImageList: nextProps.cover.data,
+
+        });
+        break;
+      case 'coverIndex':
+        this.setState({
           currentImgIndex: nextProps.coverCurrentIndex,
         });
     }

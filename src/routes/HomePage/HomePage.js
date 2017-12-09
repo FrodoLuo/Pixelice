@@ -38,8 +38,10 @@ class IndexPage extends React.Component {
         <Content className="main-content" style={{ padding: 0 }}>
           <Cover home author="No one" />
           <div className="content-wrap" >
-            <h2 className={style['part-title']}>最热照片</h2>
-            <PhotoWall photos={this.state.hotPhotos} home />
+            <div className={style['hot-photo-pane']}>
+              <h2 className={style['part-title']}>最热照片</h2>
+              <PhotoWall photos={this.state.hotPhotos} home />
+            </div>
           </div>
         </Content>
         <PixeliceFooter />
