@@ -1,6 +1,6 @@
 import * as request from '../utils/request';
 
-export function getAlbumsById(userId) {
+export function getAlbumsByUserId(userId) {
   return request.get(
     `/api/album/getAlbumsByUserId?userId=${userId}`,
   );

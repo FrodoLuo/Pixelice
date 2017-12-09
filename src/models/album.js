@@ -105,6 +105,23 @@ export default {
         },
       });
     },
+    *getAlbumsByUserId({ payload: userId }, { call, put }) {
+      yield put({
+        type: 'saveAlbumslist',
+        payload: {
+          state: 'loading',
+          data: [],
+        },
+      });
+      const result = yield call(albumService.getAlbumsByUserId, userId);
+      yield put({
+        type: 'saveAlbumsList',
+        payload: {
+          state: mapStatu(result.data.message),
+          data: result.data.data,
+        },
+      });
+    },
     *initAlbum({ payload: albumId }, { call, put }) {
       yield put({
         type: 'saveAlbumInfo',

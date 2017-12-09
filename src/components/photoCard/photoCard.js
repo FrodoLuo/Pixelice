@@ -29,7 +29,9 @@ function photoCard(props) {
     <Card bodyStyle={{ padding: 0 }} noHovering bordered={false} className={style['nc-wrap']} onClick={props.onClick}>
       <div className={style['nc-hover-wrap']}>
         <div className={style['nc-userInfo-wrap']}>
-          <Avatar src={avatar} />
+          <a href={`/user/${props.info.userId}`} onClick={(e) => { e.stopPropagation(); }}>
+            <Avatar src={avatar} />
+          </a>
           <span className={style['nc-userInfo-nickName']}>{props.info.nickName}</span>
         </div>
       </div>

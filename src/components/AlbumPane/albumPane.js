@@ -42,11 +42,19 @@ class AlbumPane extends React.Component {
     this.setState({
       runningOp: 'getAlbum',
     });
-    this.props.dispatch({
-      type: 'album/getAlbumsByToken',
-    });
+    if (this.props.host) {
+      this.props.dispatch({
+        type: 'album/getAlbumsByUserId',
+        payload: this.props.hostId,
+      });
+    } else {
+      this.props.dispatch({
+        type: 'album/getAlbumsByToken',
+      });
+    }
   }
   componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
     switch (nextProps.runningOp) {
       case 'getAlbum':
         switch (nextProps.albumsList.state) {
@@ -304,26 +312,35 @@ class AlbumPane extends React.Component {
         </Modal>
         <div>
           <div>
-            <Button
-              onClick={
-                () => {
-                  this.setCreateVisible(true);
-                  this.setState({
-                    afterInfo: {
-                      albumId: '',
-                      albumName: '',
-                      description: '',
-                      private: '',
-                    },
-                  });
+            {this.props.author ? (
+              <Button
+                onClick={
+                  () => {
+                    this.setCreateVisible(true);
+                    this.setState({
+                      afterInfo: {
+                        albumId: '',
+                        albumName: '',
+                        description: '',
+                        private: '',
+                      },
+                    });
+                  }
                 }
-              }
-            >
-              创建相册
+              >
+                创建相册
             </Button>
+            ) : ''}
           </div>
           <div className={style['album-pane-wrap']}>
             {albums}
+            {albums.length === 0 ? (
+              <p className="nothing-found">
+                ╮(⊙︿⊙)╭
+                <br />
+                这个up主没有相册
+              </p>
+            ) : ''}
           </div>
         </div>
       </div>

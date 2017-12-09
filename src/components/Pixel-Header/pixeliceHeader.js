@@ -46,7 +46,7 @@ function PixeliceHeader(props) {
           <Logo />
           <div>
             {
-              props.home ? '' : (<Input.Search />)
+              props.home ? '' : (<SearchBar />)
             }
           </div>
           <Dropdown trigger={['hover', 'click']} overlay={menu} style={{ backgroundColor: 'white' }}>

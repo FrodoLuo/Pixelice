@@ -168,10 +168,17 @@ class PhotoWall extends React.Component {
               <div>
                 找到了{this.props.photos.data.length}个结果
               </div>
-              )
+            )
             }
           </div>
           {pad}
+          {this.props.photos.data.length === 0 ? (
+            <p className="nothing-found">
+              ╮(⊙︿⊙)╭
+                <br />
+              这个地方没有照片
+              </p>
+          ) : ''}
         </div>
         <Modal
           style={{ top: 20, height: '100%', paddingBottom: '0', margin: 0, overflow: 'none' }}

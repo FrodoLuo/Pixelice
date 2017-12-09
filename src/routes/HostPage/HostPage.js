@@ -5,6 +5,8 @@ import PixeliceHeader from '../../components/Pixel-Header/pixeliceHeader';
 import PixeliceFooter from '../../components/Pixel-Footer/pixelFooter';
 import AlbumPane from '../../components/AlbumPane/albumPane';
 import HostCover from '../../components/Host/hostCover/host-cover';
+import PhotoWall from '../../components/PhotoWall/photoWall';
+import HostProfile from '../../components/Host/hostProfile';
 
 const TabPane = Tabs.TabPane;
 
@@ -12,14 +14,15 @@ class InfoCenterPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userInfo: {
-        message: 0,
+      hostInfo: {
+        state: 'ready',
         data: {
           userId: '',
           nickName: '',
           avatarUrl: '',
           gender: '',
           followers: 0,
+          intro: '',
         },
       },
       photos: {
@@ -27,19 +30,29 @@ class InfoCenterPage extends React.Component {
         data: [],
       },
     };
-    props.dispatch({
+  }
+  componentWillMount() {
+    this.props.dispatch({
       type: 'user/hostInfo',
-      payload: props.match.params.hostId,
+      payload: this.props.match.params.hostId,
+    });
+    this.props.dispatch({
+      type: 'photo/fetchPhotosById',
+      payload: this.props.match.params.hostId,
     });
   }
   componentWillReceiveProps(nextProps) {
     console.log(nextProps);
-    if (nextProps.hostInfo.state === 'error') {
-      Modal.error('发生服务器错误');
-    } else if (nextProps.hostInfo.state === 'success') {
+    if (nextProps.user.hostInfo.state === 'success') {
       this.setState({
-        userInfo: nextProps.userInfo.data,
+        hostInfo: nextProps.user.hostInfo,
       });
+    }
+    switch (nextProps.photo.processing) {
+      case 'fetchPhotos':
+        this.setState({
+          photos: nextProps.photo.photos,
+        });
     }
   }
   render() {
@@ -47,15 +60,16 @@ class InfoCenterPage extends React.Component {
       <Layout>
         <PixeliceHeader />
         <Layout.Content className="main-content no-cover">
-          <HostCover hostInfo={this.state.userInfo} />
+          <HostCover hostInfo={this.state.hostInfo} />
           <div className="content-wrap">
             <Tabs defaultActiveKey="1">
               <TabPane tab="作品" key="1">
-                <AlbumPane />
+                <PhotoWall photos={this.state.photos} />
               </TabPane>
-              <TabPane tab="相册" key="2">Content of Tab Pane 3</TabPane>
+              <TabPane tab="相册" key="2">
+                <AlbumPane host hostId={this.props.match.params.hostId} /></TabPane>
               <TabPane tab="资料" key="3">
-                rua!
+                <HostProfile hostInfo={this.state.hostInfo} />
               </TabPane>
             </Tabs>
           </div>
@@ -66,5 +80,5 @@ class InfoCenterPage extends React.Component {
   }
 }
 export default connect((models) => {
-  return models.user;
+  return models;
 })(InfoCenterPage);

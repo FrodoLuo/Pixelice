@@ -19,6 +19,11 @@ export function fetchPhotos() {
     '/api/photo/fetchPhotos',
   );
 }
+export function fetchPhotosById(userId) {
+  return get(
+    `/api/photo/fetchPhotosById?userId=${userId}`,
+  );
+}
 export function getNewPhotos() {
   return post('/api/photo/getNewPhotos');
 }

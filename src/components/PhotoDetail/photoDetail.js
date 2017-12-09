@@ -1,7 +1,8 @@
 import React from 'react';
-import { Row, Col, Icon } from 'antd';
+import { Row, Col, Icon, Avatar } from 'antd';
 import { connect } from 'dva';
 import style from './photoDetail.less';
+import defaultAvatar from '../../assets/images/defaultAvatar.jpeg';
 
 class PhotoDetail extends React.Component {
   constructor(props) {
@@ -38,6 +39,7 @@ class PhotoDetail extends React.Component {
     window.open(shareqqzonestring, 'newwindow', 'height=400,width=400,top=100,left=100');
   }
   render() {
+    const avatar = this.props.photoInfo.avatarUrl || defaultAvatar;
     console.log(this.props.photoInfo);
     return (
       <div style={{ height: '100%' }}>
@@ -45,6 +47,9 @@ class PhotoDetail extends React.Component {
           <img src={this.props.photoInfo.photoUrl} role="presentation" />
         </div>
         <div className={style['detail-wrap']}>
+          <a className={style['detail-avatar']}>
+            {this.props.photoInfo.nickName}&nbsp;<Avatar src={avatar} />
+          </a>
           <div className={style['detail-title']}>
             {this.props.photoInfo.title}
           </div>

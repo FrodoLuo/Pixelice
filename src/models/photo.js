@@ -76,6 +76,19 @@ export default {
         },
       });
     },
+    *fetchPhotosById({ payload: userId }, { call, put }) {
+      const result = yield call(photoService.fetchPhotosById, userId);
+      yield put({
+        type: 'savePhotos',
+        payload: {
+          data: {
+            state: mapStatu(result.data.message),
+            data: result.data.data,
+          },
+          process: 'fetchPhotos',
+        },
+      });
+    },
     *getNewPhotos({ payload }, { call, put }) {
       const result = yield call(photoService.getNewPhotos);
       yield put({
