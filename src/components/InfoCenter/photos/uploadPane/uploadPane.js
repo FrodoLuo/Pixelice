@@ -13,18 +13,15 @@ class UploadPane extends React.Component {
     },
   };
   componentWillReceiveProps(nextProps) {
-    if (nextProps.photo.upload.message === 20) {
-      message.success('保存成功, 即将跳转');
-      setTimeout(() => {
-        window.location.reload();
-      }, 1500);
-    } else if (nextProps.photo.upload.message === 21) {
-      message.error('登录已失效, 请重新登陆');
-      setTimeout(() => {
-        window.location.href = '/';
-      }, 1500);
-    } else if (nextProps.photo.upload.message === 41) {
-      message.error('服务器故障, 请稍后重试');
+    if (nextProps.processing === 'upload') {
+      if (nextProps.photo.upload.state === 'success') {
+        message.success('保存成功, 即将跳转');
+        setTimeout(() => {
+          window.location.reload();
+        }, 1500);
+      } else if (nextProps.photo.upload.state === 'error') {
+        message.error('服务器故障, 请稍后重试');
+      }
     }
   }
   handleUpload = (e) => {
@@ -149,5 +146,5 @@ const UploadPaneInstance = Form.create()(UploadPane);
 
 export default connect((models) => {
   console.log(models);
-  return models;
+  return models.photo;
 })(UploadPaneInstance);
