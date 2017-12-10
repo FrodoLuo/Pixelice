@@ -47,7 +47,7 @@ class PhotoDetail extends React.Component {
           <img src={this.props.photoInfo.photoUrl} role="presentation" />
         </div>
         <div className={style['detail-wrap']}>
-          <a className={style['detail-avatar']}>
+          <a className={style['detail-avatar']} href={`/user/${this.props.photoInfo.userId}`}>
             {this.props.photoInfo.nickName}&nbsp;<Avatar src={avatar} />
           </a>
           <div className={style['detail-title']}>
