@@ -43,6 +43,7 @@ class Cover extends React.Component {
         className={style[c]}
         style={{
           backgroundImage: `url(${this.state.coverImageList[this.state.currentImgIndex].photoUrl})`,
+          height: this.props.home ? window.document.body.clientHeight : '',
         }}
       >
         {this.props.home ?
@@ -53,15 +54,6 @@ class Cover extends React.Component {
                 <p style={{ color: 'white', fontSize: '24px' }}>面向所有人的摄影社区</p>
               </div>
               <SearchBar home />
-              {/* <div>
-                <Row type="flex" justify="center">
-                </Row>
-                <Row type="flex" justify="center">
-                  <div className={style['cover-search-wrap']}>
-                    <Search placeholder="Coming Soon." />
-                  </div>
-                </Row>
-              </div> */}
               <Carousel />
             </div>
           )

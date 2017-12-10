@@ -181,7 +181,7 @@ class PhotoWall extends React.Component {
           ) : ''}
         </div>
         <Modal
-          style={{ top: 20, height: '100%', paddingBottom: '0', margin: 0, overflow: 'none' }}
+          style={{ top: 20, height: '100%', width: '100%', paddingBottom: '0', margin: 0, overflow: 'none' }}
           bodyStyle={{ height: '100%', padding: 0, width: '100%' }}
           width="100%"
           visible={this.state.detailVisible}
