@@ -1,11 +1,11 @@
 .host-cover-wrap{
   min-height: 250px;
   background: no-repeat;
-  background-size: 100% auto;
-  background-position-y: -20px;
+  background-size: cover;
   padding: 40px 20px;;
   display: flex;
   align-items: center;
+  position: relative;
 }
 .host-cover-avatar-wrap{
   border-radius: 50%;
@@ -26,4 +26,14 @@
 .host-cover-info{
   padding: 5px 10px;
   // background-color: rgba(0,0,0,0.1);
+}
+@media screen and(max-height: 768px) {
+  .host-cover-wrap{
+    flex-direction: column;
+    height: 300px;
+    padding-top: 60px;
+  }
+  .host-cover-info{
+    text-align: center;
+  }
 }

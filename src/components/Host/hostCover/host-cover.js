@@ -3,6 +3,7 @@ import { Row, Col } from 'antd';
 import style from './host-cover.less';
 import defaultHostCover from '../../../assets/images/default_host_cover.jpg';
 import defaultAvatar from '../../../assets/images/defaultAvatar.jpeg';
+import Subscribe from '../subscribe/subscribe';
 
 class HostCover extends React.Component {
   render() {
@@ -18,6 +19,7 @@ class HostCover extends React.Component {
           <div className={style['host-cover-info']}>{this.props.hostInfo.data.nickName}</div>
           <div className={style['host-cover-info']}>关注者: {this.props.hostInfo.data.followers}</div>
         </div>
+        <Subscribe subscribed />
       </div>
     );
   }
