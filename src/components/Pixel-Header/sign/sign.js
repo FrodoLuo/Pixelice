@@ -77,6 +77,7 @@ class Sign extends React.Component {
         defaultAvatar : this.state.avatarUrl;
       content = (
         <div className={style['sign-wrap']}>
+          <a href="/infoCenter/work" className={style['upload-entry']}>上传图片</a>
           <a href="/infoCenter/work"><Avatar src={imgSrc} /></a>
           <a href="/infoCenter/work"><span>{this.state.nickName}</span></a>
           <a onClick={logout}><span>注销</span></a>
@@ -85,6 +86,7 @@ class Sign extends React.Component {
     } else {
       content = (
         <div className={style['sign-wrap']}>
+          <a onClick={this.showModal} className={style['upload-entry']}>上传图片</a>
           <a onClick={this.showModal}>登录</a>
           <Modal
             title="登陆"
