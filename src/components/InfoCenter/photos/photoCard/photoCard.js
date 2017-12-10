@@ -75,7 +75,7 @@ class PhotoCard extends React.Component {
           </a>
         </Menu.Item>
         <Menu.Item>
-          <Dropdown overlay={albumSelect} trigger={['hover']}>
+          <Dropdown overlay={albumSelect} trigger={['click']}>
             <a
               onMouseEnter={() => {
                 this.props.dispatch({
@@ -94,7 +94,7 @@ class PhotoCard extends React.Component {
       <div>
         <Card
           bodyStyle={{ padding: 0 }}
-          style={{ margin: '12px 2px', border: '#eee 1px solid' }}
+          style={{ margin: '12px 2px', border: '#eee 1px solid', overflow: 'hidden' }}
         >
           <a onClick={this.props.onClick}>
             <div className={style['photo-card-wrap']}>
@@ -106,8 +106,8 @@ class PhotoCard extends React.Component {
               </div>
               <div className={style['photo-simple-info']}>
                 <div>
+                  <span>{this.props.info.liked}&nbsp;</span>
                   <Icon type="heart" />
-                  <span>{this.props.info.liked}</span>
                 </div>
                 <div
                   onClick={
