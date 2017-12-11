@@ -57,12 +57,21 @@ class PhotoCard extends React.Component {
     }
     const albumSelect = (
       <Menu selectable>
-        <Menu.Item>
-          <a>
-            无
-          </a>
-        </Menu.Item>
-        <Menu.Divider />
+        {
+          this.state.albumList.length === 0 ?
+            (<Menu.Item><a>无</a></Menu.Item>)
+            :
+            ''
+        }
+        {
+          this.state.albumList.length === 0 ?
+            (
+              <Menu.Divider />
+            )
+            :
+            ''
+        }
+
         {albumListDrop}
       </Menu>
     );
