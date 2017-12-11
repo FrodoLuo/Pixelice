@@ -130,7 +130,7 @@ class UploadPane extends React.Component {
                   <Input placeholder="暂未实装" />
                 </Form.Item>
                 <Form.Item>
-                  <Button type="primary" htmlType="submit">
+                  <Button type="primary" htmlType="submit" disabled={this.state.fileList.length === 0}>
                     保存
                   </Button>
                 </Form.Item>
