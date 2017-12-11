@@ -6,11 +6,11 @@ import style from './subscribe.less';
 function Subscribe(props) {
   return (
     <div className={style['subscribe-wrap']}>
-      <Button type={props.subscribed ? 'primary' : 'normal'}>
+      <Button type={props.subscribed ? 'primary' : 'normal'} onClick={props.handleFollow}>
         <Icon type="eye" />{props.subscribed ? '已关注' : '关注'}
       </Button>
       &nbsp;
-      <Button>
+      <Button onClick={() => { props.showMessage(true); }}>
         <Icon type="message" />发送私信
       </Button>
     </div>

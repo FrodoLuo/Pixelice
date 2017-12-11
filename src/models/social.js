@@ -15,8 +15,40 @@ export default {
       state: 'ready',
       data: [],
     },
+    follow: {
+      state: 'ready',
+    },
+    unfollow: {
+      state: 'ready',
+    },
+    sendMessage: {
+      state: 'ready',
+    },
+    fetchMessages: {
+      state: 'ready',
+      data: [],
+    },
+    messageDetail: {
+      state: 'ready',
+      data: {},
+    },
   },
   reducers: {
+    saveFollow(state, { payload: data }) {
+      return { ...state, follow: data, runningOp: 'follow' };
+    },
+    saveUnfollow(state, { payload: data }) {
+      return { ...state, unfollow: data, runningOp: 'unfollow' };
+    },
+    saveSendMessage(state, { payload: data }) {
+      return { ...state, sendMessage: data, runningOp: 'sendMessage' };
+    },
+    saveFetchMessages(state, { payload: data }) {
+      return { ...state, fetchMessages: data, runningOp: 'fetchMessages' };
+    },
+    saveMessageDetail(state, { payload: data }) {
+      return { ...state, messageDetail: data, runningOp: 'messageDetail' };
+    },
     saveLike(state, { payload: data }) {
       return { ...state, like: data, runningOp: 'like' };
     },
@@ -28,6 +60,51 @@ export default {
     },
   },
   effects: {
+    *follow({ payload: followedId }, { call, put }) {
+      yield put({
+        type: 'saveFollow',
+        payload: {
+          state: 'loading',
+        },
+      });
+      const result = yield call(socialService.follow, followedId);
+      yield put({
+        type: 'saveFollow',
+        payload: {
+          state: mapStatu(result.data.message),
+        },
+      });
+    },
+    *unfollow({ payload: followedId }, { call, put }) {
+      yield put({
+        type: 'saveUnfollow',
+        payload: {
+          state: 'loading',
+        },
+      });
+      const result = yield call(socialService.unfollow, followedId);
+      yield put({
+        type: 'saveUnfollow',
+        payload: {
+          state: mapStatu(result.data.message),
+        },
+      });
+    },
+    *sendMessage({ payload: message }, { call, put }) {
+      yield put({
+        type: 'saveSendMessage',
+        payload: {
+          state: 'loading',
+        },
+      });
+      const result = yield call(socialService.sendMessage, message);
+      yield put({
+        type: 'saveSendMessage',
+        payload: {
+          state: mapStatu(result.data.message),
+        },
+      });
+    },
     *like({ payload: photoId }, { call, put }) {
       yield put({
         type: 'saveLike',
