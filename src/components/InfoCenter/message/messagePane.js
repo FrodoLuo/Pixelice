@@ -1,5 +1,5 @@
 import React from 'react';
-import { Collapse } from 'antd';
+import { Collapse, Tabs } from 'antd';
 import { connect } from 'dva';
 
 import style from './messagePane.less';
@@ -12,10 +12,17 @@ class MessagePane extends React.Component {
       state: 'ready',
       data: [],
     },
+    sentMessages: {
+      state: 'ready',
+      data: [],
+    },
   };
   componentWillMount() {
     this.props.dispatch({
       type: 'social/fetchMessages',
+    });
+    this.props.dispatch({
+      type: 'social/fetchSentMessages',
     });
   }
   componentWillReceiveProps(nextProps) {
@@ -26,6 +33,15 @@ class MessagePane extends React.Component {
             messages: nextProps.fetchMessages,
           });
         }
+        break;
+      }
+      case 'fetchSentMessages': {
+        if (nextProps.fetchSentMessages.state === 'success') {
+          this.setState({
+            sentMessages: nextProps.fetchSentMessages,
+          });
+        }
+        break;
       }
     }
   }
@@ -42,24 +58,58 @@ class MessagePane extends React.Component {
         <Panel
           style={{ borderRadius: 5 }}
           key={item.messageId}
-          header={`來自${item.nickName}的私信`}
+          header={<div>{item.read === 'f' ? (<span className={style['new-dot']}>新</span>) : ''}来自{item.nickName}的私信</div>}
         >
           <p>{item.content}</p>
         </Panel>,
       );
     }
-    return (
-      <div>
-        <Collapse
-          onChange={
-            (messageId) => {
-              this.handleRead(messageId);
-            }
-          }
+
+    const sentMessages = [];
+    for (const item of this.state.sentMessages.data) {
+      sentMessages.push(
+        <Panel
+          style={{ borderRadius: 5 }}
+          key={item.messageId}
+          header={`发送给${item.nickName}的私信`}
         >
-          {messages}
-        </Collapse>
-      </div>
+          <p>{item.content}</p>
+        </Panel>,
+      );
+    }
+
+    return (
+      <Tabs defaultActiveKey="received" tabPosition="left">
+        <Tabs.TabPane
+          tab="收到的私信"
+          key="received"
+        >
+          <div>
+            <Collapse
+              bordered={false}
+              onChange={
+                (messageId) => {
+                  this.handleRead(messageId);
+                }
+              }
+            >
+              {messages}
+            </Collapse>
+          </div>
+        </Tabs.TabPane>
+        <Tabs.TabPane
+          tab="发送的私信"
+          key="sent"
+        >
+          <div>
+            <Collapse
+              bordered={false}
+            >
+              {sentMessages}
+            </Collapse>
+          </div>
+        </Tabs.TabPane>
+      </Tabs>
     );
   }
 }

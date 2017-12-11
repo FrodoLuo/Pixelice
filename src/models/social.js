@@ -28,9 +28,21 @@ export default {
       state: 'ready',
       data: [],
     },
+    fetchSentMessages: {
+      state: 'ready',
+      data: [],
+    },
     messageDetail: {
       state: 'ready',
       data: {},
+    },
+    unread: {
+      state: 'ready',
+      data: 0,
+    },
+    followedUsers: {
+      state: 'ready',
+      data: [],
     },
   },
   reducers: {
@@ -46,6 +58,9 @@ export default {
     saveFetchMessages(state, { payload: data }) {
       return { ...state, fetchMessages: data, runningOp: 'fetchMessages' };
     },
+    saveFetchSentMessages(state, { payload: data }) {
+      return { ...state, fetchSentMessages: data, runningOp: 'fetchSentMessages' };
+    },
     saveMessageDetail(state, { payload: data }) {
       return { ...state, messageDetail: data, runningOp: 'messageDetail' };
     },
@@ -58,8 +73,48 @@ export default {
     saveLikedList(state, { payload: data }) {
       return { ...state, likedList: data, runningOp: 'checkLike' };
     },
+    saveUnread(state, { payload: data }) {
+      return { ...state, unread: data, runningOp: 'countUnread' };
+    },
+    saveFollowedUsers(state, { payload: data }) {
+      return { ...state, followedUsers: data, runningOp: 'followedUsers' };
+    },
   },
   effects: {
+    *getFollowedUsers({ payload }, { call, put }) {
+      yield put({
+        type: 'saveFollowedUsers',
+        payload: {
+          state: 'loading',
+          data: [],
+        },
+      });
+      const result = yield call(socialService.getFollowedUsers);
+      yield put({
+        type: 'saveFollowedUsers',
+        payload: {
+          state: mapStatu(result.data.message),
+          data: result.data.data,
+        },
+      });
+    },
+    *countUnread({ payload }, { call, put }) {
+      yield put({
+        type: 'saveUnread',
+        payload: {
+          state: 'loading',
+          data: 0,
+        },
+      });
+      const result = yield call(socialService.countUnread);
+      yield put({
+        type: 'saveUnread',
+        payload: {
+          state: mapStatu(result.data.message),
+          data: result.data.data,
+        },
+      });
+    },
     *follow({ payload: followedId }, { call, put }) {
       yield put({
         type: 'saveFollow',
@@ -116,6 +171,23 @@ export default {
       const result = yield call(socialService.fetchMessage);
       yield put({
         type: 'saveFetchMessages',
+        payload: {
+          state: mapStatu(result.data.message),
+          data: result.data.data,
+        },
+      });
+    },
+    *fetchSentMessages({ payload }, { call, put }) {
+      yield put({
+        type: 'saveFetchSentMessages',
+        payload: {
+          state: 'loading',
+          data: [],
+        },
+      });
+      const result = yield call(socialService.fetchSentMessage);
+      yield put({
+        type: 'saveFetchSentMessages',
         payload: {
           state: mapStatu(result.data.message),
           data: result.data.data,

@@ -27,6 +27,19 @@ export default {
   },
   subscriptions: {},
   effects: {
+    *getLikedPhotos({ payload }, { call, put }) {
+      const result = yield call(photoService.getLikedPhotos);
+      yield put({
+        type: 'savePhotos',
+        payload: {
+          data: {
+            state: mapStatu(result.data.message),
+            data: result.data.data,
+          },
+          process: 'likedPhotos',
+        },
+      });
+    },
     *setCoverIndex({ payload: index }, { put }) {
       yield put({
         type: 'saveCoverIndex',

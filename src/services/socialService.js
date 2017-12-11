@@ -51,11 +51,26 @@ export function fetchMessage() {
     '/api/social/fetchMessages',
   );
 }
+export function fetchSentMessage() {
+  return request.post(
+    '/api/social/fetchSentMessages',
+  );
+}
 export function messageDetail(messageId) {
   return request.post(
     '/api/social/messageDetail',
     {
       messageId,
     },
+  );
+}
+export function countUnread() {
+  return request.post(
+    '/api/social/countUnread',
+  );
+}
+export function getFollowedUsers() {
+  return request.post(
+    '/api/social/getFollowedUsers',
   );
 }

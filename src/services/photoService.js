@@ -36,3 +36,6 @@ export function hotPhoto() {
 export function searchPhoto(keystring) {
   return get(`/api/photo/search?keystring=${keystring}`);
 }
+export function getLikedPhotos() {
+  return post('/api/photo/getLikedPhotos');
+}

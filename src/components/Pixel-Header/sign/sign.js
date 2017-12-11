@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'dva';
-import { Avatar, Modal, Form, Input, Button, message } from 'antd';
+import { Avatar, Modal, Form, Input, Button, message, Badge } from 'antd';
 import style from './sign.less';
 import { logout } from '../../../utils/Tool';
 import defaultAvatar from '../../../assets/images/defaultAvatar.jpeg';
@@ -15,11 +15,18 @@ class Sign extends React.Component {
       password: '',
       nickName: '',
       avatarUrl: '',
+      unread: {
+        state: 'ready',
+        data: 0,
+      },
     };
   }
   componentWillMount() {
     this.props.dispatch({
       type: 'user/userInfo',
+    });
+    this.props.dispatch({
+      type: 'social/countUnread',
     });
   }
   componentWillReceiveProps(nextProps) {
@@ -28,6 +35,7 @@ class Sign extends React.Component {
         logged: true,
         nickName: nextProps.userInfo.data.nickName,
         avatarUrl: nextProps.userInfo.data.avatarUrl,
+        unread: nextProps.unread,
       });
     }
     if (nextProps.signIn.message === 20) {
@@ -75,11 +83,13 @@ class Sign extends React.Component {
     if (this.state.logged) {
       const imgSrc = this.state.avatarUrl === '' ?
         defaultAvatar : this.state.avatarUrl;
+      console.log(this.state);
       content = (
         <div className={style['sign-wrap']}>
           <a href="/infoCenter/work" className={style['upload-entry']}>上传图片</a>
           <a href="/infoCenter/work"><Avatar src={imgSrc} /></a>
           <a href="/infoCenter/work"><span>{this.state.nickName}</span></a>
+          <Badge style={{ left: 10, top: 8 }} count={this.state.unread.data}><a className={style['badge-a']} href="/infoCenter/message"><span>消息</span></a></Badge>
           <a onClick={logout}><span>注销</span></a>
         </div>
       );
@@ -125,6 +135,7 @@ class Sign extends React.Component {
 }
 export default connect((models) => {
   return {
+    unread: models.social.unread,
     signIn: models.auth.signIn,
     userInfo: models.user.userInfo,
   };
