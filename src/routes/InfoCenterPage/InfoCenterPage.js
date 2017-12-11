@@ -10,6 +10,7 @@ import PhotoPane from '../../components/InfoCenter/photos/photoPane';
 import AlbumPane from '../../components/AlbumPane/albumPane';
 import MessagePane from '../../components/InfoCenter/message/messagePane';
 import LikedPane from '../../components/InfoCenter/liked/likedPane';
+import FollowPane from '../../components/InfoCenter/follow/followPane';
 
 const TabPane = Tabs.TabPane;
 
@@ -64,7 +65,9 @@ class InfoCenterPage extends React.Component {
               <TabPane tab={<span><Icon type="like" />赞!</span>} key="favorite">
                 <LikedPane />
               </TabPane>
-              <TabPane tab={<span><Icon type="eye" />订阅</span>} key="subs">Content of Tab Pane 3</TabPane>
+              <TabPane tab={<span><Icon type="eye" />订阅</span>} key="follow">
+                <FollowPane />
+              </TabPane>
               <TabPane tab={<span><Icon type="message" />私信</span>} key="message"><MessagePane /></TabPane>
               <TabPane tab={<span><Icon type="user" />资料</span>} key="profile">
                 <ProfileCard userInfo={this.state.userInfo} />
