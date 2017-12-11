@@ -47,6 +47,8 @@ class InfoCenterPage extends React.Component {
       this.setState({
         hostInfo: nextProps.user.hostInfo,
       });
+    } else if (nextProps.user.hostInfo.state === 'self') {
+      window.location.href = '/infoCenter/work';
     }
     switch (nextProps.photo.processing) {
       case 'fetchPhotos':

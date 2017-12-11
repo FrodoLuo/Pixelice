@@ -105,7 +105,27 @@ export default {
         },
       });
     },
-    *like({ payload: photoId }, { call, put }) {
+    *fetchMessages({ payload }, { call, put }) {
+      yield put({
+        type: 'saveFetchMessages',
+        payload: {
+          state: 'loading',
+          data: [],
+        },
+      });
+      const result = yield call(socialService.fetchMessage);
+      yield put({
+        type: 'saveFetchMessages',
+        payload: {
+          state: mapStatu(result.data.message),
+          data: result.data.data,
+        },
+      });
+    },
+    * readMessage({ payload: messageId }, { call, put }) {
+      const result = yield call(socialService.messageDetail, messageId);
+    },
+    * like({ payload: photoId }, { call, put }) {
       yield put({
         type: 'saveLike',
         payload: {
@@ -128,7 +148,7 @@ export default {
         },
       });
     },
-    *dislike({ payload: photoId }, { call, put }) {
+    * dislike({ payload: photoId }, { call, put }) {
       yield put({
         type: 'saveDislike',
         payload: {
@@ -151,7 +171,7 @@ export default {
         },
       });
     },
-    *checkLike({ payload }, { call, put }) {
+    * checkLike({ payload }, { call, put }) {
       yield put({
         type: 'saveLikedList',
         payload: {

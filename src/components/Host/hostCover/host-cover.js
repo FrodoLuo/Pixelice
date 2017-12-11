@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, Modal, Input } from 'antd';
+import { Row, Col, Modal, Input, message } from 'antd';
 import { connect } from 'dva';
 import style from './host-cover.less';
 import defaultHostCover from '../../../assets/images/default_host_cover.jpg';
@@ -22,6 +22,16 @@ class HostCover extends React.Component {
       ...this.state,
       followed: nextProps.hostInfo.data.followed === 't',
     });
+    const { sendMessage, follow, unfollow } = nextProps.social;
+    switch (nextProps.social.runningOp) {
+      case 'sendMessage': {
+        if (sendMessage.state === 'success') {
+          message.success('私信已发送');
+          this.setMessageDialogVisible(false);
+        }
+        break;
+      }
+    }
   }
   setMessageDialogVisible = (sw) => {
     this.setState({
@@ -51,7 +61,24 @@ class HostCover extends React.Component {
       messageLength: e.target.value.length,
     });
   }
+  sendMessage = () => {
+    if (this.state.messageLength === 0) {
+      message.error('私信不能为空');
+    } else if (this.state.messageLength > 200) {
+      message.error('私信内容不能超过200字');
+    } else {
+      this.props.dispatch({
+        type: 'social/sendMessage',
+        payload: {
+          receiverId: this.props.hostInfo.data.userId,
+          content: this.state.editingMessage,
+        },
+      });
+    }
+  }
   render() {
+    const redFont = this.state.messageLength > 200 ? 'warn-font' : '';
+    console.log(redFont);
     const avatar = this.props.hostInfo.data.avatarUrl || defaultAvatar;
     return (
       <div className={style['host-cover-wrap']} style={{ backgroundImage: `url(${defaultHostCover})` }}>
@@ -73,6 +100,7 @@ class HostCover extends React.Component {
           visible={this.state.messageSendVisible}
           title={`向${this.props.hostInfo.data.nickName}发送私信`}
           onCancel={() => { this.setMessageDialogVisible(false); }}
+          onOk={this.sendMessage}
         >
           <div>
             <span>私信内容</span>
@@ -81,11 +109,13 @@ class HostCover extends React.Component {
               value={this.state.editingMessage}
               onChange={this.handleMessageChange}
             />
-            <span>{this.state.messageLength}/200</span>
+            <span className={style[redFont]}>{this.state.messageLength}/200</span>
           </div>
         </Modal>
-      </div>
+      </div >
     );
   }
 }
-export default connect()(HostCover);
+export default connect((models) => {
+  return models;
+})(HostCover);

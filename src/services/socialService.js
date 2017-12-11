@@ -48,7 +48,7 @@ export function sendMessage(message) {
 }
 export function fetchMessage() {
   return request.post(
-    '/api/social/fetchMessage',
+    '/api/social/fetchMessages',
   );
 }
 export function messageDetail(messageId) {
