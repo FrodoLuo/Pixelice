@@ -12,7 +12,7 @@ function UserCard(props) {
   return (
     <div className={style['user-card-wrap']}>
       <Popover content={detail} trigger={['hover']}>
-        <a className={style['user-avatar-wrap']} >
+        <a href={`/user/${props.userInfo.userId}`} className={style['user-avatar-wrap']} >
           <img src={defaultAvatar} role="presentation" />
         </a>
       </Popover>

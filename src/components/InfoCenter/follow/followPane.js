@@ -3,21 +3,49 @@ import { connect } from 'dva';
 import { } from 'antd';
 
 import UserCard from './userCard/userCard';
+import style from './followPane.less';
 
 class FollowPane extends React.Component {
+  state = {
+    followedUsers: {
+      state: 'ready',
+      data: [],
+    },
+  }
+  componentWillMount() {
+    this.props.dispatch({
+      type: 'social/getFollowedUsers',
+    });
+  }
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
+    switch (nextProps.runningOp) {
+      case 'followedUsers': {
+        if (nextProps.followedUsers.state === 'success') {
+          this.setState({
+            followedUsers: nextProps.followedUsers,
+          });
+        }
+      }
+    }
+  }
   render() {
-    return (
-      <div>
+    const users = [];
+    for (const item of this.state.followedUsers.data) {
+      users.push(
         <UserCard
-          userInfo={{
-            userId: 59,
-            nickName: '舟舟',
-            intro: '这个人很烂 什么都没有留下',
-            followers: 0,
-          }}
-        />
+          userInfo={item}
+          key={item.userId}
+        />,
+      );
+    }
+    return (
+      <div className={style['users-wrap']}>
+        {users}
       </div>
     );
   }
 }
-export default connect()(FollowPane);
+export default connect((models) => {
+  return models.social;
+})(FollowPane);

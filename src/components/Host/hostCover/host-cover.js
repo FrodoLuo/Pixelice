@@ -50,10 +50,12 @@ class HostCover extends React.Component {
         payload: this.props.hostInfo.data.userId,
       });
     }
-    this.props.dispatch({
-      type: 'user/hostInfo',
-      payload: this.props.hostInfo.data.userId,
-    });
+    setTimeout(() => {
+      this.props.dispatch({
+        type: 'user/hostInfo',
+        payload: this.props.hostInfo.data.userId,
+      });
+    }, 200);
   }
   handleMessageChange = (e) => {
     this.setState({

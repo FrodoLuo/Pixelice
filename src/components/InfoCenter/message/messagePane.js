@@ -58,7 +58,13 @@ class MessagePane extends React.Component {
         <Panel
           style={{ borderRadius: 5 }}
           key={item.messageId}
-          header={<div>{item.read === 'f' ? (<span className={style['new-dot']}>新</span>) : ''}来自{item.nickName}的私信</div>}
+          header={
+            <div className={style['message-title']}>
+              {item.read === 'f' ? (<span className={style['new-dot']}>新</span>) : ''}
+              来自{item.nickName}的私信
+              <span style={{ float: 'right' }}>{item.createTime}</span>
+            </div>
+          }
         >
           <p>{item.content}</p>
         </Panel>,
