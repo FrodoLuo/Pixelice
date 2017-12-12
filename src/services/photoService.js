@@ -14,6 +14,14 @@ export function upload(data) {
     },
   );
 }
+export function deletePhoto(photoId) {
+  return post(
+    '/api/photo/deletePhoto',
+    {
+      photoId,
+    },
+  );
+}
 export function fetchPhotos() {
   return post(
     '/api/photo/fetchPhotos',

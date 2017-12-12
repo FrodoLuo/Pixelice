@@ -34,6 +34,7 @@ class PhotoCard extends React.Component {
       },
     });
   }
+
   inAlbum = (num) => {
     for (const i of this.state.inList) {
       if (i.albumId === num) return true;
@@ -78,10 +79,11 @@ class PhotoCard extends React.Component {
     const menu = (
       <Menu>
         <Menu.Item>
-          <a>
-            <Icon type="delete" />
-            删除
-          </a>
+          <Popconfirm onConfirm={() => { this.props.handleDelete(this.props.info.photoId); }}>
+            <a>
+              <Icon type="delete" />删除
+            </a>
+          </Popconfirm>
         </Menu.Item>
         <Menu.Item>
           <Dropdown overlay={albumSelect} trigger={['click']}>

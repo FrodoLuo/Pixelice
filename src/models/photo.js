@@ -8,6 +8,9 @@ export default {
     upload: {
       stata: 'ready',
     },
+    delete: {
+      state: 'ready',
+    },
     photos: {
       state: 'ready',
       data: [],
@@ -71,6 +74,19 @@ export default {
       const result = yield call(photoService.upload, { files, info });
       yield put({
         type: 'saveUpload',
+        payload: {
+          state: mapStatu(result.data.message),
+        },
+      });
+    },
+    *delete({ payload: photoId }, { call, put }) {
+      yield put({
+        type: 'saveDelete',
+        payload: { message: 0 },
+      });
+      const result = yield call(photoService.deletePhoto, photoId);
+      yield put({
+        type: 'saveDelete',
         payload: {
           state: mapStatu(result.data.message),
         },
@@ -154,6 +170,9 @@ export default {
     },
     saveSearch(state, { payload: data }) {
       return { ...state, search: data, processing: 'search' };
+    },
+    saveDelete(state, { payload: data }) {
+      return { ...state, delete: data, processing: 'delete' };
     },
   },
 };

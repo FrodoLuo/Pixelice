@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, Icon, Avatar } from 'antd';
+import { Row, Col, Icon, Avatar, Tag } from 'antd';
 import { connect } from 'dva';
 import style from './photoDetail.less';
 import defaultAvatar from '../../assets/images/defaultAvatar.jpeg';
@@ -41,6 +41,13 @@ class PhotoDetail extends React.Component {
   render() {
     const avatar = this.props.photoInfo.avatarUrl || defaultAvatar;
     console.log(this.props.photoInfo);
+    const tags = [];
+    if (this.props.photoInfo.tags) {
+      const taglist = this.props.photoInfo.tags.split(' ');
+      for (const item of taglist) {
+        tags.push(<Tag>{item}</Tag>);
+      }
+    }
     return (
       <div style={{ height: '100%' }}>
         <div className={style['photo-wrap']}>
@@ -54,6 +61,7 @@ class PhotoDetail extends React.Component {
             {this.props.photoInfo.title}
           </div>
           <span className={style['detail-date']}>{this.props.photoInfo.date}</span>
+          <span>{tags}</span>
           <p>
             {this.props.photoInfo.intro}
           </p>

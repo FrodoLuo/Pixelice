@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Button, Col, Modal } from 'antd';
+import { Row, Button, Col, Modal, message } from 'antd';
 import { connect } from 'dva';
 import MediaQuery from 'react-responsive';
 import PhotoCard from './photoCard/photoCard';
@@ -26,9 +26,16 @@ class PhotoPane extends React.Component {
     });
   }
   componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
     if (nextProps.photos.state === 'success') {
       this.setState({
         photos: nextProps.photos,
+      });
+    }
+    if (nextProps.processing === 'delete' && nextProps.delete.state === 'success') {
+      message.success('照片已删除');
+      this.props.dispatch({
+        type: 'photo/fetchPhotos',
       });
     }
   }
@@ -43,6 +50,12 @@ class PhotoPane extends React.Component {
       uploadVisible: true,
     });
   };
+  handleDeletePhoto = (photoId) => {
+    this.props.dispatch({
+      type: 'photo/delete',
+      payload: photoId,
+    });
+  }
   hideUpload = () => {
     this.setState({
       uploadVisible: false,
@@ -55,11 +68,21 @@ class PhotoPane extends React.Component {
       const item1 = this.state.photos.data[i];
       const item2 = this.state.photos.data[i + 1];
       column1.push(
-        <PhotoCard onClick={() => { this.showDetail(item1); }} key={i} info={item1} />,
+        <PhotoCard
+          handleDelete={this.handleDeletePhoto}
+          onClick={() => { this.showDetail(item1); }}
+          key={i}
+          info={item1}
+        />,
       );
       if (item2 !== undefined) {
         column2.push(
-          <PhotoCard onClick={() => { this.showDetail(item2); }} key={i + 1} info={item2} />,
+          <PhotoCard
+            handleDelete={this.handleDeletePhoto}
+            onClick={() => { this.showDetail(item2); }}
+            key={i + 1}
+            info={item2}
+          />,
         );
       }
     }
@@ -81,16 +104,31 @@ class PhotoPane extends React.Component {
       const item2 = this.state.photos.data[i + 1];
       const item3 = this.state.photos.data[i + 2];
       column1.push(
-        <PhotoCard onClick={() => { this.showDetail(item1); }} key={i} info={item1} />,
+        <PhotoCard
+          handleDelete={this.handleDeletePhoto}
+          onClick={() => { this.showDetail(item1); }}
+          key={i}
+          info={item1}
+        />,
       );
       if (item2 !== undefined) {
         column2.push(
-          <PhotoCard onClick={() => { this.showDetail(item2); }} key={i + 1} info={item2} />,
+          <PhotoCard
+            handleDelete={this.handleDeletePhoto}
+            onClick={() => { this.showDetail(item2); }}
+            key={i + 1}
+            info={item2}
+          />,
         );
       }
       if (item3 !== undefined) {
         column3.push(
-          <PhotoCard onClick={() => { this.showDetail(item3); }} key={i + 2} info={item3} />,
+          <PhotoCard
+            handleDelete={this.handleDeletePhoto}
+            onClick={() => { this.showDetail(item3); }}
+            key={i + 2}
+            info={item3}
+          />,
         );
       }
     }
@@ -111,7 +149,12 @@ class PhotoPane extends React.Component {
     for (let i = 0; i < this.state.photos.data.length; i += 1) {
       const item1 = this.state.photos.data[i];
       column1.push(
-        <PhotoCard onClick={() => { this.showDetail(item1); }} key={i} info={item1} />,
+        <PhotoCard
+          handleDelete={this.handleDeletePhoto}
+          onClick={() => { this.showDetail(item1); }}
+          key={i}
+          info={item1}
+        />,
       );
     }
     return (

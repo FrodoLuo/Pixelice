@@ -10,6 +10,7 @@ class UploadPane extends React.Component {
     info: {
       title: '',
       intro: '',
+      tags: '',
     },
   };
   componentWillReceiveProps(nextProps) {
@@ -72,6 +73,25 @@ class UploadPane extends React.Component {
       },
     });
   };
+  tagChage = (e) => {
+    this.setState({
+      info: {
+        ...this.state.info,
+        tags: e.target.value,
+      },
+    });
+  }
+  beforeUpload = (file) => {
+    const isJPG = file.type === 'image/jpeg';
+    if (!isJPG) {
+      message.error('You can only upload JPG file!');
+    }
+    const isLt20M = file.size / 1024 / 1024 < 20;
+    if (!isLt20M) {
+      message.error('Image must smaller than 20MB!');
+    }
+    return isJPG && isLt20M;
+  }
   render() {
     const uploadButton = (
       <div>
@@ -90,6 +110,7 @@ class UploadPane extends React.Component {
               fileList={this.state.fileList}
               onPreview={this.handlePreview}
               onChange={this.handleChange}
+              beforeUpload={this.beforeUpload}
               multiple
             >
               {uploadButton}
@@ -123,11 +144,18 @@ class UploadPane extends React.Component {
                       message: '描述限制在80字内',
                     }],
                   })(
-                    <Input placeholder="标题限制在16字内" />,
+                    <Input placeholder="描述限制在80字内" />,
                   )}
                 </Form.Item>
                 <Form.Item label="标签">
-                  <Input placeholder="暂未实装" />
+                  {getFieldDecorator('tags', {
+                    rules: [{
+                      max: 40,
+                      message: '标签总不超过40字',
+                    }],
+                  })(
+                    <Input placeholder="请以空格分开标签" />,
+                  )}
                 </Form.Item>
                 <Form.Item>
                   <Button type="primary" htmlType="submit" disabled={this.state.fileList.length === 0}>
