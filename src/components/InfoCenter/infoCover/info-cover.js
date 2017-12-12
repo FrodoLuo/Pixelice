@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Upload, message } from 'antd';
+import { Modal, Upload, message, Avatar } from 'antd';
 import { connect } from 'dva';
 import style from './info-cover.less';
 import defaultCover from '../../../assets/images/default_cover.jpeg';
@@ -40,7 +40,7 @@ class InfoCenter extends React.Component {
             onChange={this.handleUploadDone}
             showUploadList={false}
           >
-            <img style={{ height: 100, borderRadius: '50%', cursor: 'pointer' }} src={imgSrc} role="presentation" />
+            <Avatar style={{ height: 100, width: 100, cursor: 'pointer', borderRadius: '50%' }} src={imgSrc} />
           </Upload>
         </div>
         <div className={style['info-cover-info-wrap']}>
