@@ -44,8 +44,15 @@ export default {
       state: 'ready',
       data: [],
     },
+    hotUsers: {
+      state: 'ready',
+      data: [],
+    },
   },
   reducers: {
+    saveHotUsers(state, { payload: data }) {
+      return { ...state, hotUsers: data, runningOp: 'hotUsers' };
+    },
     saveFollow(state, { payload: data }) {
       return { ...state, follow: data, runningOp: 'follow' };
     },
@@ -81,6 +88,24 @@ export default {
     },
   },
   effects: {
+    *getHotUsers({ payload }, { call, put }) {
+      yield put({
+        type: 'saveHotUsers',
+        payload: {
+          state: 'loading',
+          data: [],
+        },
+      });
+      const result = yield call(socialService.getHotUsers);
+      console.log(result);
+      yield put({
+        type: 'saveHotUsers',
+        payload: {
+          state: mapStatu(result.data.message),
+          data: result.data.data,
+        },
+      });
+    },
     *getFollowedUsers({ payload }, { call, put }) {
       yield put({
         type: 'saveFollowedUsers',

@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'dva';
-import { Layout } from 'antd';
+import { Layout, Card, Avatar } from 'antd';
 import PixeliceHeader from '../../components/Pixel-Header/pixeliceHeader';
 import PixeliceFooter from '../../components/Pixel-Footer/pixelFooter';
 import Cover from '../../components/Cover/cover';
 import PhotoWall from '../../components/PhotoWall/photoWall';
 import style from './HomePage.less';
+import defaultAvatar from '../../assets/images/defaultAvatar.jpeg';
 
 const { Content, Footer } = Layout;
 
@@ -15,10 +16,17 @@ class IndexPage extends React.Component {
       state: 'ready',
       data: [],
     },
+    hotUsers: {
+      state: 'ready',
+      data: [],
+    },
   }
   componentWillMount() {
     this.props.dispatch({
       type: 'photo/hotPhoto',
+    });
+    this.props.dispatch({
+      type: 'social/getHotUsers',
     });
   }
   componentWillReceiveProps(nextProps) {
@@ -28,10 +36,49 @@ class IndexPage extends React.Component {
         this.setState({
           hotPhotos: nextProps.photo.photos,
         });
+        break;
+    }
+    switch (nextProps.social.runningOp) {
+      case 'hotUsers':
+        this.setState({
+          hotUsers: nextProps.social.hotUsers,
+        });
     }
   }
   render() {
     console.log(this.state);
+    const users = [];
+    for (const item of this.state.hotUsers.data) {
+      const src = item.avatarUrl === '' ? defaultAvatar : item.avatarUrl;
+      users.push(
+        <div
+          key={item.userId}
+          style={{
+            maxWidth: 1420,
+          }}
+        >
+          <Card
+            style={{
+              width: 240,
+              height: 360,
+              justifyContent: 'center',
+            }}
+          >
+            <a href={`/user/${item.userId}`}>
+              <Avatar style={{ height: 100, width: 100 }} src={src} />
+            </a>
+            <div>
+              <h2>
+                {item.nickName}
+              </h2>
+            </div>
+            <div>
+              {(item.intro === ' ' || item.intro === '' || item.intro === null) ? '这个人并没有留下自我介绍' : item.intro}
+            </div>
+          </Card>
+        </div>,
+      );
+    }
     return (
       <Layout>
         <PixeliceHeader home />
@@ -41,6 +88,13 @@ class IndexPage extends React.Component {
             <div className={style['hot-photo-pane']}>
               <h2 className={style['part-title']}>最热照片</h2>
               <PhotoWall photos={this.state.hotPhotos} home />
+            </div>
+            <br />
+            <div>
+              <h2 className={style['part-title']}>推荐摄影人</h2>
+              <div className={style['users-pane']}>
+                {users}
+              </div>
             </div>
           </div>
         </Content>
@@ -54,5 +108,6 @@ IndexPage.propTypes = {
 };
 
 export default connect((models) => {
+  console.log(models);
   return models;
 })(IndexPage);

@@ -74,3 +74,8 @@ export function getFollowedUsers() {
     '/api/social/getFollowedUsers',
   );
 }
+export function getHotUsers() {
+  return request.get(
+    '/api/social/getHotUsers',
+  );
+}
