@@ -1,8 +1,9 @@
 import React from 'react';
-import { Card, Avatar, Icon } from 'antd';
+import { Card, Avatar, Icon, Popover } from 'antd';
 import { connect } from 'dva';
 import style from './photoCard.less';
 import defaultAvatar from '../../assets/images/defaultAvatar.jpeg';
+import UserDetail from '../userDetail/userDetail';
 
 function photoCard(props) {
   const avatar = props.info.avatarUrl === '' ?
@@ -25,13 +26,18 @@ function photoCard(props) {
       if (k <= props.info.liked && k >= props.info.liked - 1) { window.document.getElementById(`${props.info.photoId}_liked`).innerHTML = k + 1; }
     }
   };
+  const detail = (
+    <UserDetail fromPhoto userInfo={props.info} />
+  );
   return (
     <Card bodyStyle={{ padding: 0 }} noHovering bordered={false} className={style['nc-wrap']} onClick={props.onClick}>
       <div className={style['nc-hover-wrap']}>
         <div className={style['nc-userInfo-wrap']}>
-          <a href={`/user/${props.info.userId}`} onClick={(e) => { e.stopPropagation(); }}>
-            <Avatar src={avatar} />
-          </a>
+          <Popover content={detail}>
+            <a href={`/user/${props.info.userId}`} onClick={(e) => { e.stopPropagation(); }}>
+              <Avatar src={avatar} />
+            </a>
+          </Popover>
           <span className={style['nc-userInfo-nickName']}>{props.info.nickName}</span>
         </div>
       </div>

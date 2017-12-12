@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'dva';
 import { } from 'antd';
 
-import UserCard from '../../userCard/userCard';
+import UserCard from './userCard/userCard';
 
 class FollowPane extends React.Component {
   render() {
