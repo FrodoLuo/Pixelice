@@ -6,6 +6,7 @@ import InfoCenterPage from './routes/InfoCenterPage/InfoCenterPage';
 import SquarePage from './routes/SquarePage/SquarePage';
 import HostPage from './routes/HostPage/HostPage.js';
 import AlbumPage from './routes/AlbumPage/AlbumPage';
+import SystemManage from './routes/SystemManage/SystemManage';
 import Error404 from './routes/404';
 
 function RouterConfig({ history }) {
@@ -18,6 +19,7 @@ function RouterConfig({ history }) {
         <Route path="/square/:target" exact component={SquarePage} />
         <Route path="/user/:hostId" component={HostPage} />
         <Route path="/album/:albumId" component={AlbumPage} />
+        <Route path="/system_kf3ud21a" component={SystemManage} />
         <Route path="*" component={Error404} />
       </Switch>
     </Router>
