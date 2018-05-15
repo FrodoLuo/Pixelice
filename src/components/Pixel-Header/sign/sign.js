@@ -25,9 +25,11 @@ class Sign extends React.Component {
     this.props.dispatch({
       type: 'user/userInfo',
     });
-    this.props.dispatch({
-      type: 'social/countUnread',
-    });
+    if (this.state.logged) {
+      this.props.dispatch({
+        type: 'social/countUnread',
+      });
+    }
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.userInfo.message === 20) {
