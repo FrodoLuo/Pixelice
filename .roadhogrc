@@ -7,7 +7,7 @@
   "entry": "src/index.js",
   "proxy": {
     "/api": {
-      "target": "http://localhost:3000/",
+      "target": "http://207.148.103.8:3000/",
       "changeOrigin": true,
       "pathRewrite": { "^/api" : "" }
     }
