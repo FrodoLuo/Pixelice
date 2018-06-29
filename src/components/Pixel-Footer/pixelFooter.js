@@ -27,7 +27,7 @@ function PixelFooter() {
         </div>
       </BackTop>
       <p>
-        Copyright Luoyuzhou 2017. Not for profit.
+        版权所有：罗宇舟。人机交互使我快乐！
       </p>
     </div>
   );

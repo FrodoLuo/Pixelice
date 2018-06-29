@@ -61,7 +61,7 @@ class Cover extends React.Component {
           ''
         }
         <div className={style[this.props.home ? 'cover-author-home' : 'cover-author']}>
-          <div>Author: {this.state.coverImageList[this.state.currentImgIndex].nickName}</div>
+          <div>作者： {this.state.coverImageList[this.state.currentImgIndex].nickName}</div>
         </div>
       </div>
     );

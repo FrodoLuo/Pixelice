@@ -1,6 +1,6 @@
 import React from 'react';
-import { connect } from 'dva';
-import { Icon } from 'antd';
+import {connect} from 'dva';
+import {Icon} from 'antd';
 import style from './searchBar.less';
 
 class SearchBar extends React.Component {
@@ -18,6 +18,7 @@ class SearchBar extends React.Component {
       payload: this.state.searchkey,
     });
   }
+
   render() {
     return (
       <div
@@ -25,9 +26,18 @@ class SearchBar extends React.Component {
           `${style['search-bar-wrap']} ${this.props.home ? style['search-bar-wrap-home'] : style['search-bar-wrap-small']}`
         }
       >
-        <input placeholder="Search Your Interested Photos." value={this.state.searchkey} onChange={this.handleChange} />
+        <input
+          placeholder="查找你感兴趣的照片"
+          style={{fontSize: '14', paddingLeft: '10px'}}
+          value={this.state.searchkey}
+          onChange={this.handleChange}
+        />
         <div className={style['search-bar-button']}>
-          <a href={`/square/search?searchkey=${this.state.searchkey}`} style={{ color: 'grey' }} onClick={this.handleSearch}>
+          <a
+            href={`/square/search?searchkey=${this.state.searchkey}`}
+            style={{color: 'grey'}}
+            onClick={this.handleSearch}
+          >
             <Icon type="search" />
           </a>
         </div>
@@ -35,4 +45,5 @@ class SearchBar extends React.Component {
     );
   }
 }
+
 export default connect()(SearchBar);
