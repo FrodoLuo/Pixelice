@@ -24,7 +24,7 @@ function PixeliceHeader(props) {
   );
   const c = props.home ? 'header-wrap-home' : 'header-wrap';
   return (
-    <div className={style[c]} id="header">
+    <div className={style['header-wrap']} id="header">
       <MediaQuery minWidth={768}>
         <Row type="flex" justify="space-between" style={{ width: '100%' }}>
           <Col xs={24} sm={12}>
