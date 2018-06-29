@@ -13,14 +13,8 @@ class ProfileCard extends React.Component {
     console.log(this.props.userInfo);
     return (
       <div>
-        <Tabs size="small" tabPosition="left" defaultActiveKey="1">
-          <Tabs.TabPane tab="个人信息" key="1">
-            <Info userInfo={this.props.userInfo} />
-          </Tabs.TabPane>
-          <Tabs.TabPane tab="账户" key="2">
-            <Account userInfo={this.props.userInfo} />
-          </Tabs.TabPane>
-        </Tabs>
+        <Info userInfo={this.props.userInfo} />
+        <Account userInfo={this.props.userInfo} />
       </div>
     );
   }

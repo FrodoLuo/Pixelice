@@ -1,7 +1,9 @@
 import React from 'react';
-import {connect} from 'dva';
-import {Icon} from 'antd';
+import { connect } from 'dva';
+import { Icon } from 'antd';
+import { browserHistory } from 'react-router';
 import style from './searchBar.less';
+
 
 class SearchBar extends React.Component {
   state = {
@@ -28,14 +30,22 @@ class SearchBar extends React.Component {
       >
         <input
           placeholder="查找你感兴趣的照片"
-          style={{fontSize: '14', paddingLeft: '10px'}}
+          style={{ fontSize: '14', paddingLeft: '10px' }}
           value={this.state.searchkey}
           onChange={this.handleChange}
+          onKeyDown={
+            (e) => {
+              if (e.keyCode === 13) {
+                this.handleSearch();
+                // browserHistory.push(`/square/search?searchkey=${this.state.searchkey}`);
+              }
+            }
+          }
         />
         <div className={style['search-bar-button']}>
           <a
             href={`/square/search?searchkey=${this.state.searchkey}`}
-            style={{color: 'grey'}}
+            style={{ color: 'grey' }}
             onClick={this.handleSearch}
           >
             <Icon type="search" />

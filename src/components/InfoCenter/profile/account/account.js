@@ -77,7 +77,6 @@ class Account extends React.Component {
           <span>注册邮箱: </span>{this.props.userInfo.email}
           <span>{verified}</span>
         </div>
-        <h3>密码</h3>
       </div>
     );
   }

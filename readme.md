@@ -6,7 +6,7 @@ You can get Node from *[HERE](http://nodejs.cn/)*
 npm install
 
 # if the installation is slow, try the next two commands
-# npm i -g cnpm
+# 
 # cnpm install
 
 # And then type the below command
