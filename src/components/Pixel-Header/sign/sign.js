@@ -101,7 +101,7 @@ class Sign extends React.Component {
           <a onClick={this.showModal} className={style['upload-entry']}>上传图片</a>
           <a onClick={this.showModal}>登录</a>
           <Modal
-            title="登陆"
+            title="登录"
             style={{
               top: '-100px',
             }}
