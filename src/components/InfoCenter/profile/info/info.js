@@ -89,6 +89,16 @@ class Info extends React.Component {
     });
   }
   render() {
+    const formItemLayout = {
+      labelCol: {
+        xs: { span: 24 },
+        sm: { span: 8 },
+      },
+      wrapperCol: {
+        xs: { span: 24 },
+        sm: { span: 12 },
+      },
+    };
     const wrap = this.state.editMode ?
       (
         <div>
@@ -133,41 +143,35 @@ class Info extends React.Component {
       <Row type="flex" align="top">
         <Col xs={24} sm={16}>
           <div>
-            <Form layout={'vertical'}>
-              <Form.Item label="个人介绍">
+            <Form layout={'horizontal'}>
+              <Form.Item {...formItemLayout} label="个人介绍">
                 <Input.TextArea
                   defaultValue={this.props.userInfo.data.intro}
                   disabled={!this.state.editMode}
                   onChange={this.changeIntro}
                 />
               </Form.Item>
-              <Form.Item label="昵称">
+              <Form.Item {...formItemLayout} label="昵称">
                 <Input
                   defaultValue={this.props.userInfo.data.nickName}
                   disabled={!this.state.editMode}
                   onChange={this.changeNickName}
                 />
               </Form.Item>
-              <Form.Item label="ID">
+              <Form.Item {...formItemLayout} label="ID">
                 <Input
                   defaultValue={this.props.userInfo.data.userId}
                   disabled
                 />
               </Form.Item>
-              <Form.Item label="电子邮箱">
-                <Input
-                  defaultValue={this.props.userInfo.data.email}
-                  disabled
-                />
-              </Form.Item>
-              <Form.Item label="电话号码">
+              <Form.Item {...formItemLayout} label="电话号码">
                 <Input
                   defaultValue={this.props.userInfo.data.phone}
                   disabled={!this.state.editMode}
                   onChange={this.changePhone}
                 />
               </Form.Item>
-              <Form.Item label="性别">
+              <Form.Item {...formItemLayout} label="性别">
                 <Select
                   defaultValue={this.props.userInfo.data.gender}
                   disabled={!this.state.editMode}

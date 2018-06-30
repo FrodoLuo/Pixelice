@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Input, message } from 'antd';
+import { Button, Input, message, Row, Col } from 'antd';
 import { connect } from 'dva';
 import style from './account.less';
 
@@ -71,13 +71,15 @@ class Account extends React.Component {
         </div>
       );
     return (
-      <div>
-        <h3>电子邮箱</h3>
-        <div className={style['account-info-wrap']}>
-          <span>注册邮箱: </span>{this.props.userInfo.email}
-          <span>{verified}</span>
-        </div>
-      </div>
+      <Row>
+        { /* <h3>电子邮箱</h3> */ }
+        <Col offset={4}>
+          <div className={style['account-info-wrap']}>
+            <span>注册邮箱: </span>{this.props.userInfo.email}
+            <span>{verified}</span>
+          </div>
+        </Col>
+      </Row>
     );
   }
 }
