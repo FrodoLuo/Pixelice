@@ -19,7 +19,7 @@ class AlbumPage extends React.Component {
       state: 'ready',
       data: [],
     },
-  }
+  };
   componentWillMount() {
     this.props.dispatch({
       type: 'album/initAlbum',

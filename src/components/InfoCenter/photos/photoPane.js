@@ -14,17 +14,20 @@ class PhotoPane extends React.Component {
       data: [],
     },
     uploadVisible: false,
+    sortOption: false,
     upload: {
       message: 0,
     },
     chosenPhoto: undefined,
     detailVisible: false,
   };
+
   componentWillMount() {
     this.props.dispatch({
       type: 'photo/fetchPhotos',
     });
   }
+
   componentWillReceiveProps(nextProps) {
     console.log(nextProps);
     if (nextProps.photos.state === 'success') {
@@ -39,6 +42,12 @@ class PhotoPane extends React.Component {
       });
     }
   }
+
+  sortPhoto = () => {
+    this.setState({
+      sortOption: !this.state.sortOption,
+    });
+  };
   showDetail = (info) => {
     this.setState({
       chosenPhoto: info,
@@ -55,7 +64,7 @@ class PhotoPane extends React.Component {
       type: 'photo/delete',
       payload: photoId,
     });
-  }
+  };
   hideUpload = () => {
     this.setState({
       uploadVisible: false,
@@ -70,7 +79,9 @@ class PhotoPane extends React.Component {
       column1.push(
         <PhotoCard
           handleDelete={this.handleDeletePhoto}
-          onClick={() => { this.showDetail(item1); }}
+          onClick={() => {
+            this.showDetail(item1);
+          }}
           key={i}
           info={item1}
         />,
@@ -79,7 +90,9 @@ class PhotoPane extends React.Component {
         column2.push(
           <PhotoCard
             handleDelete={this.handleDeletePhoto}
-            onClick={() => { this.showDetail(item2); }}
+            onClick={() => {
+              this.showDetail(item2);
+            }}
             key={i + 1}
             info={item2}
           />,
@@ -87,6 +100,12 @@ class PhotoPane extends React.Component {
       }
     }
     return ([
+      <div><Button
+        onClick={this.sortPhoto}
+        size={'middle'}
+      >
+        {this.state.sortOption ? '欣赏新的照片' : '欣赏旧照'}
+      </Button></div>,
       <Col span={12}>
         {column1}
       </Col>,
@@ -106,7 +125,9 @@ class PhotoPane extends React.Component {
       column1.push(
         <PhotoCard
           handleDelete={this.handleDeletePhoto}
-          onClick={() => { this.showDetail(item1); }}
+          onClick={() => {
+            this.showDetail(item1);
+          }}
           key={i}
           info={item1}
         />,
@@ -115,7 +136,9 @@ class PhotoPane extends React.Component {
         column2.push(
           <PhotoCard
             handleDelete={this.handleDeletePhoto}
-            onClick={() => { this.showDetail(item2); }}
+            onClick={() => {
+              this.showDetail(item2);
+            }}
             key={i + 1}
             info={item2}
           />,
@@ -125,7 +148,9 @@ class PhotoPane extends React.Component {
         column3.push(
           <PhotoCard
             handleDelete={this.handleDeletePhoto}
-            onClick={() => { this.showDetail(item3); }}
+            onClick={() => {
+              this.showDetail(item3);
+            }}
             key={i + 2}
             info={item3}
           />,
@@ -151,17 +176,19 @@ class PhotoPane extends React.Component {
       column1.push(
         <PhotoCard
           handleDelete={this.handleDeletePhoto}
-          onClick={() => { this.showDetail(item1); }}
+          onClick={() => {
+            this.showDetail(item1);
+          }}
           key={i}
           info={item1}
         />,
       );
     }
-    return (
+    return ([
       <Col span={24}>
         {column1}
-      </Col>
-    );
+      </Col>,
+    ]);
   };
   paneCompute = (size) => {
     if (this.state.uploadVisible) {
@@ -187,24 +214,32 @@ class PhotoPane extends React.Component {
           break;
       }
       return (
-        <Row
-          type="flex"
-          justify="space-between"
-          align="top"
-          className={style['photo-cards-wrap']}
-          gutter={10}
-        >
-          {photos}
-        </Row>
+        <div>
+          <Button
+            onClick={this.sortPhoto}
+            size={'default'}
+          >
+            {this.state.sortOption ? '欣赏新的照片' : '欣赏旧照'}
+          </Button>
+          <Row
+            type="flex"
+            justify="space-between"
+            align="top"
+            className={style['photo-cards-wrap']}
+            gutter={10}
+          >{photos}
+          </Row>
+        </div>
       );
     }
   };
+
   render() {
-    console.log(this.state);
     const buttonhandler = this.state.uploadVisible ?
       this.hideUpload
       :
       this.openUpload;
+    this.state.photos.data.reverse();
     return (
       <div>
         <div className={style['photo-control-wrap']}>
@@ -230,7 +265,9 @@ class PhotoPane extends React.Component {
           bodyStyle={{ height: '100%', padding: 0, width: '100%' }}
           width="100%"
           visible={this.state.detailVisible}
-          onCancel={() => { this.setState({ detailVisible: false }); }}
+          onCancel={() => {
+            this.setState({ detailVisible: false });
+          }}
           footer={null}
         >
           <PhotoDetail photoInfo={this.state.chosenPhoto} />
@@ -239,6 +276,7 @@ class PhotoPane extends React.Component {
     );
   }
 }
+
 export default connect((models) => {
   return models.photo;
 })(PhotoPane);
