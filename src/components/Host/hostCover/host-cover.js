@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, Modal, Input, message } from 'antd';
+import { Row, Col, Modal, Input, message, Button } from 'antd';
 import { connect } from 'dva';
 import style from './host-cover.less';
 import defaultHostCover from '../../../assets/images/default_host_cover.jpg';
@@ -28,6 +28,9 @@ class HostCover extends React.Component {
         if (sendMessage.state === 'success') {
           message.success('私信已发送');
           this.setMessageDialogVisible(false);
+          this.setState({
+            editingMessage: '',
+          });
         }
         break;
       }
@@ -77,7 +80,7 @@ class HostCover extends React.Component {
         },
       });
     }
-  }
+  };
   render() {
     const redFont = this.state.messageLength > 200 ? 'warn-font' : '';
     console.log(redFont);
@@ -103,6 +106,11 @@ class HostCover extends React.Component {
           title={`向${this.props.hostInfo.data.nickName}发送私信`}
           onCancel={() => { this.setMessageDialogVisible(false); }}
           onOk={this.sendMessage}
+          footer={[
+            <Button type="primary" onClick={this.sendMessage} disabled={this.state.messageLength > 200}>
+              发送
+            </Button>,
+          ]}
         >
           <div>
             <span>私信内容</span>
