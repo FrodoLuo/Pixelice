@@ -2,6 +2,10 @@ import React from 'react';
 import { Upload, Icon, Modal, Button, message, Col, Row, Input, Form, Affix } from 'antd';
 import { connect } from 'dva';
 
+function hasErrors(fieldsError) {
+  return Object.keys(fieldsError).some(field => fieldsError[field]);
+}
+
 class UploadPane extends React.Component {
   state = {
     previewVisible: false,
@@ -13,6 +17,12 @@ class UploadPane extends React.Component {
       tags: '',
     },
   };
+
+  componentDidMount() {
+    // To disabled submit button at the beginning.
+    this.props.form.validateFields();
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.processing === 'upload') {
       if (nextProps.upload.state === 'success') {
@@ -25,6 +35,7 @@ class UploadPane extends React.Component {
       }
     }
   }
+
   handleUpload = (e) => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
@@ -73,14 +84,14 @@ class UploadPane extends React.Component {
       },
     });
   };
-  tagChage = (e) => {
+  tagChange = (e) => {
     this.setState({
       info: {
         ...this.state.info,
         tags: e.target.value,
       },
     });
-  }
+  };
   beforeUpload = (file) => {
     const isJPG = file.type === 'image/jpeg';
     if (!isJPG) {
@@ -91,7 +102,8 @@ class UploadPane extends React.Component {
       message.error('Image must smaller than 20MB!');
     }
     return isJPG && isLt20M;
-  }
+  };
+
   render() {
     const uploadButton = (
       <div>
@@ -99,7 +111,9 @@ class UploadPane extends React.Component {
         <div className="ant-upload-text">上传</div>
       </div>
     );
-    const { getFieldDecorator } = this.props.form;
+    const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
+    const titleError = isFieldTouched('title') && getFieldError('title');
+    const introError = isFieldTouched('intro') && getFieldError('intro');
     return (
       <Row type="flex" justify="space-between" align="top">
         <Col xs={24} sm={20}>
@@ -124,7 +138,11 @@ class UploadPane extends React.Component {
           <Affix>
             <div>
               <Form onSubmit={this.handleUpload}>
-                <Form.Item label="标题">
+                <Form.Item
+                  label="标题"
+                  validateStatus={titleError ? 'error' : ''}
+                  help={titleError || ''}
+                >
                   {getFieldDecorator('title', {
                     rules: [{
                       required: true,
@@ -137,7 +155,11 @@ class UploadPane extends React.Component {
                     <Input placeholder="标题限制在16字内" />,
                   )}
                 </Form.Item>
-                <Form.Item label="描述">
+                <Form.Item
+                  label="描述"
+                  validateStatus={introError ? 'error' : ''}
+                  help={introError || ''}
+                >
                   {getFieldDecorator('intro', {
                     rules: [{
                       max: 80,
@@ -158,7 +180,7 @@ class UploadPane extends React.Component {
                   )}
                 </Form.Item>
                 <Form.Item>
-                  <Button type="primary" htmlType="submit" disabled={this.state.fileList.length === 0}>
+                  <Button type="primary" htmlType="submit" disabled={!(!hasErrors(getFieldsError()) && (this.state.fileList.length > 0))}>
                     保存
                   </Button>
                 </Form.Item>
@@ -170,6 +192,7 @@ class UploadPane extends React.Component {
     );
   }
 }
+
 const UploadPaneInstance = Form.create()(UploadPane);
 
 export default connect((models) => {
