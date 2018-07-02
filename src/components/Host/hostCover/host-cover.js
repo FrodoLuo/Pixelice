@@ -83,7 +83,6 @@ class HostCover extends React.Component {
   };
   render() {
     const redFont = this.state.messageLength > 200 ? 'warn-font' : '';
-    console.log(redFont);
     const avatar = this.props.hostInfo.data.avatarUrl || defaultAvatar;
     return (
       <div className={style['host-cover-wrap']} style={{ backgroundImage: `url(${defaultHostCover})` }}>

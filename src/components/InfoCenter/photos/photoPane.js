@@ -47,6 +47,7 @@ class PhotoPane extends React.Component {
     this.setState({
       sortOption: !this.state.sortOption,
     });
+    this.state.photos.data.reverse();
   };
   showDetail = (info) => {
     this.setState({
@@ -102,12 +103,6 @@ class PhotoPane extends React.Component {
       }
     }
     return ([
-      <div><Button
-        onClick={this.sortPhoto}
-        size={'middle'}
-      >
-        {this.state.sortOption ? '欣赏新的照片' : '欣赏旧照'}
-      </Button></div>,
       <Col span={12}>
         {column1}
       </Col>,
@@ -221,12 +216,6 @@ class PhotoPane extends React.Component {
       }
       return (
         <div>
-          <Button
-            onClick={this.sortPhoto}
-            size={'default'}
-          >
-            {this.state.sortOption ? '欣赏新的照片' : '欣赏旧照'}
-          </Button>
           <Row
             type="flex"
             justify="space-between"
@@ -245,7 +234,7 @@ class PhotoPane extends React.Component {
       this.hideUpload
       :
       this.openUpload;
-    this.state.photos.data.reverse();
+
     return (
       <div>
         <div className={style['photo-control-wrap']}>
@@ -257,6 +246,11 @@ class PhotoPane extends React.Component {
             {this.state.uploadVisible ? '取消' : '上传图片'}
           </Button>
         </div>
+        <Button
+          onClick={this.sortPhoto}
+        >
+          {this.state.sortOption ? '最新在前' : '最旧在前'}
+        </Button>
         <MediaQuery minWidth={992}>
           {this.paneCompute('md')}
         </MediaQuery>

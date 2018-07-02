@@ -61,14 +61,14 @@ class IndexPage extends React.Component {
           <Card
             style={{
               width: 240,
-              height: 360,
+              height: 280,
               justifyContent: 'center',
             }}
           >
-            <a href={`/user/${item.userId}`}>
+            <a href={`/user/${item.userId}`} className={style['recommond-avatar-wrapper']}>
               <Avatar style={{ height: 100, width: 100 }} src={src} />
             </a>
-            <div>
+            <div className={style['recommond-info-wrapper']}>
               <h2>
                 {item.nickName}
               </h2>
