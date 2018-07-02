@@ -41,9 +41,9 @@ class UserDetail extends React.Component {
         <div className={style['user-detail-nickName']}>
           {this.state.hostInfo.data.nickName}
         </div>
-        <div className={style['user-detail-id']}>
-          {this.state.hostInfo.data.userId}
-        </div>
+        {/* <div className={style['user-detail-id']}>*/}
+        {/* {this.state.hostInfo.data.userId}*/}
+        {/* </div>*/}
         <div className={style['user-detail-intro']}>
           <p>
             {this.state.hostInfo.data.intro}
