@@ -31,9 +31,7 @@ class Sign extends React.Component {
       });
     }
   }
-  componentDidMount() {
-    window.document.getElementById('loading-mask').style.display = 'none';
-  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.userInfo.message === 20) {
       this.setState({

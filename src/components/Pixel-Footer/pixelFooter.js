@@ -3,6 +3,7 @@ import { BackTop, Icon } from 'antd';
 import style from './pixelFooter.less';
 
 function PixelFooter() {
+  window.document.getElementById('loading-mask').style.display = 'none';
   return (
     <div className={style['footer-wrap']}>
       <BackTop
