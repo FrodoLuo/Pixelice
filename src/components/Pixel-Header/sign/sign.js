@@ -21,15 +21,13 @@ class Sign extends React.Component {
       },
     };
   }
-  componentWillMount() {
+  componentDidMount() {
     this.props.dispatch({
       type: 'user/userInfo',
     });
-    if (this.state.logged) {
-      this.props.dispatch({
-        type: 'social/countUnread',
-      });
-    }
+    this.props.dispatch({
+      type: 'social/countUnread',
+    });
   }
 
   componentWillReceiveProps(nextProps) {

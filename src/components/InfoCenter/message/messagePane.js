@@ -59,7 +59,7 @@ class MessagePane extends React.Component {
           style={{ borderRadius: 5 }}
           key={item.messageId}
           header={
-            <div className={style['message-title']}>
+            <div className={style['message-title']} onClick={() => { this.handleRead(item.messageId); }}>
               {item.read === 'f' ? (<span className={style['new-dot']}>新</span>) : ''}
               来自{item.nickName}的私信
               <span style={{ float: 'right' }}>{item.createTime}</span>
@@ -93,11 +93,6 @@ class MessagePane extends React.Component {
           <div>
             <Collapse
               bordered={false}
-              onChange={
-                (messageId) => {
-                  this.handleRead(messageId);
-                }
-              }
             >
               {messages}
             </Collapse>
