@@ -28,6 +28,11 @@ class Info extends React.Component {
       state: 'ready',
     },
   };
+  componentDidMount() {
+    this.state.profileForm = { ...this.props.userInfo.data };
+    this.state.editForm = { ...this.state.profileForm };
+    console.log(this.state);
+  }
   componentWillReceiveProps(nextProps) {
     console.log(nextProps);
     switch (nextProps.modify.state) {
@@ -50,6 +55,7 @@ class Info extends React.Component {
       modify: nextProps.modify,
     });
   }
+
   changeIntro = (e) => {
     this.setState({
       editForm: {

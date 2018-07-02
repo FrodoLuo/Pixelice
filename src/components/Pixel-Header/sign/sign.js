@@ -31,6 +31,9 @@ class Sign extends React.Component {
       });
     }
   }
+  componentDidMount() {
+    window.document.getElementById('loading-mask').style.display = 'none';
+  }
   componentWillReceiveProps(nextProps) {
     if (nextProps.userInfo.message === 20) {
       this.setState({
@@ -50,6 +53,7 @@ class Sign extends React.Component {
       message.error('用户名或密码不正确');
     }
   }
+
   showModal = () => {
     this.setState({
       loginVisible: true,

@@ -82,6 +82,7 @@ class PhotoPane extends React.Component {
           onClick={() => {
             this.showDetail(item1);
           }}
+          toAlbum={this.props.toAlbum}
           key={i}
           info={item1}
         />,
@@ -93,6 +94,7 @@ class PhotoPane extends React.Component {
             onClick={() => {
               this.showDetail(item2);
             }}
+            toAlbum={this.props.toAlbum}
             key={i + 1}
             info={item2}
           />,
@@ -128,6 +130,7 @@ class PhotoPane extends React.Component {
           onClick={() => {
             this.showDetail(item1);
           }}
+          toAlbum={this.props.toAlbum}
           key={i}
           info={item1}
         />,
@@ -139,6 +142,7 @@ class PhotoPane extends React.Component {
             onClick={() => {
               this.showDetail(item2);
             }}
+            toAlbum={this.props.toAlbum}
             key={i + 1}
             info={item2}
           />,
@@ -151,6 +155,7 @@ class PhotoPane extends React.Component {
             onClick={() => {
               this.showDetail(item3);
             }}
+            toAlbum={this.props.toAlbum}
             key={i + 2}
             info={item3}
           />,
@@ -179,6 +184,7 @@ class PhotoPane extends React.Component {
           onClick={() => {
             this.showDetail(item1);
           }}
+          toAlbum={this.props.toAlbum}
           key={i}
           info={item1}
         />,

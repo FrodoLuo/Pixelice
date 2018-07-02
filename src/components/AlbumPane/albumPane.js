@@ -13,6 +13,7 @@ import {
 import Album from './album';
 import PhotoWall from '../PhotoWall/photoWall';
 import style from './albumPane.less';
+import { queryParse } from '../../utils/queryParser';
 
 class AlbumPane extends React.Component {
   state = {
@@ -51,6 +52,12 @@ class AlbumPane extends React.Component {
       this.props.dispatch({
         type: 'album/getAlbumsByToken',
       });
+    }
+  }
+  componentDidMount() {
+    const key = queryParse(window.location.search);
+    if (key && key.new) {
+      this.setCreateVisible(true);
     }
   }
   componentWillReceiveProps(nextProps) {

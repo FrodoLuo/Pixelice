@@ -8,9 +8,67 @@
   <!--记得更新下面iconfont的CSS连接-->
   <link rel="stylesheet" href="//at.alicdn.com/t/font_501673_2do5eh4g1h4wvcxr.css" />
   <!-- <link rel="stylesheet" href="/index.less" /> -->
+  <style>
+    #loading-mask {
+      position: fixed;
+      height: 100vh;
+      width: 100vw;
+      left: 0;
+      top: 0;
+      z-index: 10000;
+      background-color: rgba(255, 255, 255, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #loading-bar-wrapper {
+      height: 4rem;
+      width: 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .bar {
+      width: 1rem;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    #bar-1 {
+      animation: loading-bar 1s ease 0s infinite;
+    }
+
+    #bar-2 {
+      animation: loading-bar 1s ease 0.2s infinite;
+    }
+
+    #bar-3 {
+      animation: loading-bar 1s ease 0.4s infinite;
+    }
+
+    @keyframes loading-bar {
+      0% {
+        height: 4rem;
+      }
+      50% {
+        height: 6rem;
+      }
+      100% {
+        height: 4rem;
+      }
+    }
+  </style>
 </head>
 
 <body>
+  <div id="loading-mask">
+    <div id="loading-bar-wrapper">
+      <div id="bar-1" class="bar"></div>
+      <div id="bar-2" class="bar"></div>
+      <div id="bar-3" class="bar"></div>
+    </div>
+  </div>
   <div id="root"></div>
 </body>
 

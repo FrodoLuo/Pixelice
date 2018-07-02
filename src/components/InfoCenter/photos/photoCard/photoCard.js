@@ -58,21 +58,8 @@ class PhotoCard extends React.Component {
     }
     const albumSelect = (
       <Menu selectable>
-        {
-          this.state.albumList.length === 0 ?
-            (<Menu.Item><a>无</a></Menu.Item>)
-            :
-            ''
-        }
-        {
-          this.state.albumList.length === 0 ?
-            (
-              <Menu.Divider />
-            )
-            :
-            ''
-        }
-
+        <Menu.Item><a href="/infoCenter/album?new=true">创建新相册</a></Menu.Item>
+        <Menu.Divider />
         {albumListDrop}
       </Menu>
     );

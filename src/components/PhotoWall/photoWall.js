@@ -9,7 +9,9 @@ import PhotoDetail from '../PhotoDetail/photoDetail';
 class PhotoWall extends React.Component {
   state = {
     detailVisible: false,
-    chosenPhoto: undefined,
+    chosenPhoto: {
+      photoId: 0,
+    },
     state: 'ready',
     searched: false,
     likedList: [],
@@ -188,7 +190,10 @@ class PhotoWall extends React.Component {
           onCancel={() => { this.setState({ detailVisible: false }); }}
           footer={null}
         >
-          <PhotoDetail photoInfo={this.state.chosenPhoto} />
+          <PhotoDetail
+            photoInfo={this.state.chosenPhoto}
+            liked={this.isLiked(this.state.chosenPhoto.photoId)}
+          />
         </Modal>
       </div>
     );

@@ -59,7 +59,7 @@ class SquarePage extends React.Component {
     });
   }
   render() {
-    console.log(this.state);
+    const key = queryParse(this.props.location.search);
     return (
       <Layout>
         <PixelHeader />
@@ -77,6 +77,7 @@ class SquarePage extends React.Component {
                       <Input.Search
                         placeholder="搜索图片关键词"
                         onSearch={this.handleSearch}
+                        defaultValue={key ? decodeURI(key.searchkey) : ''}
                       />
                     </div>
                   </div>

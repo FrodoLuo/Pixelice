@@ -37,7 +37,7 @@ class SearchBar extends React.Component {
             (e) => {
               if (e.keyCode === 13) {
                 this.handleSearch();
-                // browserHistory.push(`/square/search?searchkey=${this.state.searchkey}`);
+                window.location.href = `/square/search?searchkey=${this.state.searchkey}`;
               }
             }
           }
