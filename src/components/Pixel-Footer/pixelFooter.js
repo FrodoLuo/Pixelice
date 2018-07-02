@@ -16,7 +16,7 @@ function PixelFooter() {
         <div
           style={{
             fontSize: '32px',
-            backgroundColor: '#27a5f5',
+            backgroundColor: 'rgb(101,117,138)',
             borderRadius: '2px',
             height: '45px',
             width: '45px',
