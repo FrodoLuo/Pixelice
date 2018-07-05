@@ -42,7 +42,7 @@ function photoCard(props) {
         </div>
       </div>
       <div className={style['nc-like-wrap']} onClick={handleLike}>
-        <span id={`${props.info.photoId}_liked`} >{props.info.liked}</span>&nbsp;<Icon type={props.liked ? 'heart' : 'heart-o'} />
+        <span id={`${props.info.photoId}_liked`} >{props.info.liked}</span>&nbsp;<Icon type={props.liked ? 'heart' : 'heart-o'} style={{ color: 'rgb(255,163,169)' }} />
       </div>
       <div className={style['nc-photo-wrap']}>
         <img src={props.info.zipUrl} role="presentation" />

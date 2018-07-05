@@ -101,7 +101,7 @@ class Info extends React.Component {
         sm: { span: 8 },
       },
       wrapperCol: {
-        xs: { span: 24 },
+        xs: { span: 18 },
         sm: { span: 12 },
       },
     };
@@ -150,11 +150,10 @@ class Info extends React.Component {
         <Col xs={24} sm={16}>
           <div>
             <Form layout={'horizontal'}>
-              <Form.Item {...formItemLayout} label="个人介绍">
-                <Input.TextArea
-                  defaultValue={this.props.userInfo.data.intro}
-                  disabled={!this.state.editMode}
-                  onChange={this.changeIntro}
+              <Form.Item {...formItemLayout} label="ID">
+                <Input
+                  defaultValue={this.props.userInfo.data.userId}
+                  disabled
                 />
               </Form.Item>
               <Form.Item {...formItemLayout} label="昵称">
@@ -164,13 +163,7 @@ class Info extends React.Component {
                   onChange={this.changeNickName}
                 />
               </Form.Item>
-              <Form.Item {...formItemLayout} label="ID">
-                <Input
-                  defaultValue={this.props.userInfo.data.userId}
-                  disabled
-                />
-              </Form.Item>
-              <Form.Item {...formItemLayout} label="电话号码">
+              <Form.Item {...formItemLayout} label="电话">
                 <Input
                   defaultValue={this.props.userInfo.data.phone}
                   disabled={!this.state.editMode}
@@ -179,6 +172,7 @@ class Info extends React.Component {
               </Form.Item>
               <Form.Item {...formItemLayout} label="性别">
                 <Select
+                  className={style['gender-select']}
                   defaultValue={this.props.userInfo.data.gender}
                   disabled={!this.state.editMode}
                   onSelect={this.changeGender}
@@ -187,6 +181,13 @@ class Info extends React.Component {
                   <Option value="f">女</Option>
                   <Option value="s">保密</Option>
                 </Select>
+              </Form.Item>
+              <Form.Item {...formItemLayout} label="个人介绍">
+                <Input.TextArea
+                  defaultValue={this.props.userInfo.data.intro}
+                  disabled={!this.state.editMode}
+                  onChange={this.changeIntro}
+                />
               </Form.Item>
             </Form>
           </div>

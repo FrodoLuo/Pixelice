@@ -16,6 +16,7 @@ function UserCard(props) {
         <a href={`/user/${props.userInfo.userId}`} className={style['user-avatar-wrap']} >
           <img src={defaultAvatar} role="presentation" />
         </a>
+        {/* <p>{props.userInfo}</p>*/}
       </Popover>
     </div>
 
