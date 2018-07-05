@@ -7,9 +7,9 @@ function AlbumCover(props) {
   const scrollHandler = () => {
     // console.log('scrolled');
     if (window.document.documentElement.scrollTop === 0) {
-      window.document.getElementById('cover').style.height = '340px';
+      window.document.getElementById('cover').style.height = '100vh';
     } else {
-      window.document.getElementById('cover').style.height = '200px';
+      window.document.getElementById('cover').style.height = '50vh';
     }
   };
   window.onscroll = scrollHandler;

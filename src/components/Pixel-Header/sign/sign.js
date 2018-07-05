@@ -25,9 +25,11 @@ class Sign extends React.Component {
     this.props.dispatch({
       type: 'user/userInfo',
     });
-    this.props.dispatch({
-      type: 'social/countUnread',
-    });
+    this.unreadInterval = setInterval(() => {
+      this.props.dispatch({
+        type: 'social/countUnread',
+      });
+    }, 10000);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -48,6 +50,9 @@ class Sign extends React.Component {
     if (nextProps.signIn.message === 21) {
       message.error('用户名或密码不正确');
     }
+  }
+  componentDidUnmount() {
+    clearInterval(this.unreadInterval);
   }
 
   showModal = () => {
