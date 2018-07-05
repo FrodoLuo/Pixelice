@@ -167,7 +167,7 @@ class MessagePane extends React.Component {
             <Modal
               visible={this.state.messageSendVisible}
               title={`向${this.state.nickName}发送私信`}
-              onCancel={() => { this.setMessageDialogVisible(false); }}
+              onCancel={() => { this.setState({ messageSendVisible: false }); }}
               onOk={this.sendMessage}
               footer={[
                 <Button type="primary" onClick={this.sendMessage} disabled={this.state.messageLength > 200}>
