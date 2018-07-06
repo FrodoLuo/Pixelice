@@ -4,6 +4,7 @@ import { connect } from 'dva';
 import style from './info-cover.less';
 import defaultCover from '../../../assets/images/default_cover.jpeg';
 import defaultAvatar from '../../../assets/images/defaultAvatar.jpeg';
+import galaxy from '../../../assets/images/galaxy.jpg';
 
 class InfoCenter extends React.Component {
 
@@ -31,7 +32,7 @@ class InfoCenter extends React.Component {
     return (
       <div
         className={style['info-cover-background']}
-        style={{ backgroundImage: `url(${defaultCover})` }}
+        style={{ backgroundImage: `url(${this.props.userInfo.userId === 77 ? galaxy : defaultCover})` }}
       >
         <div className={style['info-cover-avatar-wrap']}>
           <Upload

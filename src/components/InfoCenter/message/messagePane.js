@@ -120,7 +120,7 @@ class MessagePane extends React.Component {
               }}
             >
               {item.read === 'f' ? (<span className={style['new-dot']}>新</span>) : ''}
-              来自{item.nickName}的私信
+              <span>来自{item.fromId > 1 ? <a href={`/user/${item.fromId}`}>{item.nickName}</a> : item.nickName}的私信</span>
               <span style={{ float: 'right' }}>{item.createTime}</span>
             </div>
           }
